@@ -1,6 +1,6 @@
 /.phpunit.cache
 /public/build
-/public/hot
+git/public/hot
 /public/storage
 /storage/*.key
 .phpunit.result.cache
