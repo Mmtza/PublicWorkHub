@@ -1,0 +1,24 @@
+Portal Berita dan Informasi Kemasyarakatan Interaktif
+- Landing Page
+- Single Page Berita
+- Login
+- Register
+- Responsif Desktop & Mobile
+- Dashboard Admin:
+	- Main Dashboard
+	- Management Berita (CRUD)
+	- Management User (CRUD)
+
+Extra Feature:
+- Search Berita
+- Komentar (Include jumlah)
+- Like (Include jumlah)
+- Kategori
+- Jumlah Pengunjung
+- Share Berita
+- Artikel Populer (Base on Jumlah Pengunjung + Jumlah Komentar + Jumlah Like)
+
+User: 
+- Guest
+- User is Logged in
+- Admin
