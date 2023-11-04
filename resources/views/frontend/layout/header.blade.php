@@ -44,9 +44,10 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="category.html">Culture</a></li>
                             <li><a href="category.html">Business</a></li>
+                            <li><a href="category.html">Culture</a></li>
                             <li><a href="category.html">Politics</a></li>
+                            <li><a href="category.html">Travel</a></li>
                         </ul>
                     </div>
                     <div class="col-2 text-end">
