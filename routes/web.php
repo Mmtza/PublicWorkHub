@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Berita;
+use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// routes frontend
 Route::get('/', function () {
     return view('frontend.index');
 });
+Route::get(
+    '/blog',
+    [BeritaController::class, 'index']
+    // $model = new Berita();
+    // $data = [
+    // //     'berita' => $model,
+    // // ];
+    // return view('frontend.pages.blog', $data);
+);
+Route::get('/category', function () {
+    return view('frontend.pages.category');
+});
 
+
+// routes backend
 Route::get('/admin', function () {
     return view('backend.index');
 });
