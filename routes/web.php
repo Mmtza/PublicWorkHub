@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BeritaController;
+// use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,15 +19,15 @@ Route::get('/', function () {
     return view('users.index');
 });
 
-Route::get(
-    '/blog',
-    [BeritaController::class, 'index']
-    // $model = new Berita();
-    // $data = [
-    // //     'berita' => $model,
-    // // ];
-    // return view('frontend.pages.blog', $data);
-);
+// Route::get(
+//     '/blog',
+//     [BeritaController::class, 'index']
+//     // $model = new Berita();
+//     // $data = [
+//     // //     'berita' => $model,
+//     // // ];
+//     // return view('frontend.pages.blog', $data);
+// );
 Route::get('/category', function () {
     return view('users.pages.category');
 });
