@@ -40,7 +40,7 @@
 <body>
 
     {{-- header --}}
-    @include('frontend.layout.header')
+    @include('frontend.layout.navbar')
 
     {{-- content --}}
     @yield('content')
