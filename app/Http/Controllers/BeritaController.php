@@ -18,7 +18,7 @@ class BeritaController extends Controller
             "berita" => $model,
         ];
         // dd($model);
-        return view("frontend.pages.blog", $data);
+        return view("users.pages.blog", $data);
     }
 
     /**
