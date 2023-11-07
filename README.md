@@ -9,6 +9,38 @@
 - Muhammad Anwar Fauzan as Backend Developer. Github: [Anuraaaa](https://github.com/Anuraaaa)
 - Ahmad Riziq as Database Analyst. Github: [ahmadriziq03](https://github.com/ahmadriziq03)
 
+## MVP (Minimum Variable Product)
+### Portal Berita dan Informasi Kemasyarakatan Interaktif
+- Landing Page
+- Single Page Berita
+- Login
+- Register
+- Responsif Desktop & Mobile
+- Dashboard Penulis:
+    - Main Dashboard
+    - Management Berita (CRUD only penulis)
+- Dashboard Admin:
+	- Main Dashboard
+	- Management Berita (CRUD all berita)
+	- Management User (CRUD all user)
+- User login redirect to landing
+- Penulis login redirect to dashboard
+- Admin login redirect to dashboard
+
+### Extra Feature:
+- Search Berita
+- Komentar (Include jumlah)
+- Like (Include jumlah)
+- Kategori
+- Jumlah Pengunjung
+- Share Berita
+- Artikel Populer (Base on Jumlah Pengunjung + Jumlah Komentar + Jumlah Like)
+
+### User: 
+- User is Logged in
+- Penulis
+- Admin
+
 ## Software and Tools
 ### Bahasa Pemrograman
 - PHP
@@ -19,6 +51,7 @@
 ### Framework and Library
 - Laravel
 - Bootstrap
+- Breeze
 
 ### Package Manager
 - Composer

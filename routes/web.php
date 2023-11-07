@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Berita;
-use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +14,10 @@ use App\Http\Controllers\BeritaController;
 |
 */
 
-// routes frontend
 Route::get('/', function () {
-    return view('frontend.index');
+    return view('users.index');
 });
+
 Route::get(
     '/blog',
     [BeritaController::class, 'index']
@@ -29,11 +28,24 @@ Route::get(
     // return view('frontend.pages.blog', $data);
 );
 Route::get('/category', function () {
-    return view('frontend.pages.category');
+    return view('users.pages.category');
 });
 
 
-// routes backend
+// routes admin
 Route::get('/admin', function () {
-    return view('backend.index');
+    return view('admins.index');
 });
+
+// --- example 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
