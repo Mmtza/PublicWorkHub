@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita_Model;
+use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $model = Berita_Model::join('kategori', 'berita.id_kategori', '=', 'kategori.id')->get();
+        $model = Berita::join('kategori', 'berita.id_kategori', '=', 'id.kategori')->get();
         $data = [
             "berita" => $model,
         ];
@@ -40,7 +40,7 @@ class BeritaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Berita_Model $berita_Model)
+    public function show(Berita $berita_Model)
     {
         //
     }
@@ -48,7 +48,7 @@ class BeritaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Berita_Model $berita_Model)
+    public function edit(Berita $berita_Model)
     {
         //
     }
@@ -56,7 +56,7 @@ class BeritaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Berita_Model $berita_Model)
+    public function update(Request $request, Berita $berita_Model)
     {
         //
     }
@@ -64,7 +64,7 @@ class BeritaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Berita_Model $berita_Model)
+    public function destroy(Berita $berita_Model)
     {
         //
     }
