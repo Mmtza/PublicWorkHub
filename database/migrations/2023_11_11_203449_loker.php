@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentar', function(Blueprint $table) {
+        Schema::create('loker', function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_berita')->nullable(false);
             $table->unsignedBigInteger('id_user')->nullable(false);
-            $table->text('isi_komentar')->nullable(false);
-            $table->timestamp('waktu_komentar')->nullable(false);
-            $table->foreign('id_berita')->references('id')->on('berita')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('nama_loker')->nullable(false);
+            $table->text('deskripsi_loker')->nullable(false);
+            $table->text('alamat')->nullable(false);
+            $table->timestamp('waktu_publikasi')->nullable(false);
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komentar');
+        Schema::dropIfExists('loker');
     }
 };
