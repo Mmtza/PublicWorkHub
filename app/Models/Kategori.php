@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Berita_Has_Kategori;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kategori extends Model
 {
@@ -15,4 +16,12 @@ class Kategori extends Model
         'nama_kategori',
         'keterangan',
     ];
+
+    public function getBeritaHasKategori() {
+        return $this->belongsToMany(Berita_Has_Kategori::class);
+    }
+
+    public function getLokerHasKategori() {
+        return $this->belongsToMany(Loker_Has_Kategori::class);
+    }
 }
