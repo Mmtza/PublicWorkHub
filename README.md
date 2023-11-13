@@ -1,6 +1,6 @@
 # Public Work Hub: Situs Berita, Pengaduan, dan Lowongan Kerja untuk Masyarakat
 
-<strong>InfoPlus</strong> adalah sebuah platform digital yang dirancang untuk menyediakan akses cepat dan mudah ke berbagai informasi berita, lowongan pekerjaan, pengaduan masyarakat. Aplikasi ini biasanya dikembangkan untuk memenuhi kebutuhan konsumen dalam mengakses berita terbaru, mencari lowongan pekerjaan, dan pengaduan masyarakat terlepas dari perangkat yang mereka gunakan, seperti smartphone, tablet, atau komputer. Website ini juga merupakan sebuah projek akhir dari Program Kampus Merdeka MSIB-5.
+<strong>Public Work Hub</strong> adalah sebuah platform digital yang dirancang untuk menyediakan akses cepat dan mudah ke berbagai informasi berita, lowongan pekerjaan, pengaduan masyarakat. Aplikasi ini biasanya dikembangkan untuk memenuhi kebutuhan konsumen dalam mengakses berita terbaru, mencari lowongan pekerjaan, dan pengaduan masyarakat terlepas dari perangkat yang mereka gunakan, seperti smartphone, tablet, atau komputer. Website ini juga merupakan sebuah projek akhir dari Program Kampus Merdeka MSIB-5.
 
 ## Our Team
 - Bagus Muhammad Mumtaza as Project Manager. Github: [Mmtza](https://github.com/Mmtza)
