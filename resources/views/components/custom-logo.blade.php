@@ -1,0 +1,1 @@
+<img src="{{ asset('users/themes') }}/images/" alt="">
