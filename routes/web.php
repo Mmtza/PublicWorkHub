@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('users.index');
-});
+})->name('landing');
 
 // Route::get(
 //     '/blog',
