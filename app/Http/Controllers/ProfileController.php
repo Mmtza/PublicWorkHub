@@ -43,7 +43,16 @@ class ProfileController extends Controller
         $request->user()->tanggal_lahir = $data['birthdate'];
         $request->user()->alamat = $data['address'];
         $request->user()->deskripsi_diri = $data['deskripsi_diri_content'];
-        $request->user()->foto = isset($data['foto'])? $data['foto']: null;
+        if (isset($data['foto'])) {
+
+            $filePath = public_path('assets/users/images/'. auth()->user()->foto);
+            if (file_exists($filePath)) {
+                unlink($filePath);                
+            }
+            $imageName = auth()->user()->id . time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('assets/users/images/'), $imageName);
+            $request->user()->foto = $imageName;
+        }
         $request->user()->save();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
