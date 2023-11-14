@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentar', function(Blueprint $table) {
-            $table->id();
+        Schema::create('berita_has_kategori', function(Blueprint $table) {
             $table->unsignedBigInteger('id_berita')->nullable(false);
-            $table->unsignedBigInteger('id_user')->nullable(false);
-            $table->text('isi_komentar')->nullable(false);
-            $table->timestamp('waktu_komentar')->nullable(false);
+            $table->unsignedBigInteger('id_kategori')->nullable(false);
             $table->foreign('id_berita')->references('id')->on('berita')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_kategori')->references('id')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komentar');
+        Schema::dropIfExists('berita_has_kategori');
     }
 };

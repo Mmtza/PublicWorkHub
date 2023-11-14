@@ -1,6 +1,6 @@
-# Portal Berita
+# Public Work Hub: Situs Berita, Pengaduan, dan Lowongan Kerja untuk Masyarakat
 
-<strong>Portal Berita</strong> adalah sebuah platform digital yang dirancang untuk menyediakan akses cepat dan mudah ke berbagai informasi berita terkini dari berbagai sumber dan topik. Aplikasi ini biasanya dikembangkan untuk memenuhi kebutuhan konsumen dalam mengakses berita terbaru, terlepas dari perangkat yang mereka gunakan, seperti smartphone, tablet, atau komputer. Website ini juga merupakan sebuah projek akhir dari Program Kampus Merdeka MSIB-5.
+<strong>Public Work Hub</strong> adalah sebuah platform digital yang dirancang untuk menyediakan akses cepat dan mudah ke berbagai informasi berita, lowongan pekerjaan, pengaduan masyarakat. Aplikasi ini biasanya dikembangkan untuk memenuhi kebutuhan konsumen dalam mengakses berita terbaru, mencari lowongan pekerjaan, dan pengaduan masyarakat terlepas dari perangkat yang mereka gunakan, seperti smartphone, tablet, atau komputer. Website ini juga merupakan sebuah projek akhir dari Program Kampus Merdeka MSIB-5.
 
 ## Our Team
 - Bagus Muhammad Mumtaza as Project Manager. Github: [Mmtza](https://github.com/Mmtza)
@@ -10,12 +10,18 @@
 - Ahmad Riziq as Database Analyst. Github: [ahmadriziq03](https://github.com/ahmadriziq03)
 
 ## MVP (Minimum Variable Product)
-### Portal Berita dan Informasi Kemasyarakatan Interaktif
+### Public Work Hub: Situs Berita, Pengaduan, dan Lowongan Kerja untuk Masyarakat
 - Landing Page
 - Single Page Berita
 - Login
 - Register
 - Responsif Desktop & Mobile
+- Dashboard User:
+	- Main Dashboard
+	- Form Pengaduan Masyarakat
+- Dashboard Penyedia Loker:
+	- Main Dashboard
+	- Form Penyedia Loker
 - Dashboard Penulis:
     - Main Dashboard
     - Management Berita (CRUD only penulis)
@@ -23,8 +29,12 @@
 	- Main Dashboard
 	- Management Berita (CRUD all berita)
 	- Management User (CRUD all user)
+	- Management loker (CRUD all loker)
+	- Management pengaduan (CRUD all pengaduan)
 - User login redirect to landing
+- User login can access dashboard
 - Penulis login redirect to dashboard
+- Penyedia loker redirect to dashboard
 - Admin login redirect to dashboard
 
 ### Extra Feature:
@@ -35,6 +45,7 @@
 - Jumlah Pengunjung
 - Share Berita
 - Artikel Populer (Base on Jumlah Pengunjung + Jumlah Komentar + Jumlah Like)
+- Chatbox, chat from applyer loker to penyedia loker. chat from penyedia loker to applyer loker
 
 ### User: 
 - User is Logged in

@@ -3,10 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Chat;
+use App\Models\Like;
+use App\Models\Loker;
+use App\Models\Berita;
+use App\Models\Komentar;
+use App\Models\Pengaduan;
+use App\Models\Apply_Loker;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -21,6 +28,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'tanggal_lahir',
+        'alamat',
+        'deskripsi_diri',
+        'foto'
     ];
 
     /**
@@ -42,4 +54,32 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getBerita() {
+        return $this->belongsTo(Berita::class);
+    }
+
+    public function getLike() {
+        return $this->belongsTo(Like::class);
+    }
+
+    public function getKomentar() {
+        return $this->belongsTo(Komentar::class);
+    }
+
+    public function getLoker() {
+        return $this->belongsTo(Loker::class);
+    }
+
+    public function getApplyLoker() {
+        return $this->belongsTo(Apply_Loker::class);
+    }
+
+    public function getPengaduan() {
+        return $this->belongsTo(Pengaduan::class);
+    }
+
+    public function getChat() {
+        return $this->belongsTo(Chat::class);
+    }
 }

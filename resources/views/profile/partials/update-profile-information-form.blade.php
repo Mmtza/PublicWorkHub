@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -46,9 +46,32 @@
                 </div>
             @endif
         </div>
+        <div>
+            <x-input-label for='birthdate' :value="__('Birthdate')"/>
+            <x-text-input id="birthdate" name="birthdate" type="date" class="mt-1 block w-full" :value="old('birthdate', $user->tanggal_lahir)" autofocus autocomplete="birthdate" />
+            <x-input-error class="mt-2" :messages="$errors->get('birthdate')" />
+        </div>
+
+        <div>
+            <x-input-label for='address' :value="__('Address')"/>
+            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->alamat)" autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+        </div>
+        
+        <div>
+            <x-input-label for='deskripsi_diri_content' :value="__('Description')"/>
+            <x-text-editor id="deskripsi_diri" class="mt-1 block w-full" style="min-height: 30vh;" autofocus autocomplete="deskripsi_diri" />
+            <x-input-error class="mt-2" :messages="$errors->get('deskripsi_diri_content')" />
+        </div>
+
+        <div>
+            <x-input-label for='foto' :value="__('Foto')"/>
+            <x-text-input id="foto" name="foto" type="file" accept='.jpg, .png, .jpeg' class="mt-1 block w-full" :value="old('foto', $user->foto)" autofocus autocomplete="foto" />
+            <x-input-error class="mt-2" :messages="$errors->get('foto')" />
+        </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button onclick="sendData()">{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

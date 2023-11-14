@@ -18,7 +18,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable(false);
             $table->rememberToken();
-            $table->enum('role', ['user', 'penulis', 'admin'])->nullable(false)->default('user');
+            $table->enum('role', ['user', 'penulis', 'penyedia_loker', 'admin'])->nullable(false)->default('user');
+            $table->date('tanggal_lahir')->nullable(true);
+            $table->text('alamat')->nullable(true);
+            $table->text('deskripsi_diri')->nullable(true);
+            $table->text('foto')->nullable(true);
             $table->timestamps();
         });
     }

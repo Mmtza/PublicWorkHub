@@ -13,12 +13,25 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/fonts/icomoon/style.css">
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/fonts/flaticon/font/flaticon.css">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/css/tiny-slider.css">
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/css/aos.css">
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/css/glightbox.min.css">
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/css/style.css">
+    
+        <link rel="stylesheet" href="{{ asset('users/themes') }}/css/flatpickr.min.css">        
     </head>
     <body class="font-sans text-gray-900 antialiased">
+        @include('layouts.guestnavbar')
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-custom-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
             </div>
 

@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentar', function(Blueprint $table) {
+        Schema::create('chat', function(Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_berita')->nullable(false);
             $table->unsignedBigInteger('id_user')->nullable(false);
-            $table->text('isi_komentar')->nullable(false);
-            $table->timestamp('waktu_komentar')->nullable(false);
-            $table->foreign('id_berita')->references('id')->on('berita')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('id_loker')->nullable(false);
+            $table->text('isi_chat')->nullable(true);
+            $table->text('file')->nullable(true);
+            $table->timestamp('waktu_chat')->nullable(false);
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_loker')->references('id')->on('loker')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komentar');
+        Schema::dropIfExists('chat');
     }
 };

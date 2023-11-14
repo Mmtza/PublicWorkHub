@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('users/themes') }}/css/flatpickr.min.css">
 
 
-    <title>Portal Berita</title>
+    <title>Public Work Hub</title>
 </head>
 
 <body>
