@@ -42,6 +42,10 @@ Route::get('/admin/berita', function () {
     return view('admins.pages.berita');
 })->name('managementberita');
 
+Route::get('/admin/loker', function () {
+    return view('admins.form_user.user');
+})->name('managementUser');
+
 // --- example
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Phoenix</title>
+    <title>PWH | Admin</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -48,6 +48,7 @@
         id="user-style-rtl" />
     <link href="{{ asset('admins/themes') }}/assets/css/user.min.css" type="text/css" rel="stylesheet"
         id="user-style-default" />
+    <link href="{{ asset('admins/themes') }}/assets/css/formUser.css" type="text/css" rel="stylesheet"/>
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -393,6 +394,7 @@
     <script src="{{ asset('admins/themes') }}/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js">
     </script>
     <script src="{{ asset('admins/themes') }}/assets/js/ecommerce-dashboard.js"></script>
+    <script src="{{ asset('admins/themes') }}/assets/js/form-user.js"></script>
 </body>
 
 </html>
