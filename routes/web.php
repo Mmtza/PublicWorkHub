@@ -38,6 +38,10 @@ Route::get('/admin', function () {
     return view('admins.index');
 });
 
+Route::get('/admin/berita', function () {
+    return view('admins.pages.berita');
+})->name('managementberita');
+
 // --- example
 Route::get('/dashboard', function () {
     return view('dashboard');
