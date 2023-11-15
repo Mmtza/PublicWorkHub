@@ -39,6 +39,46 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <!-- parent pages-->
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" href="#nv-management" role="button"
+                            data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-management">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+                                <span class="nav-link-icon"><span class="fas fa-book"></span></span><span
+                                    class="nav-link-text">Management</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-management">
+                                <li class="collapsed-nav-item-title d-none">Management</li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text">Berita</span></div>
+                                    </a><!-- more inner pages-->
+                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text">Loker</span></div>
+                                    </a><!-- more inner pages-->
+                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text">Pengaduan</span></div>
+                                    </a><!-- more inner pages-->
+                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text">Users</span></div>
+                                    </a><!-- more inner pages-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
