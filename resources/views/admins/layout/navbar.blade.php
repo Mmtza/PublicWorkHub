@@ -69,7 +69,7 @@
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Pengaduan</span></div>
                                     </a><!-- more inner pages-->
-                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('managementUser') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Users</span></div>
