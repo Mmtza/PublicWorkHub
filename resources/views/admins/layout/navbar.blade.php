@@ -54,7 +54,7 @@
                             <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-management">
                                 <li class="collapsed-nav-item-title d-none">Management</li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="index.html" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('managementberita') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Berita</span></div>

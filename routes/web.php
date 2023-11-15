@@ -40,7 +40,7 @@ Route::get('/admin', function () {
 
 Route::get('/admin/berita', function () {
     return view('admins.pages.berita');
-});
+})->name('managementberita');
 
 // --- example
 Route::get('/dashboard', function () {
