@@ -36,19 +36,35 @@ Route::get('/category', function () {
 // routes admin
 Route::get('/admin', function () { //admin dashboard
     return view('admins.index');
-})->name('dashboardAdmin');
+})->name('admin');
 
 Route::get('/admin/berita', function () { //berita
     return view('admins.pages.berita');
-})->name('managementberita');
+})->name('admin.berita');
 
-Route::get('/admin/user', function () { //user
+Route::get('/admin/berita/tambah', function () { //berita
+    return view('admins.pages.tambah_berita');
+})->name('admin.berita.tambah');
+
+Route::post('/admin/berita/tambah', function () { //berita
+    return view('admins.pages.tambah_berita');
+})->name('admin.berita.tambah.post');
+
+Route::get('/admin/berita/edit', function () { //berita
+    return view('admins.pages.edit_berita');
+})->name('admin.berita.edit');
+
+Route::patch('/admin/berita/edit', function () { //berita
+    return view('admins.pages.edit_berita');
+})->name('admin.berita.edit.patch');
+
+Route::get('/admin/users', function () { //user
     return view('admins.form_user.user');
-})->name('managementUser');
+})->name('admin.users');
 
 Route::get('/admin/pengaduan', function () { //pengaduan
     return view('admins.form_pengaduan.pengaduan');
-})->name('managementPengaduan');
+})->name('admin.pengaduan');
 
 // --- example
 Route::get('/dashboard', function () {
