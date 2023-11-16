@@ -34,17 +34,21 @@ Route::get('/category', function () {
 
 
 // routes admin
-Route::get('/admin', function () {
+Route::get('/admin', function () { //admin dashboard
     return view('admins.index');
-});
+})->name('dashboardAdmin');
 
-Route::get('/admin/berita', function () {
+Route::get('/admin/berita', function () { //berita
     return view('admins.pages.berita');
 })->name('managementberita');
 
-Route::get('/admin/loker', function () {
+Route::get('/admin/user', function () { //user
     return view('admins.form_user.user');
 })->name('managementUser');
+
+Route::get('/admin/pengaduan', function () { //pengaduan
+    return view('admins.form_pengaduan.pengaduan');
+})->name('managementPengaduan');
 
 // --- example
 Route::get('/dashboard', function () {
