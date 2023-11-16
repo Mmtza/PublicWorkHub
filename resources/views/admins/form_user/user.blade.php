@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Berita')
+@section('title', 'Management User')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2><b>Publick</b> Work <b>Hub</b></h2>
+                    <h2>Form <b>User</b></h2>
                 </div>
                 <div class="col-sm-6">
                     <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Users</span></a>
