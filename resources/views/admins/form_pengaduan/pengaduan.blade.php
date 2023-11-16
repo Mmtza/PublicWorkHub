@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management User')
+@section('title', 'Management Pengaduan')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Form <b>User</b></h2>
+                    <h2>Form <b>Pengaduan</b></h2>
                 </div>
                 <div class="col-sm-6">
                     <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Users</span></a>
@@ -27,14 +27,11 @@
                         </span>
                     </th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Date Of Birth</th>
-                    <th>Biodata</th>
-                    <th>Role</th>
-                    <th>Foto</th>
-                    <th>Actions</th>
-                </tr>
+                    <th>Isi Pengaduan</th>
+                    <th>Tanggal Pengaduan</th>
+                    <th>Status</th>
+                    <th>File</th>
+                    <th>Action</th>
             </thead>
             <tbody>
                 <tr>
@@ -44,13 +41,11 @@
                             <label for="checkbox1"></label>
                         </span>
                     </td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
+                    <td>John Doe</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus ut ultricies imperdiet. Vivamus eu libero id justo varius dapibus. Etiam vel lacus vel felis dignissim convallis.</td>
+                    <td>2023-01-15</td>
+                    <td>Dalam Proses</td>
+                    <td>dokumen1.pdf</td>
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -63,13 +58,11 @@
                             <label for="checkbox2"></label>
                         </span>
                     </td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
+                    <td>John Doe</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus ut ultricies imperdiet. Vivamus eu libero id justo varius dapibus. Etiam vel lacus vel felis dignissim convallis.</td>
+                    <td>2023-01-15</td>
+                    <td>Dalam Proses</td>
+                    <td>dokumen1.pdf</td>
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -82,13 +75,11 @@
                             <label for="checkbox3"></label>
                         </span>
                     </td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
+                    <td>John Doe</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus ut ultricies imperdiet. Vivamus eu libero id justo varius dapibus. Etiam vel lacus vel felis dignissim convallis.</td>
+                    <td>2023-01-15</td>
+                    <td>Dalam Proses</td>
+                    <td>dokumen1.pdf</td>
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -101,13 +92,11 @@
                             <label for="checkbox4"></label>
                         </span>
                     </td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Penulis</td>
-                    <td>image.jpg</td>
+                    <td>John Doe</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus ut ultricies imperdiet. Vivamus eu libero id justo varius dapibus. Etiam vel lacus vel felis dignissim convallis.</td>
+                    <td>2023-01-15</td>
+                    <td>Dalam Proses</td>
+                    <td>dokumen1.pdf</td>
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -120,13 +109,11 @@
                             <label for="checkbox5"></label>
                         </span>
                     </td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Penyedia Loker</td>
-                    <td>image.jpg</td>
+                    <td>John Doe</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius tellus ut ultricies imperdiet. Vivamus eu libero id justo varius dapibus. Etiam vel lacus vel felis dignissim convallis.</td>
+                    <td>2023-01-15</td>
+                    <td>Dalam Proses</td>
+                    <td>dokumen1.pdf</td>
                     <td>
                         <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
