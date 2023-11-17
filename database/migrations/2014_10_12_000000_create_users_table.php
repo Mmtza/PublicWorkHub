@@ -21,8 +21,8 @@ return new class extends Migration
             $table->enum('role', ['user', 'penulis', 'penyedia_loker', 'admin'])->nullable(false)->default('user');
             $table->date('tanggal_lahir')->nullable(true);
             $table->text('alamat')->nullable(true);
-            $table->text('deskripsi_diri')->nullable(true);
-            $table->text('foto')->nullable(true);
+            $table->longText('deskripsi_diri')->nullable(true);
+            $table->longText('foto')->nullable(true);
             $table->timestamps();
         });
     }

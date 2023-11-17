@@ -31,7 +31,7 @@ class ProfileController extends Controller
             'email' => ['required', 'email:rfc,dns'],
             'birthdate' => ['max:65000'],
             'address' => ['max:65000'],
-            'deskripsi_diri_content' => ['max:65000'],
+            'deskripsi_diri_content' => ['max:4000000000'],
             'foto' => ['image', 'mimes:jpg,png,jpeg', 'max:10000']
         ]);
 
