@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('users.index');
 })->name('landing')->middleware('guest');
 
+Route::get('/pengaduan-masyarakat', function () {
+    return view('users.pengaduan');
+})->name('pengaduan');
+
 // Route::get(
 //     '/blog',
 //     [BeritaController::class, 'index']
