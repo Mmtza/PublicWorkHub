@@ -73,7 +73,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button onclick="sendData()">{{ __('Save') }}</x-primary-button>
+            <x-primary-button onclick="sendDataDeskripsiDiri()">{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
