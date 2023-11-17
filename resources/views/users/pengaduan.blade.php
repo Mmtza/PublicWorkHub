@@ -1,6 +1,6 @@
 @extends('users.layout.template')
 
-@section('title', 'Category')
+@section('title', 'Pengaduan')
 
 @section('content')
     <div class="section search-result-wrap">
