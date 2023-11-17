@@ -62,7 +62,7 @@
             <x-input-label for='deskripsi_diri_content' :value="__('Description')"/>
             <div id="quill_deskripsi_diri" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" style="min-height: 30vh;" autofocus autocomplete="quill_deskripsi_diri">
             </div>
-            <x-text-input type="hidden" name="deskripsi_diri_content" id="deskripsi_diri_content" autofocus autocomplete="deskripsi_diri_content" value="{{ auth()->user()->deskripsi_diri }}">            
+            <x-text-input type="hidden" name="deskripsi_diri_content" id="deskripsi_diri_content" autofocus autocomplete="deskripsi_diri_content" value="{{ auth()->user()->deskripsi_diri }}"/>            
             <x-input-error class="mt-2" :messages="$errors->get('deskripsi_diri_content')" />
         </div>
 

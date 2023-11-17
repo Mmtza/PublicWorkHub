@@ -411,10 +411,10 @@
             },        
         });
 
-        quilleditberita.clipboard.dangerouslyPasteHTML(document.getElementById('quilleditberita').value);
+        quilleditberita.clipboard.dangerouslyPasteHTML(document.getElementById('isi_berita').value);
 
         function sendDataEditBerita() {
-            document.getElementById('quilleditberita').value = quilleditberita.root.innerHTML;
+            document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
         }
     </script>
 </body>
