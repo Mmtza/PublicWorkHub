@@ -33,7 +33,7 @@ class BeritaController extends Controller
 
     public function viewAddBeritaDashboard()
     {
-        return view('admins.pages.berita.add_berita');
+        return view('admins.pages.berita.tambah_berita');
     }
 
     public function addBeritaDashboard()
@@ -42,6 +42,11 @@ class BeritaController extends Controller
     }
 
     public function editBeritaDashboard()
+    {
+
+    }
+
+    public function deleteBeritaDashboard()
     {
 
     }
