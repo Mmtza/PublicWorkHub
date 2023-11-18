@@ -20,11 +20,13 @@ class Berita extends Model
         'isi',
         'waktu_publikasi',
         'img',
-        'status'
+        'status',
+        'id_user'
     ];
+    public $timestamps = false;
 
     public function getUser() {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function getKomentar() {
@@ -33,5 +35,9 @@ class Berita extends Model
 
     public function getLike() {
         return $this->belongsTo(Like::class);
+    }
+
+    public function getKategori() {
+        return $this->belongsToMany(Kategori::class, 'berita_has_kategori', 'id_berita', 'id_kategori', 'id');
     }
 }
