@@ -10,4 +10,20 @@ class PengaduanController extends Controller
     {
         return view('admins.pages.form_pengaduan.pengaduan');
     }
+
+    public function viewEditPengaduan() {
+        return view('admins.pages.form_pengaduan.edit_pengaduan');
+    }
+
+    public function viewAddPengaduan() {
+        return view('admins.pages.form_pengaduan.tambah_pengaduan');
+    }
+
+    public function editPengaduan() {
+
+    }
+
+    public function addPengaduan() {
+
+    }
 }

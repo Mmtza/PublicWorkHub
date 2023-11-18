@@ -5,19 +5,11 @@
 @section('content')
 
 <div class="container">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h2>Form <b>Pengaduan</b></h2>
-                </div>
-                <div class="col-sm-6">
-                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Users</span></a>
-                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete All Users</span></a>						
-                </div>
+            <h1 class="fs-1 mb-5">Management Pengaduan</h1>
+            <div class="d-flex mb-3">
+            <a href={{ route('admin.pengaduan.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
             </div>
-        </div>
-        <table class="table table-striped table-hover">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
@@ -47,7 +39,7 @@
                     <td>Dalam Proses</td>
                     <td>dokumen1.pdf</td>
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="{{ route('admin.pengaduan.edit') }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
@@ -121,7 +113,6 @@
                 </tr> 
             </tbody>
         </table>
-    </div>
 </div>
 <!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">

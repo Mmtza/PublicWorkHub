@@ -61,7 +61,23 @@ Route::delete('/admin/berita/delete', [BeritaController::class, 'deleteBeritaDas
 
 Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
 
+Route::get('/admin/users/edit', [UsersController::class, 'viewEditUsers'])->name('admin.users.edit');
+
+Route::patch('/admin/users/edit', [UsersController::class, 'editUsers'])->name('admin.users.edit.patch');
+
+Route::get('/admin/users/tambah', [UsersController::class, 'viewAddUsers'])->name('admin.users.tambah');
+
+Route::post('/admin/users/tambah', [UsersController::class, 'addUsers'])->name('admin.users.tambah.post');
+
 Route::get('/admin/pengaduan', [PengaduanController::class, 'showAllPengaduanDashboard'])->name('admin.pengaduan');
+
+Route::get('/admin/pengaduan/edit', [PengaduanController::class, 'viewEditPengaduan'])->name('admin.pengaduan.edit');
+
+Route::patch('/admin/pengaduan/edit', [PengaduanController::class, 'editPengaduan'])->name('admin.pengaduan.edit.patch');
+
+Route::get('/admin/pengaduan/tambah', [PengaduanController::class, 'viewAddPengaduan'])->name('admin.pengaduan.tambah');
+
+Route::post('/admin/pengaduan/tambah', [PengaduanController::class, 'addPengaduan'])->name('admin.pengaduan.tambah.post');
 
 Route::get('/admin/loker', [LokerController::class, 'showAllLokerDashboard'])->name('admin.loker');
 
