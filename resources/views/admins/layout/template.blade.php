@@ -398,7 +398,7 @@
     <script src="{{ asset('admins/themes') }}/assets/js/form-user.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
-        var quilleditberita = new Quill('#quilleditberita', {
+        const quilleditberita = new Quill('#quilleditberita', {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -415,6 +415,27 @@
 
         function sendDataEditBerita() {
             document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
+        }
+        
+    </script>
+    <script>
+        const quilleditloker = new Quill('#quilleditloker', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }], // Color and background color
+                    ['link', 'image', 'video'],
+                    ['clean']
+                ]
+            },        
+        });
+
+        quilleditloker.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_loker').value);
+
+        function sendDataEditLoker() {
+            document.getElementById('deskripsi_loker').value = quilleditloker.root.innerHTML;
         }
     </script>
 </body>

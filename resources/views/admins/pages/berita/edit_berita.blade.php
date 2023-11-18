@@ -5,14 +5,14 @@
 @section('content')
 
 <h1 class="fs-1 mb-5">Edit Berita</h1>
-<form class="d-flex mb-3" method="POST">
+<form class="d-flex mb-3" method="POST" action="{{ route('admin.berita.delete') }}">
     @csrf
-    @method('DELETE')
+    @method('delete')
     <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
 </form>  
 <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.berita.edit.patch') }}>
     @csrf
-    @method('PATCH')
+    @method('patch')
 
     <x-input-label for="judul_berita" :value="('Judul')"/>
     <x-text-input type="text" class="rounded p-2" name="judul_berita" id="judul_berita"/>
@@ -43,7 +43,7 @@
     <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2" name="image_berita" id="image_berita"/>
     
     <div class="d-flex justify-content-center gap-5">
-        <button type="submit" class="btn btn-primary p-3">{{ __('Edit') }}</button>
+        <button type="submit" class="btn btn-primary p-3" onclick="sendDataEditBerita()">{{ __('Edit') }}</button>
         <button type="reset" class="btn btn-secondary p-3">{{ __('Reset') }}</button>
     </div>
 </form>

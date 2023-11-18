@@ -3,6 +3,7 @@
 // use App\Http\Controllers\BeritaController;
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\LokerController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
@@ -56,6 +57,8 @@ Route::get('/admin/berita/edit', [BeritaController::class, 'viewEditBeritaDashbo
 
 Route::patch('/admin/berita/edit', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
 
+Route::delete('/admin/berita/delete', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
+
 Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
 
 Route::get('/admin/users/edit', [UsersController::class, 'viewEditUsers'])->name('admin.users.edit');
@@ -75,6 +78,18 @@ Route::patch('/admin/pengaduan/edit', [PengaduanController::class, 'editPengadua
 Route::get('/admin/pengaduan/tambah', [PengaduanController::class, 'viewAddPengaduan'])->name('admin.pengaduan.tambah');
 
 Route::post('/admin/pengaduan/tambah', [PengaduanController::class, 'addPengaduan'])->name('admin.pengaduan.tambah.post');
+
+Route::get('/admin/loker', [LokerController::class, 'showAllLokerDashboard'])->name('admin.loker');
+
+Route::get('/admin/loker/tambah', [LokerController::class, 'viewAddLokerDashboard'])->name('admin.loker.tambah');
+
+Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
+
+Route::get('/admin/loker/edit', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
+
+Route::patch('/admin/loker/edit', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
+
+Route::delete('/admin/loker/delete', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 
 // --- example
 Route::get('/dashboard', function () {
