@@ -60,7 +60,9 @@
         
         <div>
             <x-input-label for='deskripsi_diri_content' :value="__('Description')"/>
-            <x-text-editor id="deskripsi_diri" class="mt-1 block w-full" style="min-height: 30vh;" autofocus autocomplete="deskripsi_diri" />
+            <div id="quill_deskripsi_diri" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" style="min-height: 30vh;" autofocus autocomplete="quill_deskripsi_diri">
+            </div>
+            <x-text-input type="hidden" name="deskripsi_diri_content" id="deskripsi_diri_content" autofocus autocomplete="deskripsi_diri_content" value="{{ auth()->user()->deskripsi_diri }}"/>            
             <x-input-error class="mt-2" :messages="$errors->get('deskripsi_diri_content')" />
         </div>
 
@@ -71,7 +73,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button onclick="sendData()">{{ __('Save') }}</x-primary-button>
+            <x-primary-button onclick="sendDataDeskripsiDiri()">{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

@@ -33,7 +33,6 @@
 
     <link rel="stylesheet" href="{{ asset('users/themes') }}/css/flatpickr.min.css">
 
-
     <title>Public Work Hub</title>
 </head>
 
@@ -69,8 +68,6 @@
     <script src="{{ asset('users/themes') }}/js/navbar.js"></script>
     <script src="{{ asset('users/themes') }}/js/counter.js"></script>
     <script src="{{ asset('users/themes') }}/js/custom.js"></script>
-
-
 </body>
 
 </html>

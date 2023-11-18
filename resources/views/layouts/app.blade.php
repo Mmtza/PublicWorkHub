@@ -39,7 +39,7 @@
 
         <!-- Initialize Quill editor -->
         <script>
-        var quill = new Quill('#deskripsi_diri', {
+        var quilldeskripsidiri = new Quill('#quill_deskripsi_diri', {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -52,12 +52,12 @@
             },        
         });
 
-        quill.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_diri_content').value);
+        quilldeskripsidiri.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_diri_content').value);
 
-        function sendData() {
-            document.getElementById('deskripsi_diri_content').value = quill.root.innerHTML;
+        function sendDataDeskripsiDiri() {
+            document.getElementById('deskripsi_diri_content').value = quilldeskripsidiri.root.innerHTML;
         }
-
+        
         </script>
     </body>
 </html>

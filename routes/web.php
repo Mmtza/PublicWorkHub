@@ -1,7 +1,11 @@
 <?php
 
 // use App\Http\Controllers\BeritaController;
+
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('users.index');
 })->name('landing')->middleware('guest');
+
+Route::get('/pengaduan-masyarakat', function () {
+    return view('users.pengaduan');
+})->name('pengaduan');
 
 // Route::get(
 //     '/blog',
@@ -36,19 +44,21 @@ Route::get('/category', function () {
 // routes admin
 Route::get('/admin', function () { //admin dashboard
     return view('admins.index');
-})->name('dashboardAdmin');
+})->name('admin');
 
-Route::get('/admin/berita', function () { //berita
-    return view('admins.pages.berita');
-})->name('managementberita');
+Route::get('/admin/berita', [BeritaController::class, 'showAllBeritaDashboard'])->name('admin.berita');
 
-Route::get('/admin/user', function () { //user
-    return view('admins.form_user.user');
-})->name('managementUser');
+Route::get('/admin/berita/tambah', [BeritaController::class, 'viewAddBeritaDashboard'])->name('admin.berita.tambah');
 
-Route::get('/admin/pengaduan', function () { //pengaduan
-    return view('admins.form_pengaduan.pengaduan');
-})->name('managementPengaduan');
+Route::post('/admin/berita/tambah', [BeritaController::class, 'addBeritaDashboard'])->name('admin.berita.tambah.post');
+
+Route::get('/admin/berita/edit', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
+
+Route::patch('/admin/berita/edit', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
+
+Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
+
+Route::get('/admin/pengaduan', [PengaduanController::class, 'showAllPengaduanDashboard'])->name('admin.pengaduan');
 
 // --- example
 Route::get('/dashboard', function () {

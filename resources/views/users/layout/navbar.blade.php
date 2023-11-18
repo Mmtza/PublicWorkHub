@@ -29,7 +29,6 @@
                                 <ul class="dropdown">
                                     <li><a href="search-result.html">Search Result</a></li>
                                     <li><a href="/blog">Blog</a></li>
-                                    <li><a href="single.html">Blog Single</a></li>
                                     <li><a href="/category">Category</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -49,6 +48,7 @@
                             <li><a href="category.html">Culture</a></li>
                             <li><a href="category.html">Politics</a></li>
                             <li><a href="category.html">Travel</a></li>
+                            <li><a href="/pengaduan-masyarakat">Komplain</a></li>
                             <li class="d-lg-none d-inline-block">
                                 @if (Route::has('login'))
                                     <a href="{{ route('login') }}" class="text-black">Login</a>
@@ -64,9 +64,11 @@
                         <div class="d-none d-lg-flex flex-row-reverse justify-center align-items-center gap-5">
                             <div class="d-none d-lg-flex gap-3">
                                 @if (Route::has('login'))
-                                    <a href="{{ route('login') }}" class="text-white btn btn-outline-light">Login</a>
+                                    <a href="{{ route('login') }}"
+                                        class="text-white btn btn-outline-secondary">Login</a>
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="text-white btn btn-outline-light">Register</a>
+                                        <a href="{{ route('register') }}"
+                                            class="text-white btn btn-outline-secondary">Register</a>
                                     @endif
                                 @endif
                             </div>

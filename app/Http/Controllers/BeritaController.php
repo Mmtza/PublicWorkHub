@@ -21,6 +21,31 @@ class BeritaController extends Controller
         return view("users.pages.blog", $data);
     }
 
+    public function showAllBeritaDashboard()
+    {
+        return view('admins.pages.berita.all_berita');
+    }
+
+    public function viewEditBeritaDashboard()
+    {
+        return view('admins.pages.berita.edit_berita');
+    }
+
+    public function viewAddBeritaDashboard()
+    {
+        return view('admins.pages.berita.add_berita');
+    }
+
+    public function addBeritaDashboard()
+    {
+
+    }
+
+    public function editBeritaDashboard()
+    {
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */

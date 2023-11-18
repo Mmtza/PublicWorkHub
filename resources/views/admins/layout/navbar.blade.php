@@ -29,7 +29,7 @@
                             <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-home">
                                 <li class="collapsed-nav-item-title d-none">Home</li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('dashboardAdmin') }}" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('admin') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Dashboard</span></div>
@@ -54,7 +54,7 @@
                             <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-management">
                                 <li class="collapsed-nav-item-title d-none">Management</li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="{{ route('managementberita') }}" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('admin.berita') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Berita</span></div>
@@ -64,12 +64,12 @@
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Loker</span></div>
                                     </a><!-- more inner pages-->
-                                    <a class="nav-link active" href="{{ route('managementPengaduan') }}" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('admin.pengaduan') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Pengaduan</span></div>
                                     </a><!-- more inner pages-->
-                                    <a class="nav-link active" href="{{ route('managementUser') }}" data-bs-toggle=""
+                                    <a class="nav-link active" href="{{ route('admin.users') }}" data-bs-toggle=""
                                         aria-expanded="false">
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Users</span></div>

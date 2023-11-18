@@ -68,6 +68,7 @@
     <link href="{{ asset('admins/themes') }}/vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet" />
     <link href="{{ asset('admins/themes') }}/vendors/leaflet.markercluster/MarkerCluster.Default.css"
         rel="stylesheet" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -395,6 +396,27 @@
     </script>
     <script src="{{ asset('admins/themes') }}/assets/js/ecommerce-dashboard.js"></script>
     <script src="{{ asset('admins/themes') }}/assets/js/form-user.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quilleditberita = new Quill('#quilleditberita', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'color': [] }, { 'background': [] }], // Color and background color
+                    ['link', 'image', 'video'],
+                    ['clean']
+                ]
+            },        
+        });
+
+        quilleditberita.clipboard.dangerouslyPasteHTML(document.getElementById('isi_berita').value);
+
+        function sendDataEditBerita() {
+            document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
+        }
+    </script>
 </body>
 
 </html>
