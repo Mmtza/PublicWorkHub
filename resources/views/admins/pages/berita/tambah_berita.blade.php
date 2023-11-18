@@ -7,7 +7,7 @@
 <h1 class="fs-1 mb-5">Tambah Berita</h1>
 <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.berita.tambah.post') }}>
     @csrf
-    @method('POST')
+    @method('post')
 
     <x-input-label for="judul_berita" :value="('Judul')"/>
     <x-text-input type="text" class="rounded p-2" name="judul_berita" id="judul_berita"/>

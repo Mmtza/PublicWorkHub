@@ -39,7 +39,7 @@
 
         <!-- Initialize Quill editor -->
         <script>
-        var quilldeskripsidiri = new Quill('#quill_deskripsi_diri', {
+        const quilldeskripsidiri = new Quill('#quill_deskripsi_diri', {
             theme: 'snow',
             modules: {
                 toolbar: [
