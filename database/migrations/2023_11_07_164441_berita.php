@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('berita', function(Blueprint $table) {
             $table->id();
-            $table->string('judul', 50)->nullable(false);
+            $table->longText('judul')->nullable(false);
             $table->longText('isi')->nullable(false);
             $table->timestamp('waktu_publikasi')->nullable(false);
-            $table->string('img', 255)->nullable(false);
-            $table->enum('status', ['aktif', 'tidak aktif'])->nullable(false)->default('tidak aktif');
-            $table->unsignedBigInteger('id_kategori')->nullable(false);
+            $table->longText('img')->nullable(true);
+            $table->enum('status', ['menunggu', 'aktif', 'tidak aktif'])->nullable(false)->default('menunggu');
             $table->unsignedBigInteger('id_user')->nullable(false);
-            $table->foreign('id_kategori')->references('id')->on('kategori')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
