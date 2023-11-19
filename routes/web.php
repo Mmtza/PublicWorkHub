@@ -53,9 +53,9 @@ Route::get('/admin/berita/tambah', [BeritaController::class, 'viewAddBeritaDashb
 
 Route::post('/admin/berita/tambah', [BeritaController::class, 'addBeritaDashboard'])->name('admin.berita.tambah.post');
 
-Route::get('/admin/berita/edit', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
+Route::get('/admin/berita/edit/{id}', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
 
-Route::patch('/admin/berita/edit', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
+Route::patch('/admin/berita/edit/{id}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
 
 Route::delete('/admin/berita/delete', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
 
