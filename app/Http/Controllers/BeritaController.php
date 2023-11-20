@@ -37,13 +37,15 @@ class BeritaController extends Controller
         $publisher = Berita::with('getUser')->find($id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
+        confirmDelete();
         return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }
 
     public function viewAddBeritaDashboard()
     {
         $kategori = Kategori::all();
-        return view('admins.pages.berita.tambah_berita', compact('kategori'));
+        $publisherName = Auth::user()->name;
+        return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName'));
     }
 
     public function addBeritaDashboard(Request $request)
@@ -52,7 +54,7 @@ class BeritaController extends Controller
             'judul_berita' => ['required', 'min:4', 'max:65000'],
             'isi_berita' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
-            'status_berita' => ['required', 'in:Menunggu,Aktif,TidakAktif'],
+            'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'pembuat_berita' => ['required'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
         ]);
@@ -99,9 +101,11 @@ class BeritaController extends Controller
 
     }
 
-    public function deleteBeritaDashboard()
+    public function deleteBeritaDashboard($id)
     {
-
+        Berita::destroy($id);
+        alert('Notification', 'Berhasil menghapus berita', 'success');
+        return redirect()->route('admin.berita');
     }
 
     /**
