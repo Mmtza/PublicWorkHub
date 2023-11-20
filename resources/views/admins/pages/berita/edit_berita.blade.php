@@ -5,11 +5,31 @@
 @section('content')
 
     <h1 class="fs-1 mb-5">Edit Berita</h1>
-    <form class="d-flex mb-3" method="POST" action="{{ route('admin.berita.delete') }}">
+    <form class="d-flex mb-3" method="POST" action="{{ route('admin.berita.delete', $berita->id) }}" id="deleteBeritaForm">
         @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
     </form>
+    <script>
+        document.getElementById('deleteBeritaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: 'Ingin menghapus berita ini',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    this.submit();
+                }
+            });
+        });
+    </script>
     <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data"
         action={{ route('admin.berita.edit.patch', $berita->id) }}>
         @csrf
