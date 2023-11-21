@@ -20,11 +20,11 @@ class Berita_Has_Kategori extends Model
 
     public $timestamps = false;
 
-    // public function getBerita() {
-    //     return $this->belongsToMany(Berita::class, 'berita_has_kategori', 'id_kategori', 'id_berita', 'id_kategori', 'id');
-    // }
+    public function getBerita() {
+        return $this->belongsToMany(Berita::class, 'berita_has_kategori', 'id_kategori', 'id_berita', 'id_kategori', 'id');
+    }
 
-    // public function getKategori() {
-    //     return $this->belongsToMany(Kategori::class, 'berita_has_kategori', 'id_berita', 'id_kategori', 'id_berita', 'id');
-    // }
+    public function getKategori() {
+        return $this->belongsToMany(Kategori::class, 'berita_has_kategori', 'id_berita', 'id_kategori', 'id_berita', 'id');
+    }
 }
