@@ -92,6 +92,7 @@ class BeritaController extends Controller
                 }
             }
         }
+        alert('Notifikasi', 'Berhasil membuat berita', 'success');
         return redirect()->route('admin.berita');
     }
     
