@@ -2,12 +2,13 @@
 
 // use App\Http\Controllers\BeritaController;
 
-use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\LokerController;
-use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LokerController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\PenulisBeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,23 @@ Route::get('/admin/loker/edit', [LokerController::class, 'viewEditLokerDashboard
 Route::patch('/admin/loker/edit', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
 
 Route::delete('/admin/loker/delete', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
+
+// Routes Penulis
+Route::get('/penulis', function () { //penulis dashboard
+    return view('penulis.index');
+})->name('penulis');
+
+Route::get('/penulis/berita', [PenulisBeritaController::class, 'showAllBeritaDashboard'])->name('penulis.berita');
+
+Route::get('/penulis/berita/tambah', [PenulisBeritaController::class, 'viewAddBeritaDashboard'])->name('penulis.berita.tambah');
+
+Route::post('/penulis/berita/tambah', [PenulisBeritaController::class, 'addBeritaDashboard'])->name('penulis.berita.tambah.post');
+
+Route::get('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'viewEditBeritaDashboard'])->name('penulis.berita.edit');
+
+Route::patch('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
+
+Route::delete('/penulis/berita/delete', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
 
 // --- example
 Route::get('/dashboard', function () {
