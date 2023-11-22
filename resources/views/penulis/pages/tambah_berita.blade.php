@@ -17,16 +17,6 @@
     </div>
     <x-text-input type="hidden" name="isi_berita" id="isi_berita"/>
     
-    {{-- <x-input-label for="status_berita" :value="('Status')"/>
-    <select name="status_berita" id="status_berita" class="rounded p-2" required>
-        <option value="menunggu">Menunggu</option>
-        <option value="aktif">Aktif</option>
-        <option value="tidak aktif">Tidak Aktif</option>
-    </select> --}}
-    
-    {{-- <x-input-label for="pembuat_berita" :value="('Dibuat Oleh')"/>
-    <x-text-input type="text" class="rounded p-2" name="pembuat_berita" id="pembuat_berita" required/> --}}
-    
     <x-input-label for="kategori_berita" :value="('Kategori')"/>
     <div class="d-flex gap-2 mb-3">
         @foreach ( $kategori as $k ) 
