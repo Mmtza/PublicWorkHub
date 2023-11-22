@@ -58,7 +58,7 @@ Route::get('/admin/berita/edit/{id}', [BeritaController::class, 'viewEditBeritaD
 
 Route::patch('/admin/berita/edit/{id}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
 
-Route::delete('/admin/berita/delete', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
+Route::delete('/admin/berita/delete/{id}', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
 
 Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
 

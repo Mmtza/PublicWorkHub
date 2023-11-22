@@ -25,7 +25,7 @@
     </select>
     
     <x-input-label for="pembuat_berita" :value="('Dibuat Oleh')"/>
-    <x-text-input type="text" class="rounded p-2" name="pembuat_berita" id="pembuat_berita" required/>
+    <x-text-input type="text" class="rounded p-2" name="pembuat_berita" id="pembuat_berita" value="{{ $publisherName }}" required disabled/>
     
     <x-input-label for="kategori_berita" :value="('Kategori')"/>
     <div class="d-flex gap-2 mb-3">

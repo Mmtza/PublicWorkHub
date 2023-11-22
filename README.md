@@ -71,7 +71,11 @@
 
 ### If you Local
 - Have a composer
-- Run command compose update or composer install to get the package from composer
+- Run command composer update or composer install to get the package from composer
+- Run command npm install to get the package from packege.json
+- Copy .env.example to .env
 - Have a database named in .env file
 - Run php artisan migrate
+- php artisan sweetalert:publish to publish sweet alert to frontend 
 - Run php artisan serve to running a laravel
+- Run npm run dev to running js script
