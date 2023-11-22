@@ -72,6 +72,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <main class="main" id="top">
         @include('admins.layout.navbar')
 
@@ -405,7 +406,7 @@
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     ['bold', 'italic', 'underline', 'strike'],
                     [{ 'color': [] }, { 'background': [] }], // Color and background color
-                    ['link', 'image', 'video'],
+                    ['link'],
                     ['clean']
                 ]
             },        
@@ -415,6 +416,7 @@
 
         function sendDataEditBerita() {
             document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
+            console.log(document.getElementById('isi_berita').value)
         }
         
     </script>
@@ -426,7 +428,7 @@
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     ['bold', 'italic', 'underline', 'strike'],
                     [{ 'color': [] }, { 'background': [] }], // Color and background color
-                    ['link', 'image', 'video'],
+                    ['link'],
                     ['clean']
                 ]
             },        
