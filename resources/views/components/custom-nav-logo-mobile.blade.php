@@ -1,0 +1,1 @@
+<img width="80%" src="{{ asset('users/themes') }}/images/pwhlogo3.png" alt="" class="d-block d-md-none d-sm-block">
