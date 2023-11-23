@@ -2087,7 +2087,7 @@
                     <li>
                         <a class="dropdown-item" href="documentation/gulp.html">
                             <div class="dropdown-item-wrapper"><span
-                                    class="me-2 fa-brands fa-gulp ms-1 me-1 fa-lg"></span>Gulp</div>
+                                    class="me-2 fa-brands fa-gulp ms-1 fa-lg"></span>Gulp</div>
                         </a>
                     </li>
                     <li>
@@ -3497,7 +3497,7 @@
                     <li>
                         <a class="dropdown-item" href="documentation/gulp.html">
                             <div class="dropdown-item-wrapper"><span
-                                    class="me-2 fa-brands fa-gulp ms-1 me-1 fa-lg"></span>Gulp</div>
+                                    class="me-2 fa-brands fa-gulp ms-1 fa-lg"></span>Gulp</div>
                         </a>
                     </li>
                     <li>
@@ -4912,7 +4912,7 @@
                     <li>
                         <a class="dropdown-item" href="documentation/gulp.html">
                             <div class="dropdown-item-wrapper"><span
-                                    class="me-2 fa-brands fa-gulp ms-1 me-1 fa-lg"></span>Gulp</div>
+                                    class="me-2 fa-brands fa-gulp ms-1 fa-lg"></span>Gulp</div>
                         </a>
                     </li>
                     <li>
@@ -6322,7 +6322,7 @@
                     <li>
                         <a class="dropdown-item" href="documentation/gulp.html">
                             <div class="dropdown-item-wrapper"><span
-                                    class="me-2 fa-brands fa-gulp ms-1 me-1 fa-lg"></span>Gulp</div>
+                                    class="me-2 fa-brands fa-gulp ms-1 fa-lg"></span>Gulp</div>
                         </a>
                     </li>
                     <li>
@@ -8361,7 +8361,7 @@
                         <li>
                             <a class="dropdown-item" href="documentation/gulp.html">
                                 <div class="dropdown-item-wrapper"><span
-                                        class="me-2 fa-brands fa-gulp ms-1 me-1 fa-lg"></span>Gulp</div>
+                                        class="me-2 fa-brands fa-gulp ms-1 fa-lg"></span>Gulp</div>
                             </a>
                         </li>
                         <li>
