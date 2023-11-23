@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class BeritaController extends Controller
+class PenulisBeritaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,8 +27,8 @@ class BeritaController extends Controller
 
     public function showAllBeritaDashboard()
     {
-        $berita = Berita::all();
-        return view('admins.pages.berita.all_berita', compact('berita'));
+        $berita = Berita::where('id_user', Auth::user()->id)->get();
+        return view('penulis.pages.all_berita', compact('berita'));
     }
 
     public function viewEditBeritaDashboard($id)
@@ -38,14 +38,13 @@ class BeritaController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         confirmDelete();
-        return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
+        return view('penulis.pages.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }
 
     public function viewAddBeritaDashboard()
     {
         $kategori = Kategori::all();
-        $publisherName = Auth::user()->name;
-        return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName'));
+        return view('penulis.pages.tambah_berita', compact('kategori'));
     }
 
     public function addBeritaDashboard(Request $request)
@@ -54,25 +53,23 @@ class BeritaController extends Controller
             'judul_berita' => ['required', 'min:4', 'max:65000'],
             'isi_berita' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
-            'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
         ]);
         
-        if (isset($request->image_berita)) {
+        if (isset($data['image_berita'])) {
 
             $imageName = time() . '.' . $request->image_berita->extension();
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
         }
         $waktu = now()->toDateTimeString();
-        
+
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
-            'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
-            'img' => isset($request->image_berita)? $data['image_berita'] : null
+            'img' => isset($data['image_berita'])? $data['image_berita'] : null
         ]);
         
         if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
@@ -82,7 +79,7 @@ class BeritaController extends Controller
             foreach ($kategori as $i)
             {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
-                
+
                 foreach ($dataKategori as $j)
                 {
                     Berita_Has_Kategori::create([
@@ -93,16 +90,15 @@ class BeritaController extends Controller
             }
         }
         alert('Notifikasi', 'Berhasil membuat berita', 'success');
-        return redirect()->route('admin.berita');
+        return redirect()->route('penulis.berita');
     }
-    
+
     public function editBeritaDashboard(Request $request, $id)
     {
         $data = $request->validate([
             'judul_berita' => ['required', 'min:4', 'max:65000'],
             'isi_berita' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
-            'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
         ]);
 
@@ -147,14 +143,13 @@ class BeritaController extends Controller
 
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
-        $berita->status = $data['status_berita'];
         $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
         $berita->waktu_publikasi = now()->toDateTimeString();
         $berita->save();
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
     
-        return redirect()->route('admin.berita');
+        return redirect()->route('penulis.berita');
     }
 
     public function deleteBeritaDashboard($id)
@@ -172,7 +167,7 @@ class BeritaController extends Controller
         }
         Berita::destroy($id);
         alert('Notifikasi', 'Berhasil menghapus berita', 'success');
-        return redirect()->route('admin.berita');
+        return redirect()->route('penulis.berita');
     }
 
     /**
