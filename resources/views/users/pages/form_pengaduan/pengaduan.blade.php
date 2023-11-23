@@ -25,7 +25,8 @@
                         </div>
                         <div class="mb-3 ">
                             <label for="file_pengaduan" class="form-label">Upload File</label>
-                            <input type="file" class="form-control form-control-sm" id="file_pengaduan" name="file">
+                            <input type="file" class="form-control form-control-sm" id="file_pengaduan"
+                                name="file_pengaduan">
                         </div>
                         <input type="submit" class="btn btn-outline-primary">
                     </form>
@@ -36,7 +37,7 @@
                         <h3 class="heading">Daftar Pengaduan</h3>
                         <div class="post-entry-sidebar">
                             <ul>
-                                @forelse ($pengaduan as $row)
+                                @foreach ($pengaduan as $row)
                                     <li>
                                         <p>
                                         <div class="text-sm">
@@ -47,13 +48,7 @@
                                         </div>
                                         </p>
                                     </li>
-                                @empty
-                                    <li>
-                                        <p class="text-sm">
-                                            Belum ada pengaduan yang dibuat.
-                                        </p>
-                                    </li>
-                                @endforelse
+                                @endforeach
                             </ul>
                         </div>
                     </div>
