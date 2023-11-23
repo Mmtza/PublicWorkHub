@@ -29,7 +29,7 @@ class PengaduanController extends Controller
         $user_id = auth()->user()->id;
 
         $data = [
-            'pengaduan' => Pengaduan::where('id', $user_id)->get()
+            'pengaduan' => Pengaduan::where('id_user', $user_id)->get()
         ];
 
         // dd($data);
@@ -43,7 +43,7 @@ class PengaduanController extends Controller
             'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
         ]);
 
-        if (isset($data['file_pengaduan'])) {
+        if (isset($request->file_pengaduan)) {
 
             $fileName = time() . '.' . $request->file_pengaduan->extension();
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
@@ -51,18 +51,51 @@ class PengaduanController extends Controller
         }
         $waktu = now()->toDateTimeString();
 
+
         $dataPengaduan = Pengaduan::insert([
             'id_user' => auth()->user()->id,
             'isi_pengaduan' => $data['isi_pengaduan'],
             'waktu_pengaduan' => $waktu,
-            'file' => isset($data['file_pengaduan']) ? $data['file_pengaduan'] : null
+            'file' => isset($request->file_pengaduan) ? $data['file_pengaduan'] : null
         ]);
+
+        // dd($dataPengaduan);
         alert('Notifikasi', 'Berhasil membuat pengaduan', 'success');
         return redirect()->route('users.pengaduan');
     }
 
-    public function editPengaduan()
+    public function editPengaduanDashboard(Request $request, $id)
     {
+        $data = $request->validate([
+            'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
+            'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
+        ]);
 
+        $pengaduan = Pengaduan::find($id);
+
+        if ($pengaduan->file) {
+            $data['file_pengaduan'] = $pengaduan->file;
+        }
+
+        if (isset($request->file_berita)) {
+            $filePath = public_path('assets/pengaduan/files/' . $pengaduan->file);
+
+            if (file_exists($filePath) && is_file($filePath)) {
+                unlink($filePath);
+            }
+
+            $fileName = time() . '.' . $request->file_pengaduan->extension();
+            $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
+            $data['file_pengaduan'] = $fileName;
+        }
+        $waktu = now()->toDateTimeString();
+
+        $dataPengaduan = Pengaduan::save([
+            'isi_pengaduan' => $data['isi_pengaduan'],
+            'waktu_pengaduan' => $waktu,
+            'file' => $data['file_pengaduan']
+        ]);
+        alert('Notifikasi', 'Berhasil mengedit pengaduan', 'success');
+        // Tambahkan redir ke tampilan admin/pengaduan
     }
 }
