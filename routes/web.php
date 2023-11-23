@@ -107,7 +107,7 @@ Route::get('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'viewEd
 
 Route::patch('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
 
-Route::delete('/penulis/berita/delete', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
+Route::delete('/penulis/berita/delete/{id}', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
 
 // --- example
 Route::get('/dashboard', function () {

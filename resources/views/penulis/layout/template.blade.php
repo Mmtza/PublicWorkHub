@@ -72,6 +72,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <main class="main" id="top">
         @include('penulis.layout.navbar')
 
