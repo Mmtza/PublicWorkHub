@@ -20,14 +20,13 @@ use App\Http\Controllers\PenulisBeritaController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Routes Users
 Route::get('/', function () {
     return view('users.index');
 })->name('landing')->middleware('guest');
 
-Route::get('/pengaduan-masyarakat', function () {
-    return view('users.pengaduan');
-})->name('pengaduan');
+Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
+Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
 
 // Route::get(
 //     '/blog',
