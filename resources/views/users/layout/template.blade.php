@@ -37,7 +37,7 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
     {{-- header --}}
     @include('users.layout.navbar')
 
