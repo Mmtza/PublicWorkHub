@@ -497,6 +497,8 @@
                         <circle cx="8" cy="2" r="2" fill="currentColor"></circle>
                         <circle cx="14" cy="2" r="2" fill="currentColor"></circle>
                     </svg></a>
+
+                {{-- menu  --}}
                 <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
                     aria-labelledby="navbarDropdownNindeDots">
                     <div class="card bg-white position-relative border-0">
@@ -662,6 +664,7 @@
         </ul>
     </div>
 </nav>
+{{-- navbar mobile --}}
 <nav class="navbar navbar-top navbar-slim fixed-top navbar-expand" id="topNavSlim" style="display: none">
     <div class="collapse navbar-collapse justify-content-between">
         <div class="navbar-logo">

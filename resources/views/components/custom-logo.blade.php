@@ -1,1 +1,1 @@
-<img src="{{ asset('users/themes') }}/images/" alt="">
+<img src="{{ asset('users/themes') }}/images/pwhlogo2.png" alt="">
