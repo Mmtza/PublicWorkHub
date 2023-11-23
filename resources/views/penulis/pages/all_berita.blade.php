@@ -27,7 +27,10 @@
                     }
                 @endphp
                 <div class="card-body">
-                    <h5 class="card-title">{{ $b->judul }}</h5>
+                    <div class="d-flex justify-content-end ">
+                        <p class="border border-warning rounded d-inline-block p-1 justify-content-end"> {{ $b->status }} </p>
+                    </div>
+                    <h5 class="card-title">{{ $b->judul }}</h5> 
                     <div class="card-text">
                         @php
                             echo $truncatedString;
