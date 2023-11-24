@@ -9,6 +9,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenulisBeritaController;
+use App\Http\Controllers\penyediaLokerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,23 @@ Route::get('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'viewEd
 Route::patch('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
 
 Route::delete('/penulis/berita/delete/{id}', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
+
+// Routes Penulis
+Route::get('/penyedia-loker', function () { //penyedia-loker dashboard
+    return view('penyedia_loker.index');
+})->name('penyedia-loker');
+
+Route::get('/penyedia-loker/loker', [penyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
+
+Route::get('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
+
+Route::post('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'addLokerDashboard'])->name('penyedia-loker.loker.tambah.post');
+
+Route::get('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'viewEditLokerDashboard'])->name('penyedia-loker.loker.edit');
+
+Route::patch('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'editLokerDashboard'])->name('penyedia-loker.loker.edit.patch');
+
+Route::delete('/penyedia-loker/loker/delete/{id}', [penyediaLokerController::class, 'deleteLokerDashboard'])->name('penyedia-loker.loker.delete');
 
 // --- example
 Route::get('/dashboard', function () {
