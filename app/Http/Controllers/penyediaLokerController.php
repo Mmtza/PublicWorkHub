@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class penyediaLokerController extends Controller
+class PenyediaLokerController extends Controller
 {
     public function showAllLokerDashboard()
     {
@@ -23,12 +23,12 @@ class penyediaLokerController extends Controller
 
     public function addLokerDashboard()
     {
-        
+
     }
 
     public function editLokerDashboard()
     {
-        
+
     }
 
     public function deleteLokerDashboard()
