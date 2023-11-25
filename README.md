@@ -50,6 +50,7 @@
 ### User: 
 - User is Logged in
 - Penulis
+- Penyedia Loker
 - Admin
 
 ## Software and Tools
