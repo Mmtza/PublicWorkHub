@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Pengaduan')
+@section('title', 'PWH | Management Pengaduan')
 
 @section('content')
 
@@ -9,34 +9,41 @@
         <div class="d-flex mb-3">
             <a href={{ route('admin.pengaduan.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
         </div>
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>Nama Pelapor</th>
-                    <th>Isi Pengaduan</th>
-                    <th>Waktu Pengaduan</th>
-                    <th>Status</th>
-                    <th>File</th>
-                    <th>Action</th>
+        <table class="table" id="myTable">
+            <thead class="text-center">
+                <tr>
+                    <th class="text-center">Nama Pelapor</th>
+                    <th class="text-center">Isi Pengaduan</th>
+                    <th class="text-center">Waktu Pengaduan</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">File</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 @foreach ($pengaduan as $row)
-                    <tr class="text-center">
-                        <td>{{ $row->user->name }}</td>
-                        <td>{{ $row['isi_pengaduan'] }}</td>
-                        <td>{{ date('d M Y', strtotime($row['waktu_pengaduan'])) }}</td>
-                        <td>{{ $row->status }}</td>
-                        <td>{{ $row->file }}</td>
-                        <td>
-                            <a href="{{ route('users.pengaduan.download') }}/{{ $row->file }}" download
-                                data-toggle="modal"><i data-toggle="tooltip" title="Download">Download</i></a>
+                    <tr>
+                        <td class="text-center">{{ $row->user->name }}</td>
+                        <td class="text-center">{{ $row->isi_pengaduan }}</td>
+                        <td class="text-center">{{ date('d M Y', strtotime($row->waktu_pengaduan)) }}</td>
+                        <td class="text-center">{{ $row->status }}</td>
+                        <td class="text-center">
+                            @if ($row->file)
+                                <span>{{ $row->file }}</span>
+                                <br>
+                                <a href="{{ route('users.pengaduan.download', $row->file) }}" data-toggle="modal"><i
+                                        data-toggle="tooltip" title="Download">Download</i></a>
+                            @else
+                                <span>File tidak tersedia</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
                             {{-- <a href="{{ asset('assets/pengaduan/files/' . $row->file) }}" download data-toggle="modal"><i
                                     data-toggle="tooltip" title="Download">Download</i></a> --}}
                             <a href="{{ route('admin.pengaduan.edit') }}" class="edit" data-toggle="modal"><i
-                                    class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                    data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
+                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
+                                <i class="bi bi-trash" data-toggle="tooltip" title="Delete"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -134,5 +141,4 @@
             </div>
         </div>
     </div>
-
 @endSection
