@@ -26,8 +26,12 @@ Route::get('/', function () {
     return view('users.index');
 })->name('landing')->middleware('guest');
 
-Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
-Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
+Route::middleware('auth')->group(function () {
+    Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
+    Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
+    Route::post('/pengaduan-masyarakat/download/{$file}', [PengaduanController::class, 'downloadFiles'])->name('users.pengaduan.download');
+});
+
 
 // Route::get(
 //     '/blog',
