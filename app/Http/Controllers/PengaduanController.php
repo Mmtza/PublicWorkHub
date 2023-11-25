@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class PengaduanController extends Controller
@@ -101,17 +101,20 @@ class PengaduanController extends Controller
         // Tambahkan redir ke tampilan admin/pengaduan
     }
 
-    public function downloadFiles(Request $request, $id, $file)
+    public function downloadFiles(Request $request, $file)
     {
-        $pengaduan = Pengaduan::find($id);
-        $filePengaduan = Pengaduan::where('id', $id)->find($pengaduan->file);
-        // $filePengaduan = Pengaduan::find($pengaduan->file);
+        $pengaduan = Pengaduan::where('file', $file)->first();
+        $filePengaduan = $pengaduan->file;
         $filePath = public_path('assets/pengaduan/files/' . $filePengaduan);
         // Set the Content-Disposition header
         $headers = [
             'Content-Disposition' => 'attachment; filename="' . $filePengaduan . '"',
         ];
 
-        return response()->download($filePath, $filePengaduan, $headers);
+
+        if (file_exists($filePath) && is_file($filePath)) {
+            response()->download($filePath, 'File-pengaduan.pdf', $headers);
+        }
+        return redirect()->route('user.pengaduan');
     }
 }
