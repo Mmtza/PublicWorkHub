@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Response;
 use Illuminate\Support\Facades\Auth;
 
 class PengaduanController extends Controller
 {
     public function showAllPengaduanDashboard()
     {
-        return view('admins.pages.form_pengaduan.pengaduan');
+        $pengaduan = Pengaduan::all();
+        return view('admins.pages.form_pengaduan.pengaduan', compact('pengaduan'));
     }
 
     public function viewEditPengaduan()
@@ -97,5 +99,19 @@ class PengaduanController extends Controller
         ]);
         alert('Notifikasi', 'Berhasil mengedit pengaduan', 'success');
         // Tambahkan redir ke tampilan admin/pengaduan
+    }
+
+    public function downloadFiles(Request $request, $id, $file)
+    {
+        $pengaduan = Pengaduan::find($id);
+        $filePengaduan = Pengaduan::where('id', $id)->find($pengaduan->file);
+        // $filePengaduan = Pengaduan::find($pengaduan->file);
+        $filePath = public_path('assets/pengaduan/files/' . $filePengaduan);
+        // Set the Content-Disposition header
+        $headers = [
+            'Content-Disposition' => 'attachment; filename="' . $filePengaduan . '"',
+        ];
+
+        return response()->download($filePath, $filePengaduan, $headers);
     }
 }
