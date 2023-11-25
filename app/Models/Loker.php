@@ -22,15 +22,20 @@ class Loker extends Model
         'status'
     ];
 
-    public function getUser() {
+    public $timestamps = false;
+
+    public function getUser()
+    {
         return $this->hasMany(User::class);
     }
 
-    public function getApplyLoker() {
+    public function getApplyLoker()
+    {
         return $this->belongsTo(Apply_Loker::class);
     }
 
-    public function getChat() {
+    public function getChat()
+    {
         return $this->belongsTo(Chat::class);
     }
 }
