@@ -1,12 +1,21 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Pengaduan')
+@section('title', 'PWH | Management Pengaduan')
 
 @section('content')
 
 <h1 class="fs-1 mb-5">Tambah Pengaduan</h1>
 <form class="d-flex mb-3" method="POST">
 </form>  
+@if ($errors->any())
+    <div>
+        <ul class="alert alert-danger list-unstyled">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.pengaduan.tambah.post') }}>
     @csrf
     @method('POST')

@@ -1,10 +1,20 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Berita')
+@section('title', 'PWH | Management Berita')
 
 @section('content')
 
 <h1 class="fs-1 mb-5">Tambah Berita</h1>
+@if ($errors->any())
+    <div>
+        <ul class="alert alert-danger list-unstyled">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.berita.tambah.post') }}>
     @csrf
     @method('post')
