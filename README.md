@@ -6,7 +6,7 @@
 - Bagus Muhammad Mumtaza as Project Manager. Github: [Mmtza](https://github.com/Mmtza)
 - Erick Darmawan Boeniarto as Frontend Developer. Github: [erickdb](https://github.com/erickdb)
 - Muhammad Anwar Fauzan as Backend Developer. Github: [Anuraaaa](https://github.com/Anuraaaa)
-- Febi Febiyanti as Report Writer 
+- Febi Febiyanti as Report Writer. 
 - Ahmad Riziq as Database Analyst.
 
 ## MVP (Minimum Variable Product)
@@ -47,7 +47,7 @@
 - Artikel Populer (Base on Jumlah Pengunjung + Jumlah Komentar + Jumlah Like)
 - Chatbox, chat from applyer loker to penyedia loker. chat from penyedia loker to applyer loker
 
-### User: 
+### Users: 
 - User
 > Name: user
 >
