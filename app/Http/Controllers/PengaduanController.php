@@ -43,6 +43,11 @@ class PengaduanController extends Controller
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
             'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
+        ],[
+            'isi_pengaduan.required' => 'Isi tidak diperbolehkan kosong',
+            'isi_pengaduan.max' => 'Isi diperbolehkan maksimal 65.000 karakter',
+            'file_pengaduan.mimes' => 'File yang diperbolehkan type jpg,png,jpeg,pdf,doc,docx',
+            'file_pengaduan.max' => 'File yang diperbolehkan maksimal 70mb'
         ]);
 
         if (isset($request->file_pengaduan)) {
@@ -71,6 +76,11 @@ class PengaduanController extends Controller
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
             'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
+        ],[
+            'isi_pengaduan.required' => 'Isi tidak diperbolehkan kosong',
+            'isi_pengaduan.max' => 'Isi diperbolehkan maksimal 65.000 karakter',
+            'file_pengaduan.mimes' => 'File yang diperbolehkan type jpg,png,jpeg,pdf,doc,docx',
+            'file_pengaduan.max' => 'File yang diperbolehkan maksimal 70mb'
         ]);
 
         $pengaduan = Pengaduan::find($id);

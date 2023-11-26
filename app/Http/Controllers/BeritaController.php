@@ -56,6 +56,16 @@ class BeritaController extends Controller
             'nama_kategori' => ['required'],
             'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
+        ],[
+            'judul_berita.required' => 'Judul tidak diperbolehkan kosong',
+            'judul_berita.min' => 'Judul diperbolehkan minimal 4 karakter',
+            'judul_berita.max' => 'Judul diperbolehkan maksimal 65.000 karakter',
+            'isi_berita.required' => 'Isi tidak diperbolehkan kosong',
+            'isi_berita.max' => 'Isi diperbolehkan maksimal 4.000.000.000 karakter',
+            'nama_kategori.required' => 'Kategori tidak diperbolehkan kosong',
+            'status_berita.required' => 'Status tidak diperbolehkan kosong',
+            'image_berita.mimes' => 'Image yang diperbolehkan type jpg,png,jpeg',
+            'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
         
         if (isset($request->image_berita)) {
@@ -104,6 +114,16 @@ class BeritaController extends Controller
             'nama_kategori' => ['required'],
             'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
+        ],[
+            'judul_berita.required' => 'Judul tidak diperbolehkan kosong',
+            'judul_berita.min' => 'Judul diperbolehkan minimal 4 karakter',
+            'judul_berita.max' => 'Judul diperbolehkan maksimal 65.000 karakter',
+            'isi_berita.required' => 'Isi tidak diperbolehkan kosong',
+            'isi_berita.max' => 'Isi diperbolehkan maksimal 4.000.000.000 karakter',
+            'nama_kategori.required' => 'Kategori tidak diperbolehkan kosong',
+            'status_berita.required' => 'Status tidak diperbolehkan kosong',
+            'image_berita.mimes' => 'Image yang diperbolehkan type jpg,png,jpeg',
+            'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
 
         $berita = Berita::find($id);
@@ -173,53 +193,5 @@ class BeritaController extends Controller
         Berita::destroy($id);
         alert('Notifikasi', 'Berhasil menghapus berita', 'success');
         return redirect()->route('admin.berita');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Berita $berita_Model)
-    {
-        //
     }
 }
