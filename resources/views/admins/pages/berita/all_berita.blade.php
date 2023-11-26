@@ -36,7 +36,7 @@
                             echo $truncatedString;
                         @endphp
                     </div>
-                    <a href="{{ route('admin.berita.edit', $b->id) }}" class="btn btn-warning">
+                    <a href="{{ route('admin.berita.edit', $b->slug) }}" class="btn btn-warning">
                         <div class="d-flex align-items-center gap-2">
                             <span class="fas fa-pencil"></span>
                             <span>Edit</span>

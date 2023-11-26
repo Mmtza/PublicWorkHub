@@ -5,7 +5,7 @@
 @section('content')
 
     <h1 class="fs-1 mb-5">Edit Berita</h1>
-    <form class="d-flex mb-3" method="POST" action="{{ route('penulis.berita.delete', $berita->id) }}" id="deleteBeritaFormPenulis">
+    <form class="d-flex mb-3" method="POST" action="{{ route('penulis.berita.delete', $berita->slug) }}" id="deleteBeritaFormPenulis">
         @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
@@ -31,7 +31,7 @@
         });
     </script>
     <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data"
-        action={{ route('penulis.berita.edit.patch', $berita->id) }}>
+        action={{ route('penulis.berita.edit.patch', $berita->slug) }}>
         @csrf
         @method('patch')
 
@@ -46,11 +46,12 @@
         <x-text-input type="hidden" name="isi_berita" id="isi_berita" value="{{ $berita->isi }}" />
 
         <x-input-label for="kategori_berita" :value="'Kategori'" />
-        <div class="d-flex gap-2 mb-3">
-            @foreach ($kategori as $j)                
-                <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
-                    id="{{ $j->nama_kategori }}" />
-                <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
+        <div class="row mt-2">
+            @foreach ( $kategori as $j ) 
+                <div class="col-8 col-sm-6 col-md-4 col-lg-2">
+                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}" id="{{ $j->nama_kategori }}"/>
+                    <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
+                </div>       
             @endforeach
         </div>
 
