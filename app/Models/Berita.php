@@ -18,6 +18,7 @@ class Berita extends Model
     protected $fillable = [
         'judul',
         'isi',
+        'slug',
         'waktu_publikasi',
         'img',
         'status',
@@ -27,6 +28,15 @@ class Berita extends Model
 
     public function getUser() {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public static function findSlug($slug) {
+        $loker = static::all();
+        return $loker->where('slug', $slug)->first();
     }
 
     public function getKomentar() {

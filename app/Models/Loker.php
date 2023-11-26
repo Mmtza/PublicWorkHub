@@ -16,6 +16,7 @@ class Loker extends Model
 
     protected $fillable = [
         'nama_loker',
+        'slug',
         'deskripsi_loker',
         'alamat',
         'waktu_publikasi',
