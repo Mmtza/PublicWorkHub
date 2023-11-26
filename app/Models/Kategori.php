@@ -17,6 +17,8 @@ class Kategori extends Model
         'keterangan',
     ];
 
+    public $timestamps = false;
+
     public function getBeritaHasKategori() {
         return $this->belongsToMany(Berita_Has_Kategori::class);
     }
