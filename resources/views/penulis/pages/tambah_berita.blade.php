@@ -18,15 +18,15 @@
     <x-text-input type="hidden" name="isi_berita" id="isi_berita"/>
     
     <x-input-label for="kategori_berita" :value="('Kategori')"/>
-    <div class="d-flex gap-2 mb-3">
+    <div class="row mt-2">
         @foreach ( $kategori as $k ) 
-            <div class="d-flex align-items-center gap-1">
+            <div class="col-8 col-sm-6 col-md-4 col-lg-2">
                 <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}" id="{{ $k->nama_kategori }}"/>
                 <label for="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</label>
             </div>       
         @endforeach
     </div>
-    
+
     <x-input-label for="image_berita" :value="('Image')"/>
     <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2" name="image_berita" id="image_berita"/>
     

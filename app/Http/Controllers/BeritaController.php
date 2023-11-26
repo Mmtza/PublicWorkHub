@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\Kategori;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Berita_Has_Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+
+use function PHPUnit\Framework\isNull;
 
 class BeritaController extends Controller
 {
@@ -31,10 +33,10 @@ class BeritaController extends Controller
         return view('admins.pages.berita.all_berita', compact('berita'));
     }
 
-    public function viewEditBeritaDashboard($id)
+    public function viewEditBeritaDashboard($slug)
     {
-        $berita = Berita::find($id);
-        $publisher = Berita::with('getUser')->find($id);
+        $berita = Berita::findSlug($slug);
+        $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         confirmDelete();
@@ -79,6 +81,7 @@ class BeritaController extends Controller
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
+            'slug' => Str::slug($data['judul_berita']),
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
@@ -106,7 +109,7 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita');
     }
     
-    public function editBeritaDashboard(Request $request, $id)
+    public function editBeritaDashboard(Request $request, $slug)
     {
         $data = $request->validate([
             'judul_berita' => ['required', 'min:4', 'max:65000'],
@@ -126,7 +129,7 @@ class BeritaController extends Controller
             'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
 
-        $berita = Berita::find($id);
+        $berita = Berita::findSlug($slug);
 
         if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
         {
@@ -146,10 +149,6 @@ class BeritaController extends Controller
             }
         }
 
-        if ($berita->img)
-        {
-            $data['image_berita'] = $berita->img;
-        }
         
         if (isset($request->image_berita)) 
         {    
@@ -164,10 +163,22 @@ class BeritaController extends Controller
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
         }
+        else
+        {
+            if (!isNull($berita->img))
+            {
+                $data['image_berita'] = $berita->img;
+            }
+            else
+            {
+                $data['image_berita'] = null;
+            }
+        }
 
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
         $berita->status = $data['status_berita'];
+        $berita->slug = Str::slug($data['judul_berita']);
         $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
         $berita->waktu_publikasi = now()->toDateTimeString();
@@ -177,9 +188,9 @@ class BeritaController extends Controller
         return redirect()->route('admin.berita');
     }
 
-    public function deleteBeritaDashboard($id)
+    public function deleteBeritaDashboard($slug)
     {
-        $berita = Berita::find($id);
+        $berita = Berita::findSlug($slug);
         
         if ($berita->img) 
         {
@@ -190,7 +201,7 @@ class BeritaController extends Controller
                 unlink($filePath);
             }
         }
-        Berita::destroy($id);
+        Berita::destroy($berita->id);
         alert('Notifikasi', 'Berhasil menghapus berita', 'success');
         return redirect()->route('admin.berita');
     }

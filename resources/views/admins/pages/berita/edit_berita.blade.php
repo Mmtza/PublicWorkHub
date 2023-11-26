@@ -40,7 +40,7 @@
         </div>
     @endif
     <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data"
-        action={{ route('admin.berita.edit.patch', $berita->id) }}>
+        action={{ route('admin.berita.edit.patch', $berita->slug) }}>
         @csrf
         @method('patch')
 
@@ -68,14 +68,15 @@
             value="{{ $publisherName }}" disabled />
 
         <x-input-label for="kategori_berita" :value="'Kategori'" />
-        <div class="d-flex gap-2 mb-3">
-            @foreach ($kategori as $j)
-                <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
-                    id="{{ $j->nama_kategori }}" />
-                <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
+        <div class="row mt-2">
+            @foreach ( $kategori as $j ) 
+                <div class="col-8 col-sm-6 col-md-4 col-lg-2">
+                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}" id="{{ $j->nama_kategori }}"/>
+                    <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
+                </div>       
             @endforeach
         </div>
-
+    
         <x-input-label for="image_berita" :value="'Image'" />
         <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2" name="image_berita" id="image_berita"
             value="{{ $berita->img }}" />
