@@ -58,11 +58,11 @@ Route::get('/admin/berita/tambah', [BeritaController::class, 'viewAddBeritaDashb
 
 Route::post('/admin/berita/tambah', [BeritaController::class, 'addBeritaDashboard'])->name('admin.berita.tambah.post');
 
-Route::get('/admin/berita/edit/{id}', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
+Route::get('/admin/berita/edit/{slug?}', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
 
-Route::patch('/admin/berita/edit/{id}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
+Route::patch('/admin/berita/edit/{slug?}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
 
-Route::delete('/admin/berita/delete/{id}', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
+Route::delete('/admin/berita/delete/{slug?}', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
 
 Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
 
@@ -107,11 +107,11 @@ Route::get('/penulis/berita/tambah', [PenulisBeritaController::class, 'viewAddBe
 
 Route::post('/penulis/berita/tambah', [PenulisBeritaController::class, 'addBeritaDashboard'])->name('penulis.berita.tambah.post');
 
-Route::get('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'viewEditBeritaDashboard'])->name('penulis.berita.edit');
+Route::get('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'viewEditBeritaDashboard'])->name('penulis.berita.edit');
 
-Route::patch('/penulis/berita/edit/{id}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
+Route::patch('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
 
-Route::delete('/penulis/berita/delete/{id}', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
+Route::delete('/penulis/berita/delete/{slug?}', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
 
 // Routes Penulis
 Route::get('/penyedia-loker', function () { //penyedia-loker dashboard
