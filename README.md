@@ -4,10 +4,10 @@
 
 ## Our Team
 - Bagus Muhammad Mumtaza as Project Manager. Github: [Mmtza](https://github.com/Mmtza)
-- Febi Febiyanti as Report Writer 
 - Erick Darmawan Boeniarto as Frontend Developer. Github: [erickdb](https://github.com/erickdb)
 - Muhammad Anwar Fauzan as Backend Developer. Github: [Anuraaaa](https://github.com/Anuraaaa)
-- Ahmad Riziq as Database Analyst. Github: [ahmadriziq03](https://github.com/ahmadriziq03)
+- Febi Febiyanti as Report Writer 
+- Ahmad Riziq as Database Analyst.
 
 ## MVP (Minimum Variable Product)
 ### Public Work Hub: Situs Berita, Pengaduan, dan Lowongan Kerja untuk Masyarakat
@@ -48,14 +48,35 @@
 - Chatbox, chat from applyer loker to penyedia loker. chat from penyedia loker to applyer loker
 
 ### User: 
-- User is Logged in
+- User
+> Name: user
+>
+> Email: user@gmail.com
+>
+> Password: user12345
 - Penulis
+> Name: penulis
+>
+> Email: penulis@gmail.com
+>
+> Password: penulis12345
 - Penyedia Loker
+> Name: penyedialoker
+>
+> Email: penyedialoker@gmail.com
+>
+> Password: penyedialoker12345
 - Admin
+> Name: admin
+>
+> Email: admin@gmail.com
+>
+> Password: admin12345
 
 ## Software and Tools
 ### Bahasa Pemrograman
 - PHP
+- Javascript
 
 ### Database
 - MySQL
@@ -64,6 +85,9 @@
 - Laravel
 - Bootstrap
 - Breeze
+- DataTables
+- JQuery
+- QuillJS
 
 ### Package Manager
 - Composer
@@ -77,6 +101,7 @@
 - Copy .env.example to .env
 - Have a database named in .env file
 - Run php artisan migrate
+- Run php artisan db:seed to seeding data
 - php artisan sweetalert:publish to publish sweet alert to frontend 
 - Run php artisan serve to running a laravel
 - Run npm run dev to running js script
