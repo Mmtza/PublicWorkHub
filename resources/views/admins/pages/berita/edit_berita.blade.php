@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Berita')
+@section('title', 'PWH | Management Berita')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
     </form>
     <script>
-        document.getElementById('deleteBeritaForm').addEventListener('submit', function (e) {
+        document.getElementById('deleteBeritaForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             Swal.fire({
@@ -30,6 +30,15 @@
             });
         });
     </script>
+    @if ($errors->any())
+        <div>
+            <ul class="alert alert-danger list-unstyled">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data"
         action={{ route('admin.berita.edit.patch', $berita->id) }}>
         @csrf
@@ -60,7 +69,7 @@
 
         <x-input-label for="kategori_berita" :value="'Kategori'" />
         <div class="d-flex gap-2 mb-3">
-            @foreach ($kategori as $j)                
+            @foreach ($kategori as $j)
                 <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
                     id="{{ $j->nama_kategori }}" />
                 <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>

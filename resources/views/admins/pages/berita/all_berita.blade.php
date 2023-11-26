@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management Berita')
+@section('title', 'PWH | Management Berita')
 
 @section('content')
 
