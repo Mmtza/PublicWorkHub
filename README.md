@@ -49,21 +49,29 @@
 
 ### User: 
 - User
-> Name: user.
-> Email: user@gmail.com.
-> Password: user12345.
+> Name: user
+>
+> Email: user@gmail.com
+>
+> Password: user12345
 - Penulis
-> Name: penulis.
-> Email: penulis@gmail.com.
-> Password: penulis12345.
+> Name: penulis
+>
+> Email: penulis@gmail.com
+>
+> Password: penulis12345
 - Penyedia Loker
-> Name: penyedialoker.
-> Email: penyedialoker@gmail.com.
-> Password: penyedialoker12345.
+> Name: penyedialoker
+>
+> Email: penyedialoker@gmail.com
+>
+> Password: penyedialoker12345
 - Admin
-> Name: admin.
-> Email: admin@gmail.com.
-> Password: admin12345.
+> Name: admin
+>
+> Email: admin@gmail.com
+>
+> Password: admin12345
 
 ## Software and Tools
 ### Bahasa Pemrograman
