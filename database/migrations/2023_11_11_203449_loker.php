@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user')->nullable(false);
             $table->text('nama_loker')->nullable(false);
+            $table->text('slug')->nullable(false);
             $table->longText('deskripsi_loker')->nullable(false);
             $table->text('alamat')->nullable(false);
             $table->timestamp('waktu_publikasi')->nullable(false);

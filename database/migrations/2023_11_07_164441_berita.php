@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('berita', function(Blueprint $table) {
             $table->id();
-            $table->longText('judul')->nullable(false);
+            $table->text('judul')->nullable(false);
+            $table->text('slug')->nullable(false);
             $table->longText('isi')->nullable(false);
             $table->timestamp('waktu_publikasi')->nullable(false);
             $table->longText('img')->nullable(true);
