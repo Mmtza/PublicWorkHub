@@ -90,11 +90,11 @@ Route::get('/admin/loker/tambah', [LokerController::class, 'viewAddLokerDashboar
 
 Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
 
-Route::get('/admin/loker/edit', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
+Route::get('/admin/loker/edit/{id}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
 
-Route::patch('/admin/loker/edit', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
+Route::patch('/admin/loker/edit/{id}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
 
-Route::delete('/admin/loker/delete', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
+Route::delete('/admin/loker/delete/{id}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 
 // Routes Penulis
 Route::get('/penulis', function () { //penulis dashboard

@@ -26,7 +26,7 @@ class Loker extends Model
 
     public function getUser()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function getApplyLoker()
