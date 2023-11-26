@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Berita;
 use App\Models\Kategori;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Berita_Has_Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class PenulisBeritaController extends Controller
 {
@@ -31,10 +32,10 @@ class PenulisBeritaController extends Controller
         return view('penulis.pages.all_berita', compact('berita'));
     }
 
-    public function viewEditBeritaDashboard($id)
+    public function viewEditBeritaDashboard($slug)
     {
-        $berita = Berita::find($id);
-        $publisher = Berita::with('getUser')->find($id);
+        $berita = Berita::findSlug($slug);
+        $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         confirmDelete();
@@ -67,6 +68,7 @@ class PenulisBeritaController extends Controller
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
+            'slug' => Str::slug($data['judul_berita']),
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
             'img' => isset($data['image_berita'])? $data['image_berita'] : null
@@ -93,7 +95,7 @@ class PenulisBeritaController extends Controller
         return redirect()->route('penulis.berita');
     }
 
-    public function editBeritaDashboard(Request $request, $id)
+    public function editBeritaDashboard(Request $request, $slug)
     {
         $data = $request->validate([
             'judul_berita' => ['required', 'min:4', 'max:65000'],
@@ -102,7 +104,7 @@ class PenulisBeritaController extends Controller
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
         ]);
 
-        $berita = Berita::find($id);
+        $berita = Berita::findSlug($slug);
 
         if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
         {
@@ -122,10 +124,6 @@ class PenulisBeritaController extends Controller
             }
         }
 
-        if ($berita->img)
-        {
-            $data['image_berita'] = $berita->img;
-        }
         
         if (isset($request->image_berita)) 
         {    
@@ -140,6 +138,17 @@ class PenulisBeritaController extends Controller
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
         }
+        else
+        {
+            if ($berita->img)
+            {
+                $data['image_berita'] = $berita->img;
+            }
+            else 
+            {
+                $data['image_berita'] = null;
+            }
+        }
 
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
@@ -152,9 +161,9 @@ class PenulisBeritaController extends Controller
         return redirect()->route('penulis.berita');
     }
 
-    public function deleteBeritaDashboard($id)
+    public function deleteBeritaDashboard($slug)
     {
-        $berita = Berita::find($id);
+        $berita = Berita::findSlug($slug);
         
         if ($berita->img) 
         {
@@ -165,56 +174,8 @@ class PenulisBeritaController extends Controller
                 unlink($filePath);
             }
         }
-        Berita::destroy($id);
+        Berita::destroy($berita->id);
         alert('Notifikasi', 'Berhasil menghapus berita', 'success');
         return redirect()->route('penulis.berita');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Berita $berita_Model)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Berita $berita_Model)
-    {
-        //
     }
 }

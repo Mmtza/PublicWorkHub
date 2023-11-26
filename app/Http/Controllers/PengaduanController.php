@@ -85,13 +85,10 @@ class PengaduanController extends Controller
 
         $pengaduan = Pengaduan::find($id);
 
-        if ($pengaduan->file) {
-            $data['file_pengaduan'] = $pengaduan->file;
-        }
-
+        
         if (isset($request->file_berita)) {
             $filePath = public_path('assets/pengaduan/files/' . $pengaduan->file);
-
+            
             if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
@@ -99,6 +96,16 @@ class PengaduanController extends Controller
             $fileName = time() . '.' . $request->file_pengaduan->extension();
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
             $data['file_pengaduan'] = $fileName;
+        }
+        else
+        {
+            if ($pengaduan->file) {
+                $data['file_pengaduan'] = $pengaduan->file;
+            }
+            else {
+                $data['file_pengaduan'] = null;                
+            }
+
         }
         $waktu = now()->toDateTimeString();
 
