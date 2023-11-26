@@ -52,7 +52,7 @@
             class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
             style="min-height: 30vh;">
         </div>
-        <x-text-input type="hidden" name="isi_berita" id="isi_berita" value="{{ $berita->isi }}" />
+        <x-text-input type="hidden" name="isi_berita" id="isi_berita" :value="old('isi_berita', $berita->isi)" />
 
         <x-input-label for="status_berita" :value="'Status'" />
         <select name="status_berita" id="status_berita" class="rounded p-2">

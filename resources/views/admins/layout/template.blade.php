@@ -221,7 +221,6 @@
 
         function sendDataEditBerita() {
             document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
-            console.log(document.getElementById('isi_berita').value)
         }
     </script>
     <script>
@@ -245,6 +244,7 @@
         });
 
         quilleditloker.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_loker').value);
+        console.log(document.getElementById('deskripsi_loker').value)
 
         function sendDataEditLoker() {
             document.getElementById('deskripsi_loker').value = quilleditloker.root.innerHTML;
