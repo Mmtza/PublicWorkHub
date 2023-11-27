@@ -84,9 +84,11 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::get('/admin/pengaduan/tambah', [PengaduanController::class, 'viewAddPengaduan'])->name('admin.pengaduan.tambah');
 
-    Route::post('/admin/pengaduan/tambah', [PengaduanController::class, 'addPengaduan'])->name('admin.pengaduan.tambah.post');
+    Route::post('/admin/pengaduan/tambah', [PengaduanController::class, 'addPengaduanDashboard'])->name('admin.pengaduan.tambah.post');
 
     Route::patch('/admin/pengaduan/edit/{id}', [PengaduanController::class, 'editPengaduanDashboard'])->name('admin.pengaduan.edit.patch');
+
+    Route::delete('/admin/pengaduan/delete/{id}', [PengaduanController::class, 'deletePengaduanDashboard'])->name('admin.pengaduan.delete');
 
     Route::get('/admin/loker', [LokerController::class, 'showAllLokerDashboard'])->name('admin.loker');
 
