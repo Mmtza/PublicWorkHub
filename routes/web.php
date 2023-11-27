@@ -48,94 +48,94 @@ Route::get('/category', function () {
 
 
 // routes admin
-Route::middleware(['auth', 'Admin'])->group(function() {
+Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::get('/admin', function () { //admin dashboard
         return view('admins.index');
     })->name('admin');
-    
+
     Route::get('/admin/berita', [BeritaController::class, 'showAllBeritaDashboard'])->name('admin.berita');
-    
+
     Route::get('/admin/berita/tambah', [BeritaController::class, 'viewAddBeritaDashboard'])->name('admin.berita.tambah');
-    
+
     Route::post('/admin/berita/tambah', [BeritaController::class, 'addBeritaDashboard'])->name('admin.berita.tambah.post');
-    
+
     Route::get('/admin/berita/edit/{slug?}', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
-    
+
     Route::patch('/admin/berita/edit/{slug?}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
-    
+
     Route::delete('/admin/berita/delete/{slug?}', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
-    
+
     Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
-    
+
     Route::get('/admin/users/edit/{id}', [UsersController::class, 'viewEditUsers'])->name('admin.users.edit');
-    
+
     Route::patch('/admin/users/edit/{id}', [UsersController::class, 'editUsers'])->name('admin.users.edit.patch');
 
     Route::delete('/admin/users/delete/{id}', [UsersController::class, 'deleteUsers'])->name('admin.users.delete');
-    
+
     Route::get('/admin/users/tambah', [UsersController::class, 'viewAddUsers'])->name('admin.users.tambah');
-    
+
     Route::post('/admin/users/tambah', [UsersController::class, 'addUsers'])->name('admin.users.tambah.post');
-    
+
     Route::get('/admin/pengaduan', [PengaduanController::class, 'showAllPengaduanDashboard'])->name('admin.pengaduan');
-    
-    Route::get('/admin/pengaduan/edit', [PengaduanController::class, 'viewEditPengaduan'])->name('admin.pengaduan.edit');
-    
-    Route::patch('/admin/pengaduan/edit', [PengaduanController::class, 'editPengaduan'])->name('admin.pengaduan.edit.patch');
-    
+
+    Route::get('/admin/pengaduan/edit/{id}', [PengaduanController::class, 'viewEditPengaduanDashboard'])->name('admin.pengaduan.edit');
+
     Route::get('/admin/pengaduan/tambah', [PengaduanController::class, 'viewAddPengaduan'])->name('admin.pengaduan.tambah');
-    
+
     Route::post('/admin/pengaduan/tambah', [PengaduanController::class, 'addPengaduan'])->name('admin.pengaduan.tambah.post');
-    
+
+    Route::patch('/admin/pengaduan/edit/{id}', [PengaduanController::class, 'editPengaduanDashboard'])->name('admin.pengaduan.edit.patch');
+
     Route::get('/admin/loker', [LokerController::class, 'showAllLokerDashboard'])->name('admin.loker');
-    
+
     Route::get('/admin/loker/tambah', [LokerController::class, 'viewAddLokerDashboard'])->name('admin.loker.tambah');
-    
+
     Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
-    
+
     Route::get('/admin/loker/edit/{id}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
-    
+
     Route::patch('/admin/loker/edit/{id}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
-    
+
     Route::delete('/admin/loker/delete/{id}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 });
 
-Route::middleware(['auth', 'Penulis'])->group(function() {
+Route::middleware(['auth', 'Penulis'])->group(function () {
     // Routes Penulis
     Route::get('/penulis', function () { //penulis dashboard
         return view('penulis.index');
     })->name('penulis');
-    
+
     Route::get('/penulis/berita', [PenulisBeritaController::class, 'showAllBeritaDashboard'])->name('penulis.berita');
-    
+
     Route::get('/penulis/berita/tambah', [PenulisBeritaController::class, 'viewAddBeritaDashboard'])->name('penulis.berita.tambah');
-    
+
     Route::post('/penulis/berita/tambah', [PenulisBeritaController::class, 'addBeritaDashboard'])->name('penulis.berita.tambah.post');
-    
+
     Route::get('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'viewEditBeritaDashboard'])->name('penulis.berita.edit');
-    
+
     Route::patch('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
-    
+
     Route::delete('/penulis/berita/delete/{slug?}', [PenulisBeritaController::class, 'deleteBeritaDashboard'])->name('penulis.berita.delete');
 });
 
-Route::middleware(['auth', 'PenyediaLoker'])->group(function() {
+Route::middleware(['auth', 'PenyediaLoker'])->group(function () {
     // Routes Penulis
     Route::get('/penyedia-loker', function () { //penyedia-loker dashboard
         return view('penyedia_loker.index');
     })->name('penyedia-loker');
-    
+
     Route::get('/penyedia-loker/loker', [penyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
-    
+
     Route::get('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
-    
+
     Route::post('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'addLokerDashboard'])->name('penyedia-loker.loker.tambah.post');
-    
+
     Route::get('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'viewEditLokerDashboard'])->name('penyedia-loker.loker.edit');
-    
+
     Route::patch('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'editLokerDashboard'])->name('penyedia-loker.loker.edit.patch');
-    
+
     Route::delete('/penyedia-loker/loker/delete/{id}', [penyediaLokerController::class, 'deleteLokerDashboard'])->name('penyedia-loker.loker.delete');
 });
 
