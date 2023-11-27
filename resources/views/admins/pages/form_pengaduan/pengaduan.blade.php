@@ -12,6 +12,7 @@
         <table class="table" id="myTable">
             <thead class="text-center">
                 <tr>
+                    <th class="text-center">No</th>
                     <th class="text-center">Nama Pelapor</th>
                     <th class="text-center">Isi Pengaduan</th>
                     <th class="text-center">Waktu Pengaduan</th>
@@ -21,12 +22,16 @@
                 </tr>
             </thead>
             <tbody class="text-center">
+                @php
+                    $no = 1;
+                @endphp
                 @foreach ($pengaduan as $row)
                     <tr>
-                        <td class="text-center">{{ $row->user->name }}</td>
-                        <td class="text-center">{{ $row->isi_pengaduan }}</td>
+                        <td class="text-center">{{ $no++ }}</td>
+                        <td class="text-center">{{ ucfirst($row->user->name) }}</td>
+                        <td class="text-center">{{ ucfirst($row->isi_pengaduan) }}</td>
                         <td class="text-center">{{ date('d M Y', strtotime($row->waktu_pengaduan)) }}</td>
-                        <td class="text-center">{{ $row->status }}</td>
+                        <td class="text-center">{{ ucfirst($row->status) }}</td>
                         <td class="text-center">
                             @if ($row->file)
                                 <span>{{ $row->file }}</span>
@@ -40,7 +45,7 @@
                         <td class="text-center">
                             {{-- <a href="{{ asset('assets/pengaduan/files/' . $row->file) }}" download data-toggle="modal"><i
                                     data-toggle="tooltip" title="Download">Download</i></a> --}}
-                            <a href="{{ route('admin.pengaduan.edit') }}" class="edit" data-toggle="modal"><i
+                            <a href="{{ route('admin.pengaduan.edit', $row->id) }}" class="edit" data-toggle="modal"><i
                                     class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
                                 <i class="bi bi-trash" data-toggle="tooltip" title="Delete"></i></a>
