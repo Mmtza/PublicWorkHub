@@ -62,14 +62,38 @@
                         </a>
                         <div class="d-none d-lg-flex flex-row-reverse justify-center align-items-center gap-5">
                             <div class="d-none d-lg-flex gap-3">
-                                @if (Route::has('login'))
-                                    <a href="{{ route('login') }}"
-                                        class="text-white btn btn-outline-secondary">Login</a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}"
-                                            class="text-white btn btn-outline-secondary">Register</a>
+                                @auth
+                                    @if (Auth::user()->role == 'user')                                        
+                                        @if (Route::has('dashboard'))
+                                            <a href="{{ route('dashboard') }}"
+                                                class="text-white btn btn-outline-secondary">Dashboard</a>
+                                        @endif                                    
+                                    @elseif (Auth::user()->role == 'admin')
+                                        @if (Route::has('admin'))
+                                            <a href="{{ route('admin') }}"
+                                                class="text-white btn btn-outline-secondary">Dashboard</a>
+                                        @endif                                    
+                                    @elseif (Auth::user()->role == 'penulis')
+                                        @if (Route::has('penulis'))
+                                            <a href="{{ route('penulis') }}"
+                                                class="text-white btn btn-outline-secondary">Dashboard</a>
+                                        @endif                                    
+                                    @elseif (Auth::user()->role == 'penyedia_loker')
+                                        @if (Route::has('penyedia-loker'))
+                                            <a href="{{ route('penyedia-loker') }}"
+                                                class="text-white btn btn-outline-secondary">Dashboard</a>
+                                        @endif                                    
                                     @endif
-                                @endif
+                                @else
+                                    @if (Route::has('login'))
+                                        <a href="{{ route('login') }}"
+                                            class="text-white btn btn-outline-secondary">Login</a>
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}"
+                                                class="text-white btn btn-outline-secondary">Register</a>
+                                        @endif
+                                    @endif
+                                @endauth
                             </div>
                             <form action="#" class="search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
