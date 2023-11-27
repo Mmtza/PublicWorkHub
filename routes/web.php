@@ -127,6 +127,8 @@ Route::middleware(['auth', 'PenyediaLoker'])->group(function() {
     })->name('penyedia-loker');
     
     Route::get('/penyedia-loker/loker', [penyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
+
+    Route::get('/penyedia-loker/loker/applier', [penyediaLokerController::class, 'showAllApplier'])->name('penyedia-loker.loker.applier');
     
     Route::get('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
     

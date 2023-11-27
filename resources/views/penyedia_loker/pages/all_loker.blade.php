@@ -20,6 +20,12 @@
             <span>Edit</span>          
           </div>
         </a>
+        <a href="{{ route('penyedia-loker.loker.applier') }}" class="btn btn-success">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fa-regular fa-eye" style="color: #ffffff;"></span>
+            <span>Applier</span>          
+          </div>
+        </a>
       </div>
   </div> 
 </div>
