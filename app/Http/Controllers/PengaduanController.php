@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isNull;
 
 class PengaduanController extends Controller
 {
@@ -99,7 +100,7 @@ class PengaduanController extends Controller
         }
         else
         {
-            if ($pengaduan->file) {
+            if (!isNull($pengaduan->file)) {
                 $data['file_pengaduan'] = $pengaduan->file;
             }
             else {

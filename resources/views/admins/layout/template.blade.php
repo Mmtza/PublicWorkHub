@@ -244,10 +244,35 @@
         });
 
         quilleditloker.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_loker').value);
-        console.log(document.getElementById('deskripsi_loker').value)
 
         function sendDataEditLoker() {
             document.getElementById('deskripsi_loker').value = quilleditloker.root.innerHTML;
+        }
+    </script>
+    <script>
+        const quilledituser = new Quill('#quilledituser', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }], // Color and background color
+                    ['link'],
+                    ['clean']
+                ]
+            },
+        });
+
+        quilledituser.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_diri').value);
+
+        function sendDataEditUser() {
+            document.getElementById('deskripsi_diri').value = quilledituser.root.innerHTML;
         }
     </script>
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="

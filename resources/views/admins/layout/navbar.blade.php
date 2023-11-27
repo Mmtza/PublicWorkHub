@@ -374,8 +374,11 @@
                             <hr />
                             {{-- sign out --}}
                             <div class="px-3 mb-3 ">
-                                <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="#!"> <span
-                                        class="me-2" data-feather="log-out"> </span>Logout</a>
+                                <form class="btn btn-phoenix-secondary d-flex flex-center w-100" action="{{ route('logout') }}" method="POST"> 
+                                    @csrf
+                                    <span class="me-2" data-feather="log-out"> </span>
+                                    <button type="submit" class="bg-none">Logout</button>
+                                </form>
                             </div>
                     </div>
                 </div>

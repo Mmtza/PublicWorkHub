@@ -1,6 +1,6 @@
 @extends('admins.layout.template')
 
-@section('title', 'Management User')
+@section('title', 'PWH | Management User')
 
 @section('content')
 
@@ -10,158 +10,63 @@
             <a href={{ route('admin.users.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
         </div>
         <table class="table" id="myTable">
-            <thead>
+            <thead class="text-center">
                 <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Date Of Birth</th>
-                    <th>Biodata</th>
-                    <th>Role</th>
-                    <th>Foto</th>
-                    <th>Actions</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Alamat</th>
+                    <th class="text-center">Tanggal Lahir</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Foto</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
-                    <td>
-                        <a href="{{ route('admin.users.edit') }}" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Users</td>
-                    <td>image.jpg</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Penulis</td>
-                    <td>image.jpg</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>11/12/2000</td>
-                    <td>Bio Example</td>
-                    <td>Penyedia Loker</td>
-                    <td>image.jpg</td>
-                    <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                </tr>
+            <tbody class="text-center">
+                @foreach ($users as $user)                    
+                    <tr>
+                        <td class="text-center">{{ $user->name }}</td>
+                        <td class="text-center">{{ $user->email }}</td>
+                        <td class="text-center">{{ $user->alamat }}</td>
+                        <td class="text-center">{{ $user->tanggal_lahir }}</td>
+                        <td class="text-center">{{ $user->role }}</td>
+                        <td class="text-center">{{ $user->foto }}</td>
+                        <td class="text-center d-flex align-items-center">
+                            <a href="{{ route('admin.users.edit', $user->id) }}" class="edit" data-toggle="modal"><i class="bi bi-pencil-square"
+                                    data-toggle="tooltip" title="Edit"></i></a>
+                                    
+                            <form class="delete" method="POST" action="{{ route('admin.users.delete', $user->id) }}" id={{ 'deleteUserForm'. $user->id }}>
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-none">
+                                    <i class="bi bi-trash3-fill"
+                                        data-toggle="tooltip" title="Delete"></i>
+                                </button>
+                            </form>
+                            <script>
+                                document.getElementById('deleteUserForm' + {{  $user->id }}).addEventListener('submit', function(e) {
+                                    e.preventDefault();
+                            
+                                    Swal.fire({
+                                        title: 'Apakah kamu yakin?',
+                                        text: 'Ingin menghapus user ini',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Ya, Hapus'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            // If confirmed, submit the form
+                                            this.submit();
+                                        }
+                                    });
+                                });
+                            </script>                                                                        
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-    </div>
-    <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea class="form-control" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete these Records?</p>
-                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
 @endSection

@@ -192,7 +192,7 @@ class BeritaController extends Controller
     {
         $berita = Berita::findSlug($slug);
         
-        if ($berita->img) 
+        if (!IsNull($berita->img)) 
         {
             $filePath = public_path('assets/berita/images/' . $berita->img);
 
