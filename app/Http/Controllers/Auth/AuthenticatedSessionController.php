@@ -29,7 +29,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (Auth::user()->role == 'user') {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        else if (Auth::user()->role == 'admin') {
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
+        else if (Auth::user()->role == 'penulis') {
+            return redirect()->intended(RouteServiceProvider::PENULIS);
+        }
+        else if (Auth::user()->role == 'penyedia_loker') {
+            return redirect()->intended(RouteServiceProvider::PENYEDIALOKER);
+        }
     }
 
     /**
