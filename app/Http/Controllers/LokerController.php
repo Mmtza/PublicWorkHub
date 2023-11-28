@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Loker;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Loker_Has_Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ class LokerController extends Controller
             'deskripsi_loker' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
             'alamat_loker' => ['required', 'max:65000'],
-        ],[
+        ], [
             'nama_loker.required' => 'Nama loker tidak diperbolehkan kosong',
             'nama_loker.min' => 'Nama loker diperbolehkan minimal 4 karakter',
             'nama_loker.max' => 'Nama loker diperbolehkan maksimal 65.000 karakter',
@@ -51,27 +52,25 @@ class LokerController extends Controller
             'alamat_loker.required' => 'Alamat loker tidak diperbolehkan kosong',
             'alamat_loker.max' => 'Alamat loker diperbolehkan maksimal 65.000 karakter',
         ]);
-        
+
         $waktu = now()->toDateTimeString();
-        
+
         $dataLoker = Loker::insertGetId([
             'nama_loker' => $data['nama_loker'],
             'deskripsi_loker' => $data['deskripsi_loker'],
+            'slug' => Str::slug($data['nama_loker']),
             'alamat' => $data['alamat_loker'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
         ]);
-        
-        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
-        {
+
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             $kategori = $_POST['nama_kategori'];
 
-            foreach ($kategori as $i)
-            {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
-                
-                foreach ($dataKategori as $j)
-                {
+
+                foreach ($dataKategori as $j) {
                     Loker_Has_Kategori::create([
                         'id_loker' => $dataLoker,
                         'id_kategori' => $j->id
@@ -80,7 +79,7 @@ class LokerController extends Controller
             }
         }
         alert('Notifikasi', 'Berhasil membuat loker', 'success');
-        return redirect()->route('admin.loker');        
+        return redirect()->route('admin.loker');
     }
 
     public function editLokerDashboard(Request $request, $id)
@@ -90,7 +89,7 @@ class LokerController extends Controller
             'deskripsi_loker' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
             'alamat_loker' => ['required', 'max:65000'],
-        ],[
+        ], [
             'nama_loker.required' => 'Nama loker tidak diperbolehkan kosong',
             'nama_loker.min' => 'Nama loker diperbolehkan minimal 4 karakter',
             'nama_loker.max' => 'Nama loker diperbolehkan maksimal 65.000 karakter',
@@ -103,16 +102,13 @@ class LokerController extends Controller
 
         $loker = Loker::find($id);
 
-        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
-        {
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             Loker_Has_Kategori::where('id_loker', $loker->id)->delete();
             $kategori = $_POST['nama_kategori'];
-            foreach ($kategori as $i)
-            {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
 
-                foreach ($dataKategori as $j)
-                {
+                foreach ($dataKategori as $j) {
                     Loker_Has_Kategori::create([
                         'id_loker' => $loker->id,
                         'id_kategori' => $j->id
@@ -128,8 +124,8 @@ class LokerController extends Controller
         $loker->waktu_publikasi = now()->toDateTimeString();
         $loker->save();
         alert('Notifikasi', 'Berhasil mengedit loker', 'success');
-    
-        return redirect()->route('admin.loker');        
+
+        return redirect()->route('admin.loker');
     }
 
     public function deleteLokerDashboard($id)
