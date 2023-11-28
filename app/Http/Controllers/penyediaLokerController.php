@@ -11,6 +11,11 @@ class PenyediaLokerController extends Controller
         return view('penyedia_loker.pages.all_loker');
     }
 
+    public function showAllApplier()
+    {
+        return view('penyedia_loker.pages.applier_loker');
+    }
+
     public function viewAddLokerDashboard()
     {
         return view('penyedia_loker.pages.tambah_loker');
