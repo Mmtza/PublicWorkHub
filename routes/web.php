@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('users.index');
 })->name('landing');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'User'])->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
     Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
     Route::get('/pengaduan-masyarakat/download/{file?}', [PengaduanController::class, 'downloadFiles'])->name('users.pengaduan.download');
@@ -96,11 +96,11 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
 
-    Route::get('/admin/loker/edit/{id}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
+    Route::get('/admin/loker/edit/{slug?}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
 
-    Route::patch('/admin/loker/edit/{id}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
+    Route::patch('/admin/loker/edit/{slug?}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
 
-    Route::delete('/admin/loker/delete/{id}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
+    Route::delete('/admin/loker/delete/{slug?}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 });
 
 Route::middleware(['auth', 'Penulis'])->group(function () {
@@ -149,10 +149,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'User'])->name('dashboard');
 
-Route::middleware(['auth', 'User'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -35,8 +35,8 @@ class Berita extends Model
     }
 
     public static function findSlug($slug) {
-        $loker = static::all();
-        return $loker->where('slug', $slug)->first();
+        $berita = static::all();
+        return $berita->where('slug', $slug)->first();
     }
 
     public function getKomentar() {

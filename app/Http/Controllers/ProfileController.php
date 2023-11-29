@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use function PHPUnit\Framework\isNull;
 
 class ProfileController extends Controller
 {
@@ -43,15 +44,26 @@ class ProfileController extends Controller
         $request->user()->tanggal_lahir = $data['birthdate'];
         $request->user()->alamat = $data['address'];
         $request->user()->deskripsi_diri = $data['deskripsi_diri_content'];
-        if (isset($data['foto'])) {
+        if (isset($request->foto)) {
 
             $filePath = public_path('assets/users/images/'. auth()->user()->foto);
-            if (file_exists($filePath)) {
+            if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);                
             }
             $imageName = auth()->user()->id . time() . '.' . $request->foto->extension();
             $request->foto->move(public_path('assets/users/images/'), $imageName);
             $request->user()->foto = $imageName;
+        }
+        else 
+        {
+            if (isNull($request->user()->foto))
+            {
+                $request->user()->foto = null;                
+            }
+            else
+            {
+                $request->user()->foto = $request->user()->foto;                
+            }
         }
         $request->user()->save();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

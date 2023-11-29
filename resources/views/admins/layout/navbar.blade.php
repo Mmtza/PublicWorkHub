@@ -350,7 +350,11 @@
                 <a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-l">
-                        <img class="rounded-circle" src="{{ asset('admins/themes') }}/assets/img/team/40x40/57.webp" alt="" />
+                        @if (empty(Auth::user()->foto))
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+                        @else
+                            <img class="rounded-circle" src="{{ asset('assets/users/images/' . Auth::user()->foto) }}" alt="" />
+                        @endif
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
@@ -359,14 +363,20 @@
                         <div class="card-body p-0">
                             <div class="text-center pt-4 pb-3">
                                 <div class="avatar avatar-xl">
-                                    <img class="rounded-circle" src="{{ asset('admins/themes') }}/assets/img/team/72x72/57.webp" alt="" />
+                                    @if (empty(Auth::user()->foto))
+                                        <div class ="rounded-circle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+                                        </div>
+                                    @else
+                                        <img class="rounded-circle" src="{{ asset('assets/users/images/' . Auth::user()->foto)}}" alt="" />
+                                    @endif
                                 </div>
-                                <h6 class="mt-2 text-black">Jerry Seinfield</h6>
+                                <h6 class="mt-2 text-black">{{ Auth::user()->name }}</h6>
                             </div>
                         <div class="overflow-auto scrollbar">
                             <ul class="nav d-flex flex-column pb-1">
                                 <li class="nav-item">
-                                    <a class="nav-link px-3" href="#!"> <span class="me-2 text-900"
+                                    <a class="nav-link px-3" href="{{ route('profile.edit') }}"> <span class="me-2 text-900"
                                             data-feather="user"></span><span>Profile</span></a>
                                 </li>
                             </ul>

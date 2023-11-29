@@ -5,7 +5,7 @@
 @section('content')
 
     <h1 class="fs-1 mb-5">Edit Loker</h1>
-    <form class="d-flex mb-3" method="POST" action="{{ route('admin.loker.delete', $loker->id) }}" id="deleteLokerForm">
+    <form class="d-flex mb-3" method="POST" action="{{ route('admin.loker.delete', $loker->slug) }}" id="deleteLokerForm">
         @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
@@ -40,7 +40,7 @@
         </div>
     @endif
     <form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data"
-        action={{ route('admin.loker.edit.patch', $loker->id) }}>
+        action={{ route('admin.loker.edit.patch', $loker->slug) }}>
         @csrf
         @method('patch')
 
@@ -55,16 +55,16 @@
         <x-text-input type="hidden" name="deskripsi_loker" id="deskripsi_loker" :value="old('deskripsi_loker', $loker->deskripsi_loker)" />
 
         <x-input-label for="alamat_loker" :value="'Alamat Loker'" />
-        <x-text-input type="text" class="rounded p-2" name="alamat_loker" id="alamat_loker" />
+        <x-text-input type="text" class="rounded p-2" name="alamat_loker" id="alamat_loker" :value="old('alamat_loker', $loker->alamat)" />
 
         <x-input-label for="pembuat_loker" :value="'Dibuat Oleh'" />
         <x-text-input type="text" class="rounded p-2" name="pembuat_loker" id="pembuat_loker"
             value="{{ $publisherName }}" required disabled />
 
         <x-input-label for="kategori_loker" :value="'Kategori'" />
-        <div class="d-flex gap-2 mb-3">
+        <div class="row mt-2">
             @foreach ($kategori as $k)
-                <div class="d-flex align-items-center gap-1">
+                <div class="col-8 col-sm-6 col-md-4 col-lg-2">
                     <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}"
                         id="{{ $k->nama_kategori }}" />
                     <label for="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</label>
