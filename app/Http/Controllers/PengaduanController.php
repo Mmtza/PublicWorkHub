@@ -45,7 +45,6 @@ class PengaduanController extends Controller
     {
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
-            'status' => ['required'],
             'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
         ], [
             'isi_pengaduan.required' => 'Isi tidak diperbolehkan kosong',
@@ -66,7 +65,6 @@ class PengaduanController extends Controller
             'id_user' => auth()->user()->id,
             'isi_pengaduan' => $data['isi_pengaduan'],
             'waktu_pengaduan' => $waktu,
-            'status' => $data['status'],
             'file' => isset($request->file_pengaduan) ? $data['file_pengaduan'] : null
         ]);
 

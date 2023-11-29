@@ -14,10 +14,9 @@
             </div>
             <div class="row posts-entry">
                 <div class="col-lg-8">
-                    <form action="{{ route('users.pengaduan.post') }}" method="POSt" enctype="multipart/form-data">
+                    <form action="{{ route('users.pengaduan.post') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        <input type="hidden" class="form-control" id="id_user" name="id_user">
                         <label for="isi_pengaduan" class="form-label">Isi Pengaduan</label>
                         <div class="form-floating mb-3">
                             <textarea class="form-control" id="isi_pengaduan" name="isi_pengaduan" style="height: 100px"></textarea>
