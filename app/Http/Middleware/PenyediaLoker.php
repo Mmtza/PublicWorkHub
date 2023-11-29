@@ -19,6 +19,11 @@ class PenyediaLoker
         if (Auth::check() && Auth::user()->role == 'penyedia_loker') {
             return $next($request);
         } else {
+
+            if (route('profile.edit') || route('profile.update')) {
+                return $next($request);                
+            }
+            Auth::logout();
             return redirect()->route('login');
         }
     }

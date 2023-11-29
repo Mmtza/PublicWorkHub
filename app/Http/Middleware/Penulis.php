@@ -19,6 +19,11 @@ class Penulis
         if (Auth::check() && Auth::user()->role == 'penulis') {
             return $next($request);
         } else {
+            
+            if (route('profile.edit') || route('profile.update')) {
+                return $next($request);                
+            }
+            Auth::logout();
             return redirect()->route('login');
         }
     }
