@@ -9,6 +9,15 @@
                 <div class="col-12">
                     <div class="heading">
                         <h1>Pengaduan Masyarakat</h1>
+                        @if ($errors->any())
+                            <div>
+                                <ul class="alert alert-danger list-unstyled">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
