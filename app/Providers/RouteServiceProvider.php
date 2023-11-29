@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/';
     public const ADMIN = '/admin';
     public const PENULIS = '/penulis';
     public const PENYEDIALOKER = '/penyedia-loker';
