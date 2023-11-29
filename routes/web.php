@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('users.index');
 })->name('landing');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'User'])->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
     Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
     Route::get('/pengaduan-masyarakat/download/{file?}', [PengaduanController::class, 'downloadFiles'])->name('users.pengaduan.download');
@@ -149,10 +149,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'User'])->name('dashboard');
 
-Route::middleware(['auth', 'User'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
