@@ -78,10 +78,11 @@ class BeritaController extends Controller
         }
         $waktu = now()->toDateTimeString();
         
+        $lastID = Berita::orderBy('id', 'desc')->first();
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
-            'slug' => Str::slug($data['judul_berita']),
+            'slug' => Str::slug($data['judul_berita']) . '-' . $lastID+1 . $waktu,
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
@@ -178,7 +179,7 @@ class BeritaController extends Controller
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
         $berita->status = $data['status_berita'];
-        $berita->slug = Str::slug($data['judul_berita']);
+        $berita->slug = Str::slug($data['judul_berita']) . $berita->id . $berita->waktu_publikasi;
         $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
         $berita->waktu_publikasi = now()->toDateTimeString();
