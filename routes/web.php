@@ -96,11 +96,11 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
 
-    Route::get('/admin/loker/edit/{id}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
+    Route::get('/admin/loker/edit/{slug?}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
 
-    Route::patch('/admin/loker/edit/{id}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
+    Route::patch('/admin/loker/edit/{slug?}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
 
-    Route::delete('/admin/loker/delete/{id}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
+    Route::delete('/admin/loker/delete/{slug?}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 });
 
 Route::middleware(['auth', 'Penulis'])->group(function () {
