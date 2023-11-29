@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>PWH | Admin</title>
+    <title>Public Work Hub</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
 
     {{-- Icon web --}}
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
