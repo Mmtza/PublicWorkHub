@@ -15,7 +15,8 @@ class LokerController extends Controller
     public function showAllLokerDashboard()
     {
         $loker = Loker::all();
-        return view('admins.pages.loker.all_loker', compact('loker'));
+        $lokerCount = Loker::count();
+        return view('admins.pages.loker.all_loker', compact('loker', 'lokerCount'));
     }
 
     public function viewAddLokerDashboard()

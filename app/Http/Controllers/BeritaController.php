@@ -30,7 +30,8 @@ class BeritaController extends Controller
     public function showAllBeritaDashboard()
     {
         $berita = Berita::all();
-        return view('admins.pages.berita.all_berita', compact('berita'));
+        $beritaCount = Berita::count();
+        return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount'));
     }
 
     public function viewEditBeritaDashboard($slug)

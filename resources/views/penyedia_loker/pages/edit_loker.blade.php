@@ -5,12 +5,12 @@
 @section('content')
 
 <h1 class="fs-1 mb-5">Edit Loker</h1>
-<form class="d-flex mb-3" method="POST" action="{{ route('admin.loker.delete') }}">
+<form class="d-flex mb-3" method="POST" action="{{ route('penyedia-loker.loker.delete') }}">
     @csrf
     @method('delete')
     <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
 </form>  
-<form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.loker.edit.patch') }}>
+<form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('penyedia-loker.loker.edit.patch') }}>
     @csrf
     @method('patch')
 
