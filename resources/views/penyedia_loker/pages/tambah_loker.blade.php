@@ -5,7 +5,7 @@
 @section('content')
 
 <h1 class="fs-1 mb-5">Tambah Loker</h1>
-<form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('admin.loker.tambah.post') }}>
+<form class="form-control row g-2 py-3" method="POST" enctype="multipart/form-data" action={{ route('penyedia-loker.loker.tambah.post') }}>
     @csrf
     @method('post')
 
@@ -21,14 +21,17 @@
     <x-text-input type="text" class="rounded p-2" name="alamat_loker" id="alamat_loker"/>
 
     <x-input-label for="pembuat_loker" :value="('Dibuat Oleh')"/>
-    <x-text-input type="text" class="rounded p-2" name="pembuat_loker" id="pembuat_loker"/>
+    <x-text-input type="text" class="rounded p-2" name="pembuat_loker" id="pembuat_loker" value="{{ Auth::user()->name }}" disabled/>
     
     <x-input-label for="kategori_loker" :value="('Kategori')"/>
-    <select name="kategori_loker" id="kategori_loker" class="rounded p-2">
-        <option value="Kategori 1">Kategori 1</option>
-        <option value="Kategori 2">Kategori 2</option>
-        <option value="Kategori 3">Kategori 3</option>
-    </select>
+    <div class="row mt-2">
+        @foreach ( $kategori as $k ) 
+            <div class="col-8 col-sm-6 col-md-4 col-lg-2">
+                <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}" id="{{ $k->nama_kategori }}"/>
+                <label for="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</label>
+            </div>       
+        @endforeach
+    </div>
         
     <div class="d-flex justify-content-center gap-5">
         <button type="submit" class="btn btn-primary p-3">{{ __('Tambah') }}</button>
