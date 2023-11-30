@@ -29,7 +29,8 @@ class PenulisBeritaController extends Controller
     public function showAllBeritaDashboard()
     {
         $berita = Berita::where('id_user', Auth::user()->id)->get();
-        return view('penulis.pages.all_berita', compact('berita'));
+        $beritaCount = Berita::where('id_user', Auth::user()->id)->count();
+        return view('penulis.pages.all_berita', compact('berita', 'beritaCount'));
     }
 
     public function viewEditBeritaDashboard($slug)
