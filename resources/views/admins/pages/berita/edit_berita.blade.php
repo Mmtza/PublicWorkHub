@@ -69,17 +69,18 @@
 
         <x-input-label for="kategori_berita" :value="'Kategori'" />
         <div class="row mt-2">
-            @foreach ( $kategori as $j ) 
+            @foreach ($kategori as $j)
                 <div class="col-8 col-sm-6 col-md-4 col-lg-2">
-                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}" id="{{ $j->nama_kategori }}"/>
+                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
+                        id="{{ $j->nama_kategori }}" />
                     <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
-                </div>       
+                </div>
             @endforeach
         </div>
-    
+
         <x-input-label for="image_berita" :value="'Image'" />
-        <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2" name="image_berita" id="image_berita"
-            value="{{ $berita->img }}" />
+        <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2 form-control" name="image_berita"
+            id="image_berita" value="{{ $berita->img }}" />
 
         <div class="d-flex justify-content-center gap-5">
             <button type="submit" class="btn btn-primary p-3" onclick="sendDataEditBerita()">{{ __('Edit') }}</button>
