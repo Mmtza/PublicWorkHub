@@ -95,7 +95,8 @@
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <x-custom-nav-logo-dashboard class="logo m-0 float-start"/>
-                        <p class="d-none d-md-block d-sm-none logo m-0 float-start">Public Work Hub<span
+                        <x-custom-nav-logo-dashboard-mobile class="logo m-0 float-start"/>
+                        <p class="d-none d-md-none d-sm-none d-lg-block logo m-0 float-start">Public Work Hub<span
                                 class="text-primary">.</span></p>
                     </div>
                 </div>

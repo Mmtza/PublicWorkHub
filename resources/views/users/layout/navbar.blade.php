@@ -47,7 +47,7 @@
                                 </ul>
                             </li>
                             <li><a href="category.html">Team</a></li>
-                            <li><a href="loker.html">Loker</a></li>
+                            <li><a href="{{ route('guest.loker') }}">Loker</a></li>
                             @auth
                                 <li class="d-lg-none d-inline-block"><a href="{{ route('profile.edit') }}">Profile</a></li>
                                 <li class="d-lg-none d-inline-block mb-2"><a href="{{ route('users.pengaduan') }}">Pengaduan</a></li>
