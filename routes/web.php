@@ -93,6 +93,8 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::delete('/admin/pengaduan/delete/{id}', [PengaduanController::class, 'deletePengaduanDashboard'])->name('admin.pengaduan.delete');
 
+    Route::get('/admin/pengaduan/cetakLaporanPdf/{file?}', [PengaduanController::class, 'cetakLaporanPdf'])->name('admin.pengaduan.pdf');
+
     Route::get('/admin/loker', [LokerController::class, 'showAllLokerDashboard'])->name('admin.loker');
 
     Route::get('/admin/loker/tambah', [LokerController::class, 'viewAddLokerDashboard'])->name('admin.loker.tambah');

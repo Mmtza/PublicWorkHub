@@ -115,7 +115,7 @@ class BeritaController extends Controller
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
-            'slug' => Str::slug($data['judul_berita']) . '-' . $lastID+1 . $waktu,
+            'slug' => Str::slug($data['judul_berita']) . '-' . $lastID + 1 . $waktu,
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
