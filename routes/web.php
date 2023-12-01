@@ -22,9 +22,9 @@ use App\Http\Controllers\penyediaLokerController;
 |
 */
 // Routes Users
-Route::get('/', function () {
-    return view('users.index');
-})->name('landing');
+Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
+
+Route::get('/berita/{id}', [BeritaController::class, 'showBeritaById'])->name('guest.berita');
 
 Route::middleware('auth')->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
