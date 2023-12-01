@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('pengaduan', function (Blueprint $table) {
+        Schema::create('team', function (Blueprint $table) {
             $table->id();
             $table->string('nama_anggota', 50)->nullable(false);
             $table->string('nim', 20)->nullable(false);
-            $table->enum('role', ['backend', 'project manager', 'frontend', 'afk'])->nullable(false)->default('afk');
+            $table->enum('role', ['Backend Developer', 'Project Manager', 'Frontend Developer', 'AFK'])->nullable(false)->default('AFK');
             $table->string('program_studi', 20)->nullable(false);
             $table->text('asal_kampus')->nullable(false);
             $table->text('foto')->nullable(false);
