@@ -25,22 +25,28 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if (Auth::user()->role == 'user') {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            $userRole = Auth::user()->role;
+
+            if ($userRole == 'user') {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            } elseif ($userRole == 'admin') {
+                return redirect()->intended(RouteServiceProvider::ADMIN);
+            } elseif ($userRole == 'penulis') {
+                return redirect()->intended(RouteServiceProvider::PENULIS);
+            } elseif ($userRole == 'penyedia_loker') {
+                return redirect()->intended(RouteServiceProvider::PENYEDIALOKER);
+            }
         }
-        else if (Auth::user()->role == 'admin') {
-            return redirect()->intended(RouteServiceProvider::ADMIN);
-        }
-        else if (Auth::user()->role == 'penulis') {
-            return redirect()->intended(RouteServiceProvider::PENULIS);
-        }
-        else if (Auth::user()->role == 'penyedia_loker') {
-            return redirect()->intended(RouteServiceProvider::PENYEDIALOKER);
-        }
+
+        return redirect()->back()->withErrors(['email' => 'Email atau Password salah!!!'])->onlyInput('email');
     }
 
     /**
