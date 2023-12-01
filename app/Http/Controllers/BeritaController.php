@@ -111,12 +111,7 @@ class BeritaController extends Controller
             $data['image_berita'] = $imageName;
         }
         $waktu = now()->toDateTimeString();
-<<<<<<< HEAD
-
-=======
-        
         $lastID = Berita::orderBy('id', 'desc')->first();
->>>>>>> 788b80807b2660d884a84aa141dc146952c74863
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],

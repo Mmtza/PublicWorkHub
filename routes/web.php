@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\UserLokerController;
 use App\Http\Controllers\PenulisBeritaController;
 use App\Http\Controllers\PenyediaLokerController;
 
@@ -25,6 +26,8 @@ use App\Http\Controllers\PenyediaLokerController;
 Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
 
 Route::get('/berita/{id}', [BeritaController::class, 'showBeritaById'])->name('guest.berita');
+
+Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.loker');
 
 Route::middleware(['auth', 'User'])->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
