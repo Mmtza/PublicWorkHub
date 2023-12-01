@@ -147,8 +147,8 @@ class UsersController extends Controller
 
         if (isset($request->image)) {
 
-            $imageName = time() . '.' . $request->image_berita->extension();
-            $request->image_berita->move(public_path('assets/users/images/'), $imageName);
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('assets/users/images/'), $imageName);
             $data['image'] = $imageName;
         }
         User::insert([

@@ -25,6 +25,15 @@ class Loker extends Model
 
     public $timestamps = false;
 
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public static function findSlug($slug) {
+        $loker = static::all();
+        return $loker->where('slug', $slug)->first();
+    }
+
     public function getUser()
     {
         return $this->belongsTo(User::class, 'id_user');

@@ -33,9 +33,9 @@
     <x-text-input type="text" class="rounded p-2" name="pembuat_loker" id="pembuat_loker" value="{{ $publisherName }}" disabled/>
     
     <x-input-label for="kategori_loker" :value="('Kategori')"/>
-    <div class="d-flex gap-2 mb-3">
+    <div class="row mt-2">
         @foreach ( $kategori as $k ) 
-            <div class="d-flex align-items-center gap-1">
+            <div class="col-8 col-sm-6 col-md-4 col-lg-2">
                 <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}" id="{{ $k->nama_kategori }}"/>
                 <label for="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</label>
             </div>       

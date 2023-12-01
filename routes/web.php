@@ -9,7 +9,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenulisBeritaController;
-use App\Http\Controllers\penyediaLokerController;
+use App\Http\Controllers\PenyediaLokerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
 
 Route::get('/berita/{id}', [BeritaController::class, 'showBeritaById'])->name('guest.berita');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'User'])->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
     Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
     Route::get('/pengaduan-masyarakat/download/{file?}', [PengaduanController::class, 'downloadFiles'])->name('users.pengaduan.download');
@@ -96,11 +96,11 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::post('/admin/loker/tambah', [LokerController::class, 'addLokerDashboard'])->name('admin.loker.tambah.post');
 
-    Route::get('/admin/loker/edit/{id}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
+    Route::get('/admin/loker/edit/{slug?}', [LokerController::class, 'viewEditLokerDashboard'])->name('admin.loker.edit');
 
-    Route::patch('/admin/loker/edit/{id}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
+    Route::patch('/admin/loker/edit/{slug?}', [LokerController::class, 'editLokerDashboard'])->name('admin.loker.edit.patch');
 
-    Route::delete('/admin/loker/delete/{id}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
+    Route::delete('/admin/loker/delete/{slug?}', [LokerController::class, 'deleteLokerDashboard'])->name('admin.loker.delete');
 });
 
 Route::middleware(['auth', 'Penulis'])->group(function () {
@@ -128,19 +128,19 @@ Route::middleware(['auth', 'PenyediaLoker'])->group(function () {
         return view('penyedia_loker.index');
     })->name('penyedia-loker');
 
-    Route::get('/penyedia-loker/loker', [penyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
+    Route::get('/penyedia-loker/loker', [PenyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
 
-    Route::get('/penyedia-loker/loker/applier', [penyediaLokerController::class, 'showAllApplier'])->name('penyedia-loker.loker.applier');
+    Route::get('/penyedia-loker/loker/applier', [PenyediaLokerController::class, 'showAllApplier'])->name('penyedia-loker.loker.applier');
 
-    Route::get('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
+    Route::get('/penyedia-loker/loker/tambah', [PenyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
 
-    Route::post('/penyedia-loker/loker/tambah', [penyediaLokerController::class, 'addLokerDashboard'])->name('penyedia-loker.loker.tambah.post');
+    Route::post('/penyedia-loker/loker/tambah', [PenyediaLokerController::class, 'addLokerDashboard'])->name('penyedia-loker.loker.tambah.post');
 
-    Route::get('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'viewEditLokerDashboard'])->name('penyedia-loker.loker.edit');
+    Route::get('/penyedia-loker/loker/edit/{id}', [PenyediaLokerController::class, 'viewEditLokerDashboard'])->name('penyedia-loker.loker.edit');
 
-    Route::patch('/penyedia-loker/loker/edit/{id}', [penyediaLokerController::class, 'editLokerDashboard'])->name('penyedia-loker.loker.edit.patch');
+    Route::patch('/penyedia-loker/loker/edit/{id}', [PenyediaLokerController::class, 'editLokerDashboard'])->name('penyedia-loker.loker.edit.patch');
 
-    Route::delete('/penyedia-loker/loker/delete/{id}', [penyediaLokerController::class, 'deleteLokerDashboard'])->name('penyedia-loker.loker.delete');
+    Route::delete('/penyedia-loker/loker/delete/{id}', [PenyediaLokerController::class, 'deleteLokerDashboard'])->name('penyedia-loker.loker.delete');
 });
 
 
@@ -149,10 +149,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'User'])->name('dashboard');
 
-Route::middleware(['auth', 'User'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

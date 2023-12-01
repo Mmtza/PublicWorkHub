@@ -42,17 +42,20 @@
                                 <span>File tidak tersedia</span>
                             @endif
                         </td>
-                        <td class="text-center d-flex justify-content-center gap-2">
+                        <td class="text-center d-flex align-items-center">
                             {{-- <a href="{{ asset('assets/pengaduan/files/' . $row->file) }}" download data-toggle="modal"><i
                                     data-toggle="tooltip" title="Download">Download</i></a> --}}
                             <a href="{{ route('admin.pengaduan.edit', $row->id) }}" class="edit"><i
                                     class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
 
-                            <form class="d-flex mb-3" method="POST"
+                            <form class="delete" method="POST"
                                 action="{{ route('admin.pengaduan.delete', $row->id) }}" id="deletePengaduanForm">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger ms-auto">Hapus</button>
+                                <button type="submit" class="btn btn-none">
+                                    <i class="bi bi-trash3-fill"
+                                        data-toggle="tooltip" title="Delete"></i>                                    
+                                </button>
                             </form>
                             <script>
                                 document.getElementById('deletePengaduanForm').addEventListener('submit', function(e) {

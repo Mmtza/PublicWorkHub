@@ -5,26 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>PWH | Admin</title>
+    <title>PWH | Management Berita</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180"
-        href="{{ asset('admins/themes') }}/assets/img/favicons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('admins/themes') }}/assets/img/favicons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="{{ asset('admins/themes') }}/assets/img/favicons/favicon-16x16.png" />
-    <link rel="shortcut icon" type="image/x-icon"
-        href="{{ asset('admins/themes') }}/assets/img/favicons/favicon.ico" />
-    <link rel="manifest" href="{{ asset('admins/themes') }}/assets/img/favicons/manifest.json" />
-    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png" />
+    <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
     <meta name="theme-color" content="#ffffff" />
     <script src="{{ asset('admins/themes') }}/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/simplebar/simplebar.min.js"></script>
