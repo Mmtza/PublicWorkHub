@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
+use PDF;
 
 class PengaduanController extends Controller
 {
@@ -190,4 +191,20 @@ class PengaduanController extends Controller
         return redirect()->route('admin.pengaduan');
 
     }
+
+    public function cetakLaporanPdf()
+    {
+        $pengaduan = Pengaduan::all(); //eloquent
+        $data = [
+            'pengaduan' => $pengaduan
+        ];
+        $pdf = PDF::loadView(
+            'admins.pages.form_pengaduan.pengaduan_pdf',
+            $data
+        );
+        // dd($pdf);
+        // return $pdf->download('data_pengaduan_' . date('d-m-Y') . '.pdf');
+        return $pdf->download('data_pengaduan_' . date('d-m-Y') . '.pdf');
+    }
+
 }
