@@ -7,6 +7,10 @@
     <div class="container">
         <h1 class="fs-1 mb-5">Management Pengaduan</h1>
         <div class="d-flex mb-3">
+            <a href="{{ route('admin.pengaduan.pdf') }}" class="btn btn-danger" title="Export to PDF">
+                <i class="bi bi-file-earmark-pdf-fill"></i> Cetak PDF
+            </a>
+
             <a href={{ route('admin.pengaduan.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
         </div>
         <table class="table" id="myTable">
@@ -43,18 +47,15 @@
                             @endif
                         </td>
                         <td class="text-center d-flex align-items-center">
-                            {{-- <a href="{{ asset('assets/pengaduan/files/' . $row->file) }}" download data-toggle="modal"><i
-                                    data-toggle="tooltip" title="Download">Download</i></a> --}}
                             <a href="{{ route('admin.pengaduan.edit', $row->id) }}" class="edit"><i
                                     class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
 
-                            <form class="delete" method="POST"
-                                action="{{ route('admin.pengaduan.delete', $row->id) }}" id="deletePengaduanForm">
+                            <form class="delete" method="POST" action="{{ route('admin.pengaduan.delete', $row->id) }}"
+                                id="deletePengaduanForm">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-none">
-                                    <i class="bi bi-trash3-fill"
-                                        data-toggle="tooltip" title="Delete"></i>                                    
+                                    <i class="bi bi-trash3-fill" data-toggle="tooltip" title="Delete"></i>
                                 </button>
                             </form>
                             <script>
