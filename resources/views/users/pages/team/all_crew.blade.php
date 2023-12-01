@@ -9,7 +9,7 @@
             <div class="row align-items-stretch retro-layout">
                 <h1 class="text-dark text-center">Our Team</h1>
                 <hr>
-                <div class="col-12 d-flex offset-1 gap-5 mt-3">
+                <div class="row col-lg d-flex offset-1 gap-5 mt-3">
                     @foreach ($team as $row)
                         <div class="card rounded-2 custom-card-hover shadow-lg" style="width: 18rem;">
                             <img src="{{ asset('assets/team/images/' . $row->nama_anggota . '.jpg') }}" class='card-img-top'
