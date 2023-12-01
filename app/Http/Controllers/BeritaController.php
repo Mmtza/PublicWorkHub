@@ -33,6 +33,39 @@ class BeritaController extends Controller
         return view('admins.pages.berita.all_berita', compact('berita'));
     }
 
+    public function showAllBerita()
+    {
+        $beritaHasKategori = new Berita();
+
+        // get all berita, but limit 4
+        $berita = Berita::take(4)->get();
+
+        // get all berita in kategori Pendidikan
+        // $beritaByKategori = $beritaHasKategori->getKategori()->where('nama_kategori', 'Pendidikan')->take(2)->get();
+        // $showBeritaByKategori = Berita_Has_Kategori::join('kategori', 'berita_has_kategori.id_kategori', '=', 'kategori.id')->where('nama_kategori', 'Pendidikan')->get();
+        // $beritaByKategori = Kategori::where('nama_kategori', 'Pendidikan')->get();
+
+        // if ($beritaByKategori) {
+        //     $beritaByKategori = $beritaByKategori->berita()->get();
+        //     dd($beritaByKategori);
+        // }
+        // dd($showBeritaByKategori);
+
+        return view('users.pages.berita.all_berita', compact('berita'));
+    }
+
+    public function showBeritaById(Request $request, $id)
+    {
+
+        // get berita by id
+        $berita = Berita::find($id);
+
+        $berita_side = Berita::take(5)->get();
+
+        // dd($berita);
+        return view('users.pages.berita.berita_detail', compact('berita', 'berita_side'));
+    }
+
     public function viewEditBeritaDashboard($slug)
     {
         $berita = Berita::findSlug($slug);
@@ -58,7 +91,7 @@ class BeritaController extends Controller
             'nama_kategori' => ['required'],
             'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
-        ],[
+        ], [
             'judul_berita.required' => 'Judul tidak diperbolehkan kosong',
             'judul_berita.min' => 'Judul diperbolehkan minimal 4 karakter',
             'judul_berita.max' => 'Judul diperbolehkan maksimal 65.000 karakter',
@@ -69,7 +102,7 @@ class BeritaController extends Controller
             'image_berita.mimes' => 'Image yang diperbolehkan type jpg,png,jpeg',
             'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
-        
+
         if (isset($request->image_berita)) {
 
             $imageName = time() . '.' . $request->image_berita->extension();
@@ -77,7 +110,7 @@ class BeritaController extends Controller
             $data['image_berita'] = $imageName;
         }
         $waktu = now()->toDateTimeString();
-        
+
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
@@ -85,19 +118,16 @@ class BeritaController extends Controller
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
-            'img' => isset($request->image_berita)? $data['image_berita'] : null
+            'img' => isset($request->image_berita) ? $data['image_berita'] : null
         ]);
-        
-        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
-        {
+
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             $kategori = $_POST['nama_kategori'];
 
-            foreach ($kategori as $i)
-            {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
-                
-                foreach ($dataKategori as $j)
-                {
+
+                foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([
                         'id_berita' => $dataBerita,
                         'id_kategori' => $j->id
@@ -108,7 +138,7 @@ class BeritaController extends Controller
         alert('Notifikasi', 'Berhasil membuat berita', 'success');
         return redirect()->route('admin.berita');
     }
-    
+
     public function editBeritaDashboard(Request $request, $slug)
     {
         $data = $request->validate([
@@ -117,7 +147,7 @@ class BeritaController extends Controller
             'nama_kategori' => ['required'],
             'status_berita' => ['required', 'in:menunggu,aktif,tidak aktif'],
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
-        ],[
+        ], [
             'judul_berita.required' => 'Judul tidak diperbolehkan kosong',
             'judul_berita.min' => 'Judul diperbolehkan minimal 4 karakter',
             'judul_berita.max' => 'Judul diperbolehkan maksimal 65.000 karakter',
@@ -131,16 +161,13 @@ class BeritaController extends Controller
 
         $berita = Berita::findSlug($slug);
 
-        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
-        {
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             Berita_Has_Kategori::where('id_berita', $berita->id)->delete();
             $kategori = $_POST['nama_kategori'];
-            foreach ($kategori as $i)
-            {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
 
-                foreach ($dataKategori as $j)
-                {
+                foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([
                         'id_berita' => $berita->id,
                         'id_kategori' => $j->id
@@ -149,28 +176,21 @@ class BeritaController extends Controller
             }
         }
 
-        
-        if (isset($request->image_berita)) 
-        {    
-            $filePath = public_path('assets/berita/images/'. $berita->img);
 
-            if (file_exists($filePath) && is_file($filePath)) 
-            {
+        if (isset($request->image_berita)) {
+            $filePath = public_path('assets/berita/images/' . $berita->img);
+
+            if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
-            
+
             $imageName = time() . '.' . $request->image_berita->extension();
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
-        }
-        else
-        {
-            if (!isNull($berita->img))
-            {
+        } else {
+            if (!isNull($berita->img)) {
                 $data['image_berita'] = $berita->img;
-            }
-            else
-            {
+            } else {
                 $data['image_berita'] = null;
             }
         }
@@ -184,20 +204,18 @@ class BeritaController extends Controller
         $berita->waktu_publikasi = now()->toDateTimeString();
         $berita->save();
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
-    
+
         return redirect()->route('admin.berita');
     }
 
     public function deleteBeritaDashboard($slug)
     {
         $berita = Berita::findSlug($slug);
-        
-        if (!IsNull($berita->img)) 
-        {
+
+        if (!IsNull($berita->img)) {
             $filePath = public_path('assets/berita/images/' . $berita->img);
 
-            if (file_exists($filePath) && is_file($filePath))
-            {
+            if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
         }
