@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\PDF;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
-use PDF;
 
 class PengaduanController extends Controller
 {
@@ -177,7 +177,7 @@ class PengaduanController extends Controller
     {
         $pengaduan = Pengaduan::find($id);
 
-        if (!IsNull($pengaduan->file)) {
+        if (!isNull($pengaduan->file)) {
             $filePath = public_path('assets/pengaduan/files/' . $pengaduan->file);
 
             if (file_exists($filePath) && is_file($filePath)) {
