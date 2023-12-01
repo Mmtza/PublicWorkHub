@@ -56,11 +56,10 @@ class LokerController extends Controller
 
         $waktu = now()->toDateTimeString();
 
-        $lastID = Loker::orderBy('id', 'desc')->first();
         $dataLoker = Loker::insertGetId([
             'nama_loker' => $data['nama_loker'],
             'deskripsi_loker' => $data['deskripsi_loker'],
-            'slug' => Str::slug($data['nama_loker']) . '-'. $lastID->id+1 . $waktu,
+            'slug' => Str::slug($data['nama_loker']) . '-'. $waktu,
             'alamat' => $data['alamat_loker'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
