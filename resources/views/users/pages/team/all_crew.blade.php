@@ -23,13 +23,15 @@
                                     <span>{{ $row->nim }} - {{ $row->program_studi }}</span>
                                     <span>{{ $row->asal_kampus }}</span>
                                     <div class="d-flex justify-content-center gap-2 fs-4">
-                                        <a target="__blank" class="text-dark" href="{{ $row->github }}">
+                                        <a target="__blank" class="text-dark"
+                                            href="https://www.github.com/{{ $row->github }}">
                                             <i class="fa-brands fa-github"></i>
                                         </a>
-                                        <a target="__blank" class="text-danger" href="{{ $row->instagram }}">
+                                        <a target="__blank" class="text-danger"
+                                            href="https://www.instagram.com/{{ $row->instagram }}">
                                             <i class="fa-brands fa-instagram"></i>
                                         </a>
-                                        <a target="__blank" class="text-success" href="{{ $row->whatsapp }}">
+                                        <a target="__blank" class="text-success" href="https://wa.me/{{ $row->whatsapp }}">
                                             <i class="fa-brands fa-whatsapp"></i>
                                         </a>
                                     </div>
