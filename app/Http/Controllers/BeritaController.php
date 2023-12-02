@@ -40,7 +40,13 @@ class BeritaController extends Controller
 
         // get all berita, but limit 4
         $berita = Berita::take(4)->get();
-
+        $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
+        $allCategories = [];
+        foreach ($BeritaHasKategori as $bk)
+        {            
+            $bk_array = $bk->getKategori()->get();
+            $allCategories = array_merge($allCategories, $bk_array->toArray());        
+        }
         // get all berita in kategori Pendidikan
         // $beritaByKategori = $beritaHasKategori->getKategori()->where('nama_kategori', 'Pendidikan')->take(2)->get();
         // $showBeritaByKategori = Berita_Has_Kategori::join('kategori', 'berita_has_kategori.id_kategori', '=', 'kategori.id')->where('nama_kategori', 'Pendidikan')->get();
@@ -52,7 +58,7 @@ class BeritaController extends Controller
         // }
         // dd($showBeritaByKategori);
 
-        return view('users.pages.berita.all_berita', compact('berita'));
+        return view('users.pages.berita.all_berita', compact('berita', 'allCategories'));
     }
 
     public function showBeritaById(Request $request, $id)
@@ -111,11 +117,10 @@ class BeritaController extends Controller
             $data['image_berita'] = $imageName;
         }
         $waktu = now()->toDateTimeString();
-        $lastID = Berita::orderBy('id', 'desc')->first();
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
-            'slug' => Str::slug($data['judul_berita']) . '-' . $lastID + 1 . $waktu,
+            'slug' => Str::slug($data['judul_berita']) . '-' . $waktu,
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
