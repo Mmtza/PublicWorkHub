@@ -148,10 +148,10 @@ class DatabaseSeeder extends Seeder
             'role' => 'Project Manager',
             'program_studi' => 'Sistem Informasi',
             'asal_kampus' => 'STMIK Widya Pratama',
-            'foto' => 'Bagus Muhammad Mumtaza.jpg',
-            'github' => 'https://www.github.com/Mmtza',
-            'instagram' => 'https://www.instagram.com/mmtza.mm/',
-            'whatsapp' => 'https://wa.me/6285875282178',
+            'foto' => 'Bagus_Muhammad_Mumtaza.jpg',
+            'github' => 'Mmtza',
+            'instagram' => 'mmtza.mm/',
+            'whatsapp' => '6285875282178',
         ]);
 
         Team::factory()->create([
@@ -160,10 +160,10 @@ class DatabaseSeeder extends Seeder
             'role' => 'Backend Developer',
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
-            'foto' => 'Muhammad Anwar Fauzan.jpg',
-            'github' => 'https://github.com/Anuraaaa',
-            'instagram' => 'https://www.instagram.com/anwarfz__/',
-            'whatsapp' => 'https://wa.me/6285939410330',
+            'foto' => 'Muhammad_Anwar_Fauzan.jpg',
+            'github' => 'Anuraaaa',
+            'instagram' => 'anwarfz__/',
+            'whatsapp' => '6285939410330',
         ]);
 
         Team::factory()->create([
@@ -172,10 +172,10 @@ class DatabaseSeeder extends Seeder
             'role' => 'Frontend Developer',
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
-            'foto' => 'Erick Darmawan Boeniarto.jpg',
-            'github' => 'https://www.github.com/Erickdb',
-            'instagram' => 'https://www.instagram.com/erick.db13/',
-            'whatsapp' => 'https://wa.me/6285282568210',
+            'foto' => 'Erick_Darmawan_Boeniarto.jpg',
+            'github' => 'Erickdb',
+            'instagram' => 'erick.db13/',
+            'whatsapp' => '6285282568210',
         ]);
 
     }

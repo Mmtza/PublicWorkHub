@@ -19,9 +19,9 @@ class Team extends Seeder
             'program_studi' => 'Sistem Informasi',
             'asal_kampus' => 'STMIK Widya Pratama',
             'foto' => 'Bagus_Muhammad_Mumtaza.jpg',
-            'github' => 'https://www.github.com/Mmtza',
-            'instagram' => 'https://www.instagram.com/mmtza.mm/',
-            'whatsapp' => 'https://wa.me/6285875282178',
+            'github' => 'Mmtza',
+            'instagram' => 'mmtza.mm/',
+            'whatsapp' => '6285875282178',
         ]);
 
         TeamModel::factory()->create([
@@ -31,9 +31,9 @@ class Team extends Seeder
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
             'foto' => 'Muhammad_Anwar_Fauzan.jpg',
-            'github' => 'https://github.com/Anuraaaa',
-            'instagram' => 'https://www.instagram.com/anwarfz__/',
-            'whatsapp' => 'https://wa.me/6285939410330',
+            'github' => 'Anuraaaa',
+            'instagram' => 'anwarfz__/',
+            'whatsapp' => '6285939410330',
         ]);
 
         TeamModel::factory()->create([
@@ -43,9 +43,9 @@ class Team extends Seeder
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
             'foto' => 'Erick_Darmawan_Boeniarto.jpg',
-            'github' => 'https://www.github.com/Erickdb',
-            'instagram' => 'https://www.instagram.com/erick.db13/',
-            'whatsapp' => 'https://wa.me/6285282568210',
+            'github' => 'Erickdb',
+            'instagram' => 'erick.db13/',
+            'whatsapp' => '6285282568210',
         ]);
 
 
