@@ -27,8 +27,8 @@
                         <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
                             <li class="active"><a href="{{ route('landing') }}">Home</a></li>
                             <li class="has-children">
-                                <button class="btn btn-none text-capitalize text-white fw-normal dropdown-toggle" type="button"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Kategori</button>
+                                <a class="text-dark dropdown-toggle" type="button" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Kategori</a>
                                 <ul class="dropdown dropdown-menu">
                                     @if (empty($allCategories))
                                         <li class="px-2">No one category</li>
@@ -40,10 +40,12 @@
                                 </ul>
                             </li>
                             <li><a href={{ route('guest.team') }}>Team</a></li>
-                            <li><a href="{{ route('guest.loker') }}">Loker</a></li>
+                            <li class="mb-3"><a href="{{ route('guest.loker') }}">Loker</a></li>
+                            <li class="mb-3 border-bottom"></li>
                             @auth
                                 <li class="d-lg-none d-inline-block"><a href="{{ route('profile.edit') }}">Profile</a></li>
-                                <li class="d-lg-none d-inline-block mb-2"><a href="{{ route('users.pengaduan') }}">Pengaduan</a></li>
+                                <li class="d-lg-none d-inline-block mb-2"><a
+                                        href="{{ route('users.pengaduan') }}">Pengaduan</a></li>
                                 <li class="d-lg-none d-inline-block border-top border-black">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -51,6 +53,11 @@
                                     </form>
                                 </li>
                             @else
+                                <li class="d-lg-none d-inline-block">
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="text-black">Register</a>
+                                    @endif
+                                </li>
                                 <li class="d-lg-none d-inline-block">
                                     @if (Route::has('login'))
                                         <a href="{{ route('login') }}" class="text-black">Login</a>
