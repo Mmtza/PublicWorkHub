@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,8 @@ class KategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_kategori' => fake()->randomElement(['Pendidikan', 'Sosial', 'Politik', 'Olahraga', 'Hiburan', 'Frontend Developer', 'Backend Developer', 'Software Enginer', 'Database Analyst']),
+            'keterangan' => Str::random()
         ];
     }
 }
