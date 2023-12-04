@@ -7,14 +7,14 @@
     <section class="section bg-light">
         <div class="container">
             <div class="row align-items-stretch retro-layout">
-                @foreach ($berita as $row)
+                @foreach ($beritaHeadline as $row)
                     @php
                         $originalString = htmlspecialchars_decode($row->isi);
                         $maxCharacters = 25;
                         $truncatedString = Str::limit($originalString, $maxCharacters, '...');
                     @endphp
                     <div class="col-md-3">
-                        <a href="{{ route('guest.berita', $row->id) }}" class="h-entry mb-30 v-height gradient">
+                        <a href="{{ route('guest.berita', $row->slug) }}" class="h-entry mb-30 v-height gradient">
                             @php
                                 if ($row->img) {
                                     echo "<div class='featured-img'
@@ -27,7 +27,8 @@
 
 
                             <div class="text">
-                                <span class="date">{{ date('M. d, Y', strtotime($row->waktu_publikasi)) }}</span>
+                                <span
+                                    class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                 <h2 class="mb-2">{{ $row->judul }}</h2>
                                 <span class="text-white">
                                     @php
@@ -46,68 +47,62 @@
     <!-- Start posts-entry -->
     <section class="section posts-entry">
         <div class="container">
-            <div class="row mb-4">
+            {{-- <div class="row mb-4">
                 <div class="col-sm-6">
                     <h2 class="posts-entry-title">Business</h2>
                 </div>
                 <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-            </div>
+            </div> --}}
             <div class="row g-3">
                 <div class="col-md-9">
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="blog-entry">
-                                <a href="single.html" class="img-link">
-                                    <img src="{{ asset('users/themes') }}/images/img_1_sq.jpg" alt="Image"
-                                        class="img-fluid">
-                                </a>
-                                <span class="date">Apr. 14th, 2022</span>
-                                <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis
-                                    inventore vel voluptas.</p>
-                                <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-entry">
-                                <a href="single.html" class="img-link">
-                                    <img src="{{ asset('users/themes') }}/images/img_2_sq.jpg" alt="Image"
-                                        class="img-fluid">
-                                </a>
-                                <span class="date">Apr. 14th, 2022</span>
-                                <h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis
-                                    inventore vel voluptas.</p>
-                                <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-                            </div>
-                        </div>
+                        @if (!empty($beritaMidLineCol))
+                            @foreach ($beritaMidLineCol as $berita)
+                                @php
+                                    $originalString = htmlspecialchars_decode($berita->isi);
+                                    $maxCharacters = 25;
+                                    $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                                @endphp
+                                <div class="col-md-6">
+                                    <div class="blog-entry">
+                                        @if ($berita->img)
+                                            <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
+                                                <img src="{{ asset('assets/berita/images/' . $berita->img) }}"
+                                                    alt="Image" class="img-fluid">
+                                            </a>
+                                        @endif
+                                        <span
+                                            class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                        <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a>
+                                        </h2>
+                                        <p>{!! $truncatedString !!}</p>
+                                        <p><a href="{{ route('guest.berita', $berita->slug) }}"
+                                                class="btn btn-sm btn-outline-primary">Read More</a></p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-3">
                     <ul class="list-unstyled blog-entry-sm">
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">Don’t assume your user data in the cloud is safe</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
-
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">Meta unveils fees on metaverse sales</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
-
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">UK sees highest inflation in 30 years</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
+                        @if (!empty($beritaMidLineRow))
+                            @foreach ($beritaMidLineRow as $berita)
+                                @php
+                                    $originalString = htmlspecialchars_decode($berita->isi);
+                                    $maxCharacters = 25;
+                                    $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                                @endphp
+                                <li>
+                                    <span
+                                        class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                    <h3><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h3>
+                                    <p>{!! $truncatedString !!}</p>
+                                    <p><a href="{{ route('guest.berita', $berita->slug) }}" class="read-more">Continue
+                                            Reading</a></p>
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -119,54 +114,33 @@
     <section class="section posts-entry posts-entry-sm bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="blog-entry">
-                        <a href="single.html" class="img-link">
-                            <img src="{{ asset('users/themes') }}/images/img_1_horizontal.jpg" alt="Image"
-                                class="img-fluid">
-                        </a>
-                        <span class="date">Apr. 14th, 2022</span>
-                        <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p><a href="#" class="read-more">Continue Reading</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="blog-entry">
-                        <a href="single.html" class="img-link">
-                            <img src="{{ asset('users/themes') }}/images/img_2_horizontal.jpg" alt="Image"
-                                class="img-fluid">
-                        </a>
-                        <span class="date">Apr. 14th, 2022</span>
-                        <h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p><a href="#" class="read-more">Continue Reading</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="blog-entry">
-                        <a href="single.html" class="img-link">
-                            <img src="{{ asset('users/themes') }}/images/img_3_horizontal.jpg" alt="Image"
-                                class="img-fluid">
-                        </a>
-                        <span class="date">Apr. 14th, 2022</span>
-                        <h2><a href="single.html">UK sees highest inflation in 30 years</a></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p><a href="#" class="read-more">Continue Reading</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="blog-entry">
-                        <a href="single.html" class="img-link">
-                            <img src="{{ asset('users/themes') }}/images/img_4_horizontal.jpg" alt="Image"
-                                class="img-fluid">
-                        </a>
-                        <span class="date">Apr. 14th, 2022</span>
-                        <h2><a href="single.html">Don’t assume your user data in the cloud is safe</a></h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p><a href="#" class="read-more">Continue Reading</a></p>
-                    </div>
-                </div>
+                @if (!empty($beritaMidLineCol2))
+                    @foreach ($beritaMidLineCol2 as $berita)
+                        @php
+                            $originalString = htmlspecialchars_decode($berita->isi);
+                            $maxCharacters = 25;
+                            $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                        @endphp
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="blog-entry">
+                                @if ($berita->img)
+                                    <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
+                                        <img src="{{ asset('assets/berita/images/' . $berita->img) }}" alt="Image"
+                                            class="img-fluid">
+                                    </a>
+                                @endif
+                                <span
+                                    class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h2>
+                                <p>{!! $truncatedString !!}</p>
+                                <p><a href="{{ route('guest.berita', $berita->slug) }}" class="read-more">Continue
+                                        Reading</a>
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -175,75 +149,65 @@
     <!-- Start posts-entry -->
     <section class="section posts-entry">
         <div class="container">
-            <div class="row mb-4">
+            {{-- <div class="row mb-4">
                 <div class="col-sm-6">
                     <h2 class="posts-entry-title">Culture</h2>
                 </div>
                 <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-            </div>
+            </div> --}}
             <div class="row g-3">
                 <div class="col-md-9 order-md-2">
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="blog-entry">
-                                <a href="single.html" class="img-link">
-                                    <img src="{{ asset('users/themes') }}/images/img_1_sq.jpg" alt="Image"
-                                        class="img-fluid">
-                                </a>
-                                <span class="date">Apr. 14th, 2022</span>
-                                <h2><a href="single.html">Thought you loved Python? Wait until you meet Rust</a></h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis
-                                    inventore vel voluptas.</p>
-                                <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-entry">
-                                <a href="single.html" class="img-link">
-                                    <img src="{{ asset('users/themes') }}/images/img_2_sq.jpg" alt="Image"
-                                        class="img-fluid">
-                                </a>
-                                <span class="date">Apr. 14th, 2022</span>
-                                <h2><a href="single.html">Startup vs corporate: What job suits you best?</a></h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis
-                                    inventore vel voluptas.</p>
-                                <p><a href="single.html" class="btn btn-sm btn-outline-primary">Read More</a></p>
-                            </div>
-                        </div>
+                        @if (!empty($beritaBotLineCol))
+                            @foreach ($beritaBotLineCol as $berita)
+                                @php
+                                    $originalString = htmlspecialchars_decode($berita->isi);
+                                    $maxCharacters = 25;
+                                    $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                                @endphp
+                                <div class="col-md-6">
+                                    <div class="blog-entry">
+                                        @if ($berita->img)
+                                            <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
+                                                <img src="{{ asset('assets/berita/images/' . $berita->img) }}"
+                                                    alt="Image" class="img-fluid">
+                                            </a>
+                                        @endif
+                                        </a>
+                                        <span
+                                            class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                        <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a>
+                                        </h2>
+                                        <p>{!! $truncatedString !!}</p>
+                                        <p><a href="{{ route('guest.berita', $berita->slug) }}"
+                                                class="btn btn-sm btn-outline-primary">Read More</a></p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-3">
                     <ul class="list-unstyled blog-entry-sm">
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">Don’t assume your user data in the cloud is safe</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
-
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">Meta unveils fees on metaverse sales</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
-
-                        <li>
-                            <span class="date">Apr. 14th, 2022</span>
-                            <h3><a href="single.html">UK sees highest inflation in 30 years</a></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, nobis ea quis inventore
-                                vel voluptas.</p>
-                            <p><a href="#" class="read-more">Continue Reading</a></p>
-                        </li>
+                        @if (!empty($beritaBotLineRow))
+                            @foreach ($beritaBotLineRow as $berita)
+                                <li>
+                                    <span
+                                        class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                    <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h2>
+                                    <p>{!! $truncatedString !!}</p>
+                                    <p><a href="{{ route('guest.berita', $berita->slug) }}"
+                                            class="btn btn-sm btn-outline-primary">Continue Reading</a></p>
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    {{-- <section class="section">
         <div class="container">
 
             <div class="row mb-4">
@@ -478,7 +442,7 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
 
     <div class="section bg-light">
         <div class="container">

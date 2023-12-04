@@ -30,6 +30,7 @@ class PenulisBeritaController extends Controller
     {
         $berita = Berita::where('id_user', Auth::user()->id)->get();
         $beritaCount = Berita::where('id_user', Auth::user()->id)->count();
+        confirmDelete();
         return view('penulis.pages.all_berita', compact('berita', 'beritaCount'));
     }
 
@@ -41,6 +42,14 @@ class PenulisBeritaController extends Controller
         $kategori = Kategori::all();
         confirmDelete();
         return view('penulis.pages.edit_berita', compact('berita', 'publisherName', 'kategori'));
+    }
+
+    public function previewBeritaDashboard($slug)
+    {
+        $berita = Berita::findSlug($slug);
+        $publisher = Berita::with('getUser')->find($berita->id);
+        $publisherName = $publisher->getUser()->first()->name;
+        return view('penulis.pages.detail_berita', compact('berita', 'publisherName'));
     }
 
     public function viewAddBeritaDashboard()

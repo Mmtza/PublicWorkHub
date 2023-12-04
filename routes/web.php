@@ -26,7 +26,7 @@ use App\Http\Controllers\PenyediaLokerController;
 // Routes Users
 Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
 
-Route::get('/berita/{id}', [BeritaController::class, 'showBeritaById'])->name('guest.berita');
+Route::get('/berita/{slug?}', [BeritaController::class, 'showBeritaBySlug'])->name('guest.berita');
 
 Route::get('/our-team', [TeamController::class, 'showAllCrew'])->name('guest.team');
 Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.loker');
@@ -66,6 +66,8 @@ Route::middleware(['auth', 'Admin'])->group(function () {
     Route::post('/admin/berita/tambah', [BeritaController::class, 'addBeritaDashboard'])->name('admin.berita.tambah.post');
 
     Route::get('/admin/berita/edit/{slug?}', [BeritaController::class, 'viewEditBeritaDashboard'])->name('admin.berita.edit');
+
+    Route::get('/admin/berita/preview/{slug?}', [BeritaController::class, 'previewBeritaDashboard'])->name('admin.berita.preview');
 
     Route::patch('/admin/berita/edit/{slug?}', [BeritaController::class, 'editBeritaDashboard'])->name('admin.berita.edit.patch');
 
@@ -123,6 +125,8 @@ Route::middleware(['auth', 'Penulis'])->group(function () {
     Route::post('/penulis/berita/tambah', [PenulisBeritaController::class, 'addBeritaDashboard'])->name('penulis.berita.tambah.post');
 
     Route::get('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'viewEditBeritaDashboard'])->name('penulis.berita.edit');
+
+    Route::get('/penulis/berita/preview/{slug?}', [PenulisBeritaController::class, 'previewBeritaDashboard'])->name('penulis.berita.preview');
 
     Route::patch('/penulis/berita/edit/{slug?}', [PenulisBeritaController::class, 'editBeritaDashboard'])->name('penulis.berita.edit.patch');
 

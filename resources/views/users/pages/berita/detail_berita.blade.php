@@ -13,30 +13,28 @@
                     $truncatedString = Str::limit($originalString, $maxCharacters, '...');
                 @endphp
                 <div class="col-md-9">
-                    <h1 class="text-dark text-center">{{ ucfirst($berita->judul) }}</h1>
-                    <a href="" class="h-entry mb-30 v-height gradient">
-                        @php
-                            if ($berita->img) {
-                                echo "<div class='featured-img'
-                        style='background-image: url(" .
-                                    asset('assets/berita/images/' . $berita->img) .
-                                    ")';>
-                    </div>";
-                            }
-                        @endphp
-                        {{-- <img src="{{ asset('assets/berita/images/' . $berita->img) }}" alt=""> --}}
-
-                        <div class="text">
-                            <span class="date">{{ date('M. d, Y', strtotime($berita->waktu_publikasi)) }}</span>
-                        </div>
-                    </a>
-                    <div class="berita-isi-wrapper">
+                    <div class="text-start mb-5">
+                        <a href="{{ route('landing') }}" class="btn btn-warning">Back to Berita</a>
+                    </div>
+                    <h1 class="text-dark mb-5 text-center">{{ ucfirst($berita->judul) }}</h1>
+                    @if ($berita->img)
+                        <figure class="text-center mb-4">
+                            <img src="{{ asset('assets/berita/images/' . $berita->img) }}" alt="Gambar" style="width: 50%">
+                        </figure>
+                    @endif
+                    <div class="text-center">
+                        <span>Ditulis oleh {{ $publisherName}}</span>
+                    </div>
+                    <div class="text-center mb-2">                        
+                        <span class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                    </div>
+                    <div class="p-5 border-3 rounded-3 border-secondary shadow-lg" style="border-style: outset">
                         {!! $berita->isi !!}
 
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h5 class="text-dark mt-3 ms-4">Berita Terbaru</h5>
+                    <h5 class="text-dark mt-3 ms-4">Berita Lainnya</h5>
                     @foreach ($berita_side as $row)
                         @php
                             $originalString = htmlspecialchars_decode($row->isi);
@@ -44,7 +42,7 @@
                             $truncatedString = Str::limit($originalString, $maxCharacters, '...');
                         @endphp
                         <ul>
-                            <a href="#" class="h-entry mb-30 v-height gradient">
+                            <a href="{{ route('guest.berita', $row->slug) }}" class="h-entry mb-30 v-height gradient">
                                 @php
                                     if ($row->img) {
                                         echo "<div class='featured-img'
@@ -57,7 +55,7 @@
                                 {{-- <img src="{{ asset('assets/berita/images/' . $row->img) }}" alt=""> --}}
 
                                 <div class="text">
-                                    <span class="date">{{ date('M. d, Y', strtotime($row->waktu_publikasi)) }}</span>
+                                    <span class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                     <h2 class="text-white">{{ ucfirst($row->judul) }}</h2>
                                     <span>
                                         @php

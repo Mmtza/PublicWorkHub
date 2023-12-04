@@ -1,61 +1,92 @@
 @extends('penulis.layout.template')
 
-@section('title', 'Management Berita')
+@section('title', 'PWH | Management Berita')
 
 @section('content')
 
-    <h1 class="fs-1 mb-5">Management Berita</h1>
-    <div class="d-flex mb-3">
-        <a href={{ route('penulis.berita.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
-    </div>
-    @if ($beritaCount == 0)
-        <div class="alert alert-warning text-light d-flex flex-col align-items-center gap-2" role="alert">
-            <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </span>
-            <span>
-                Tidak ada berita saat ini
-            </span>
-        </div>
-    @else
-        <div class="d-flex flex-column flex-lg-row flex-wrap gap-3">
-            @foreach ($berita as $b)
+    <div class="container">
+        <h1 class="fs-1 mb-5">Management Berita</h1>
+        <div class="d-flex mb-3">
+            <a href={{ route('penulis.berita.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
+        </div>    
+        <table class="table" id="myTable">
+            <thead class="text-center">
+                <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Judul</th>
+                    <th class="text-center">Isi</th>
+                    <th class="text-center">Waktu Publish</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Gambar</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
                 @php
-                    $originalString = htmlspecialchars_decode($b->isi);
-                    $maxCharacters = 100;
-                    $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                    $no = 1;
                 @endphp
-
-                <div class="card" style="width: 18rem;">
+                @foreach ($berita as $row)
                     @php
-                        if ($b->img) {
-                            echo "                    
-                        <img src=" .
-                                asset('assets/berita/images/' . $b->img) .
-                                " class='card-img-top'>
-                        ";
-                        }
+                        $originalString = htmlspecialchars_decode($row->isi);
+                        $maxCharacters = 50;
+                        $truncatedString = Str::limit($originalString, $maxCharacters, '...');
                     @endphp
-                    <div class="card-body">
-                        <div class="d-flex justify-content-end ">
-                            <p class="border border-warning rounded d-inline-block p-1 justify-content-end">
-                                {{ $b->status }} </p>
-                        </div>
-                        <h5 class="card-title">{{ $b->judul }}</h5>
-                        <div class="card-text">
-                            @php
-                                echo $truncatedString;
-                            @endphp
-                        </div>
-                        <a href="{{ route('penulis.berita.edit', $b->slug) }}" class="btn btn-warning">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="fas fa-pencil"></span>
-                                <span>Edit</span>
+                    <tr>
+                        <td class="text-center">{{ $no++ }}</td>
+                        <td class="text-center">{{ ucfirst($row->judul) }}</td>
+                        <td class="text-center">{!! ucfirst($truncatedString) !!}</td>
+                        <td class="text-center">
+                            {{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}
+                        </td>
+                        <td class="text-center">{{ ucfirst($row->status) }}</td>
+                        <td class="text-center">
+                            @if ($row->img)
+                                <span>{{ $row->img }}</span>
+                            @else
+                                <span>Gambar tidak tersedia</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex align-items-center">
+                                <a href="{{ route('penulis.berita.edit', $row->slug) }}" class="edit"><i
+                                        class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
+
+                                <a href="{{ route('penulis.berita.preview', $row->slug) }}" class="preview"><i
+                                        class="bi bi-card-text" data-toggle="tooltip" title="Preview"></i></a>
+
+                                <form class="delete" method="POST" action="{{ route('penulis.berita.delete', $row->slug) }}"
+                                    id="deleteBeritaForm{{ $row->id }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-none p-0">
+                                        <i class="bi bi-trash3-fill" data-toggle="tooltip" title="Delete"></i>
+                                    </button>
+                                </form>
+                                <script>
+                                    document.getElementById('deleteBeritaForm' + {{ $row->id }}).addEventListener('submit', function(e) {
+                                        e.preventDefault();
+
+                                        Swal.fire({
+                                            title: 'Apakah kamu yakin?',
+                                            text: 'Ingin menghapus berita ini',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Ya, Hapus'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // If confirmed, submit the form
+                                                this.submit();
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
-                        </a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @endif
-@endsection
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endSection
