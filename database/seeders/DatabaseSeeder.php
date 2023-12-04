@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Kategori;
-use App\Models\User;
 use App\Models\Team;
+use App\Models\User;
+use App\Models\Berita;
+use App\Models\Kategori;
 use Illuminate\Database\Seeder;
+use App\Models\Berita_Has_Kategori;
 
 class DatabaseSeeder extends Seeder
 {
@@ -178,5 +180,6 @@ class DatabaseSeeder extends Seeder
             'whatsapp' => '6285282568210',
         ]);
 
+        Berita::factory()->count(100)->create();
     }
 }

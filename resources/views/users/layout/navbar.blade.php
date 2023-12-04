@@ -24,10 +24,10 @@
                             <span class="bi-search"></span>
                         </form>
 
-                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+                        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto mt-3 mb-0">
                             <li class="active"><a href="{{ route('landing') }}">Home</a></li>
                             <li class="has-children">
-                                <a class="text-dark dropdown-toggle" type="button" role="button"
+                                <a class="dropdown-toggle" type="button" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">Kategori</a>
                                 <ul class="dropdown dropdown-menu">
                                     @if (empty($allCategories))
