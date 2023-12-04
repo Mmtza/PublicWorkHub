@@ -41,22 +41,23 @@ class BeritaController extends Controller
 
         $beritaHeadline = Berita::take(4)->get();
         $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
-        $allCategories = [];
-        foreach ($BeritaHasKategori as $bk)
-        {            
-            $bk_array = $bk->getKategori()->get();
-            $allCategories = array_merge($allCategories, $bk_array->toArray());        
-        }
+        $allCategories = Kategori::all();
+        // $allCategories = [];
+        // foreach ($BeritaHasKategori as $bk)
+        // {            
+        //     $bk_array = $bk->getKategori()->get();
+        //     $allCategories = array_merge($allCategories, $bk_array->toArray());        
+        // }
         $beritaMidLineCol = Berita::orderBy('id', 'desc')->skip(4)->take(2)->get();
-        $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(8)->take(3)->get();
-        $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(16)->take(4)->get();
-        $beritaBotLineRow = Berita::orderBy('id', 'desc')->skip(32)->take(4)->get();
-        $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(36)->take(1)->get();
-        $beritaEndLine = Berita::orderBy('id', 'desc')->skip(32)->take(4)->get();
+        $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(6)->take(3)->get();
+        $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(9)->take(4)->get();
+        $beritaBotLineRow = Berita::orderBy('id', 'desc')->skip(13)->take(3)->get();
+        $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(18)->take(2)->get();
+        $beritaEndLine = Berita::orderBy('id', 'desc')->skip(20)->take(4)->get();
         return view('users.pages.berita.all_berita', compact(
             'beritaHeadline', 'allCategories', 
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2', 
-            'beritaBotLineRow', 'beritaBotLineCol'
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
         ));
     }
 
