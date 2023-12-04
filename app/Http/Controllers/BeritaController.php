@@ -31,6 +31,7 @@ class BeritaController extends Controller
     {
         $berita = Berita::all();
         $beritaCount = Berita::count();
+        confirmDelete();
         return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount'));
     }
 
@@ -38,8 +39,7 @@ class BeritaController extends Controller
     {
         $beritaHasKategori = new Berita();
 
-        // get all berita, but limit 4
-        $berita = Berita::take(4)->get();
+        $beritaHeadline = Berita::take(4)->get();
         $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
         $allCategories = [];
         foreach ($BeritaHasKategori as $bk)
@@ -47,30 +47,34 @@ class BeritaController extends Controller
             $bk_array = $bk->getKategori()->get();
             $allCategories = array_merge($allCategories, $bk_array->toArray());        
         }
-        // get all berita in kategori Pendidikan
-        // $beritaByKategori = $beritaHasKategori->getKategori()->where('nama_kategori', 'Pendidikan')->take(2)->get();
-        // $showBeritaByKategori = Berita_Has_Kategori::join('kategori', 'berita_has_kategori.id_kategori', '=', 'kategori.id')->where('nama_kategori', 'Pendidikan')->get();
-        // $beritaByKategori = Kategori::where('nama_kategori', 'Pendidikan')->get();
-
-        // if ($beritaByKategori) {
-        //     $beritaByKategori = $beritaByKategori->berita()->get();
-        //     dd($beritaByKategori);
-        // }
-        // dd($showBeritaByKategori);
-
-        return view('users.pages.berita.all_berita', compact('berita', 'allCategories'));
+        $beritaMidLineCol = Berita::orderBy('id', 'desc')->skip(4)->take(2)->get();
+        $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(8)->take(3)->get();
+        $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(16)->take(4)->get();
+        $beritaBotLineRow = Berita::orderBy('id', 'desc')->skip(32)->take(4)->get();
+        $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(36)->take(1)->get();
+        $beritaEndLine = Berita::orderBy('id', 'desc')->skip(32)->take(4)->get();
+        return view('users.pages.berita.all_berita', compact(
+            'beritaHeadline', 'allCategories', 
+            'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2', 
+            'beritaBotLineRow', 'beritaBotLineCol'
+        ));
     }
 
-    public function showBeritaById(Request $request, $id)
+    public function showBeritaBySlug(Request $request, $slug)
     {
+        $berita = Berita::findSlug($slug);
+        $berita_side = Berita::where('id', '!=', $berita->id)->take(5)->get();
+        $publisher = Berita::with('getUser')->find($berita->id);
+        $publisherName = $publisher->getUser()->first()->name;
+        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName'));
+    }
 
-        // get berita by id
-        $berita = Berita::find($id);
-
-        $berita_side = Berita::take(5)->get();
-
-        // dd($berita);
-        return view('users.pages.berita.berita_detail', compact('berita', 'berita_side'));
+    public function previewBeritaDashboard($slug)
+    {
+        $berita = Berita::findSlug($slug);
+        $publisher = Berita::with('getUser')->find($berita->id);
+        $publisherName = $publisher->getUser()->first()->name;
+        return view('admins.pages.berita.detail_berita', compact('berita', 'publisherName'));
     }
 
     public function viewEditBeritaDashboard($slug)
