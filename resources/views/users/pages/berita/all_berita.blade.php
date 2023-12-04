@@ -1,38 +1,40 @@
 @extends('users.layout.template')
 
-@section('title', 'Home')
+@section('title', 'PWH | Home')
 
 @section('content')
     <!-- Start retroy layout blog posts -->
     <section class="section bg-light">
         <div class="container">
             <div class="row align-items-stretch retro-layout">
-                @foreach ($beritaHeadline as $row)
-                    @php
-                        $originalString = htmlspecialchars_decode($row->isi);
-                        $maxCharacters = 25;
-                        $truncatedString = Str::limit($originalString, $maxCharacters, '...');
-                    @endphp
-                    <div class="col-md-3">
-                        <a href="{{ route('guest.berita', $row->slug) }}" class="h-entry mb-30 v-height gradient">
-                            @if ($row->img)
-                                <div class="featured-img"
-                                    style="background-image: url('{{ asset('assets/berita/images/' . $row->img) }}');"></div>
-                            @endif
+                @if (count($beritaHeadLine) > 0)                    
+                    @foreach ($beritaHeadLine as $row)
+                        @php
+                            $originalString = htmlspecialchars_decode($row->isi);
+                            $maxCharacters = 25;
+                            $truncatedString = Str::limit($originalString, $maxCharacters, '...');
+                        @endphp
+                        <div class="col-md-3">
+                            <a href="{{ route('guest.berita', $row->slug) }}" class="h-entry mb-30 v-height gradient">
+                                @if ($row->img)
+                                    <div class="featured-img"
+                                        style="background-image: url('{{ asset('assets/berita/images/' . $row->img) }}');"></div>
+                                @endif
 
-                            <div class="text">
-                                <span
-                                    class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
-                                <h2 class="mb-2">{{ $row->judul }}</h2>
-                                <span class="text-white">
-                                    @php
-                                        echo $truncatedString;
-                                    @endphp
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
+                                <div class="text">
+                                    <span
+                                        class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                    <h2 class="mb-2">{{ $row->judul }}</h2>
+                                    <span class="text-white">
+                                        @php
+                                            echo $truncatedString;
+                                        @endphp
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -50,7 +52,7 @@
             <div class="row g-3">
                 <div class="col-md-9">
                     <div class="row g-3 retro-layout">
-                        @if (!empty($beritaMidLineCol))
+                        @if (count($beritaMidLineCol) > 0)
                             @foreach ($beritaMidLineCol as $berita)
                                 @php
                                     $originalString = htmlspecialchars_decode($berita->isi);
@@ -82,7 +84,7 @@
                 </div>
                 <div class="col-md-3">
                     <ul class="list-unstyled blog-entry-sm">
-                        @if (!empty($beritaMidLineRow))
+                        @if (count($beritaMidLineRow) > 0)
                             @foreach ($beritaMidLineRow as $berita)
                                 @php
                                     $originalString = htmlspecialchars_decode($berita->isi);
@@ -110,7 +112,7 @@
     <section class="section posts-entry posts-entry-sm bg-light">
         <div class="container">
             <div class="row retro-layout">
-                @if (!empty($beritaMidLineCol2))
+                @if (count($beritaMidLineCol2) > 0)
                     @foreach ($beritaMidLineCol2 as $berita)
                         @php
                             $originalString = htmlspecialchars_decode($berita->isi);
@@ -157,7 +159,7 @@
             <div class="row g-3 retro-layout">
                 <div class="col-md-9 order-md-2">
                     <div class="row g-3">
-                        @if (!empty($beritaBotLineCol))
+                        @if (count($beritaBotLineCol) > 0)
                             @foreach ($beritaBotLineCol as $berita)
                                 @php
                                     $originalString = htmlspecialchars_decode($berita->isi);
@@ -189,7 +191,7 @@
                 </div>
                 <div class="col-md-3">
                     <ul class="list-unstyled blog-entry-sm">
-                        @if (!empty($beritaBotLineRow))
+                        @if (count($beritaBotLineRow) > 0)
                             @foreach ($beritaBotLineRow as $berita)
                                 <li>
                                     <span
@@ -455,7 +457,7 @@
             </div> --}}
 
             <div class="row align-items-stretch">
-                @if (!empty($beritaEndLine))
+                @if (count($beritaEndLine) > 0)
                     <div class="col-md-5 order-md-2 retro-layout">
                         <a href="{{ route('guest.berita', $beritaEndLine[0]->slug) }}" class="h-entry gradient" style="min-height: 480px;">
                             @if ($beritaEndLine[0]->img)
