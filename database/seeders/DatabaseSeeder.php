@@ -149,6 +149,9 @@ class DatabaseSeeder extends Seeder
             'program_studi' => 'Sistem Informasi',
             'asal_kampus' => 'STMIK Widya Pratama',
             'foto' => 'Bagus_Muhammad_Mumtaza.jpg',
+            'github' => 'Mmtza',
+            'instagram' => 'mmtza.mm/',
+            'whatsapp' => '6285875282178',
         ]);
 
         Team::factory()->create([
@@ -158,6 +161,9 @@ class DatabaseSeeder extends Seeder
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
             'foto' => 'Muhammad_Anwar_Fauzan.jpg',
+            'github' => 'Anuraaaa',
+            'instagram' => 'anwarfz__/',
+            'whatsapp' => '6285939410330',
         ]);
 
         Team::factory()->create([
@@ -167,6 +173,9 @@ class DatabaseSeeder extends Seeder
             'program_studi' => 'Teknik Informatika',
             'asal_kampus' => 'Universitas Banten Jaya',
             'foto' => 'Erick_Darmawan_Boeniarto.jpg',
+            'github' => 'Erickdb',
+            'instagram' => 'erick.db13/',
+            'whatsapp' => '6285282568210',
         ]);
 
     }

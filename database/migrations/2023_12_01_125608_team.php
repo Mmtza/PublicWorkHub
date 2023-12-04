@@ -18,6 +18,9 @@ return new class extends Migration {
             $table->string('program_studi', 20)->nullable(false);
             $table->text('asal_kampus')->nullable(false);
             $table->text('foto')->nullable(false);
+            $table->text('github')->nullable(false);
+            $table->text('instagram')->nullable(false);
+            $table->text('whatsapp')->nullable(false);
         });
     }
 
