@@ -34,7 +34,9 @@
                                         <li class="px-2">No one category</li>
                                     @else
                                         @foreach ($allCategories as $k)
-                                            <li class="border-bottom px-2">{{ $k['nama_kategori'] }}</li>
+                                            <li class="border-bottom px-2">
+                                                <a href="{{ route('guest.berita.kategori', $k['nama_kategori']) }}">{{ $k['nama_kategori'] }}</a>
+                                            </li>
                                         @endforeach
                                     @endif
                                 </ul>
