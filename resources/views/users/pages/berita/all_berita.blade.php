@@ -15,16 +15,10 @@
                     @endphp
                     <div class="col-md-3">
                         <a href="{{ route('guest.berita', $row->slug) }}" class="h-entry mb-30 v-height gradient">
-                            @php
-                                if ($row->img) {
-                                    echo "<div class='featured-img'
-                                style='background-image: url(" .
-                                        asset('assets/berita/images/' . $row->img) .
-                                        ")';>
-                            </div>";
-                                }
-                            @endphp
-
+                            @if ($row->img)
+                                <div class="featured-img"
+                                    style="background-image: url('{{ asset('assets/berita/images/' . $row->img) }}');"></div>
+                            @endif
 
                             <div class="text">
                                 <span
@@ -55,7 +49,7 @@
             </div> --}}
             <div class="row g-3">
                 <div class="col-md-9">
-                    <div class="row g-3">
+                    <div class="row g-3 retro-layout">
                         @if (!empty($beritaMidLineCol))
                             @foreach ($beritaMidLineCol as $berita)
                                 @php
@@ -65,12 +59,14 @@
                                 @endphp
                                 <div class="col-md-6">
                                     <div class="blog-entry">
-                                        @if ($berita->img)
-                                            <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
-                                                <img src="{{ asset('assets/berita/images/' . $berita->img) }}"
-                                                    alt="Image" class="img-fluid">
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('guest.berita', $berita->slug) }}" class="h-entry mb-30 gradient"
+                                            style="min-height: 300px;">
+                                            @if ($berita->img)
+                                                <div class="featured-img"
+                                                    style="background-image: url('{{ asset('assets/berita/images/' . $berita->img) }}');">
+                                                </div>
+                                            @endif
+                                        </a>
                                         <span
                                             class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                         <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a>
@@ -113,7 +109,7 @@
     <!-- Start posts-entry -->
     <section class="section posts-entry posts-entry-sm bg-light">
         <div class="container">
-            <div class="row">
+            <div class="row retro-layout">
                 @if (!empty($beritaMidLineCol2))
                     @foreach ($beritaMidLineCol2 as $berita)
                         @php
@@ -124,12 +120,15 @@
 
                         <div class="col-md-6 col-lg-3">
                             <div class="blog-entry">
-                                @if ($berita->img)
-                                    <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
-                                        <img src="{{ asset('assets/berita/images/' . $berita->img) }}" alt="Image"
-                                            class="img-fluid">
-                                    </a>
-                                @endif
+                                <a href="{{ route('guest.berita', $berita->slug) }}" class="h-entry mb-30 gradient"
+                                    style="min-height: 300px;">
+                                    <div class="featured-img">
+                                        @if ($berita->img)
+                                            <img src="{{ asset('assets/berita/images/' . $berita->img) }}" alt="Image"
+                                                class="img-fluid">
+                                        @endif
+                                    </div>
+                                </a>
                                 <span
                                     class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                 <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h2>
@@ -155,7 +154,7 @@
                 </div>
                 <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
             </div> --}}
-            <div class="row g-3">
+            <div class="row g-3 retro-layout">
                 <div class="col-md-9 order-md-2">
                     <div class="row g-3">
                         @if (!empty($beritaBotLineCol))
@@ -167,12 +166,13 @@
                                 @endphp
                                 <div class="col-md-6">
                                     <div class="blog-entry">
-                                        @if ($berita->img)
-                                            <a href="{{ route('guest.berita', $berita->slug) }}" class="img-link">
-                                                <img src="{{ asset('assets/berita/images/' . $berita->img) }}"
-                                                    alt="Image" class="img-fluid">
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('guest.berita', $berita->slug) }}" class="h-entry mb-30 gradient"
+                                            style="min-height: 300px;">
+                                            @if ($berita->img)
+                                                <div class="featured-img"
+                                                    style="background-image: url('{{ asset('assets/berita/images/' . $berita->img) }}');">
+                                                </div>
+                                            @endif
                                         </a>
                                         <span
                                             class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
@@ -447,63 +447,77 @@
     <div class="section bg-light">
         <div class="container">
 
-            <div class="row mb-4">
+            {{-- <div class="row mb-4">
                 <div class="col-sm-6">
                     <h2 class="posts-entry-title">Travel</h2>
                 </div>
                 <div class="col-sm-6 text-sm-end"><a href="category.html" class="read-more">View All</a></div>
-            </div>
+            </div> --}}
 
-            <div class="row align-items-stretch retro-layout-alt">
-
-                <div class="col-md-5 order-md-2">
-                    <a href="single.html" class="hentry img-1 h-100 gradient">
-                        <div class="featured-img"
-                            style="background-image: url('{{ asset('users/themes') }}/images/img_2_vertical.jpg');">
-                        </div>
-                        <div class="text">
-                            <span>February 12, 2019</span>
-                            <h2>Meta unveils fees on metaverse sales</h2>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-7">
-
-                    <a href="single.html" class="hentry img-2 v-height mb30 gradient">
-                        <div class="featured-img"
-                            style="background-image: url('{{ asset('users/themes') }}/images/img_1_horizontal.jpg');">
-                        </div>
-                        <div class="text text-sm">
-                            <span>February 12, 2019</span>
-                            <h2>AI can now kill those annoying cookie pop-ups</h2>
-                        </div>
-                    </a>
-
-                    <div class="two-col d-block d-md-flex justify-content-between">
-                        <a href="single.html" class="hentry v-height img-2 gradient">
-                            <div class="featured-img"
-                                style="background-image: url('{{ asset('users/themes') }}/images/img_2_sq.jpg');">
-                            </div>
-                            <div class="text text-sm">
-                                <span>February 12, 2019</span>
-                                <h2>Don’t assume your user data in the cloud is safe</h2>
-                            </div>
-                        </a>
-                        <a href="single.html" class="hentry v-height img-2 ms-auto float-end gradient">
-                            <div class="featured-img"
-                                style="background-image: url('{{ asset('users/themes') }}/images/img_3_sq.jpg');">
-                            </div>
-                            <div class="text text-sm">
-                                <span>February 12, 2019</span>
-                                <h2>Startup vs corporate: What job suits you best?</h2>
+            <div class="row align-items-stretch">
+                @if (!empty($beritaEndLine))
+                    <div class="col-md-5 order-md-2 retro-layout">
+                        <a href="{{ route('guest.berita', $beritaEndLine[0]->slug) }}" class="h-entry gradient" style="min-height: 480px;">
+                            @if ($beritaEndLine[0]->img)
+                                <div class="featured-img"
+                                    style="background-image: url('{{ asset('assets/berita/images/' . $beritaEndLine[0]->img) }}');">
+                                </div>
+                            @endif
+                            <div class="text">
+                                <span
+                                    class="date">{{ \Carbon\Carbon::parse($beritaEndLine[0]->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                <h2>{{ $beritaEndLine[0]->judul }}</h2>
                             </div>
                         </a>
                     </div>
-
-                </div>
+                    <div class="col-md-7 retro-layout">
+                        <a href="{{ route('guest.berita', $beritaEndLine[1]->slug) }}" class="h-entry v-height gradient">
+                            @if ($beritaEndLine[1]->img)
+                                <div class="featured-img"
+                                    style="background-image: url('{{ asset('assets/berita/images/' . $beritaEndLine[1]->img) }}');">
+                                </div>
+                            @endif
+                            <div class="text">
+                                <span
+                                    class="date">{{ \Carbon\Carbon::parse($beritaEndLine[1]->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                <h2>{{ $beritaEndLine[1]->judul }}</h2>
+                            </div>
+                        </a>
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ route('guest.berita', $beritaEndLine[2]->slug) }}"
+                                    class="h-entry v-height gradient">
+                                    @if ($beritaEndLine[2]->img)
+                                        <div class="featured-img"
+                                            style="background-image: url('{{ asset('assets/berita/images/' . $beritaEndLine[2]->img) }}');">
+                                        </div>
+                                    @endif
+                                    <div class="text">
+                                        <span
+                                            class="date">{{ \Carbon\Carbon::parse($beritaEndLine[2]->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                        <h2>{{ $beritaEndLine[2]->judul }}</h2>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="{{ route('guest.berita', $beritaEndLine[3]->slug) }}"
+                                    class="h-entry v-height gradient">
+                                    @if ($beritaEndLine[3]->img)
+                                        <div class="featured-img"
+                                            style="background-image: url('{{ asset('assets/berita/images/' . $beritaEndLine[3]->img) }}');">
+                                        </div>
+                                    @endif
+                                    <div class="text">
+                                        <span
+                                            class="date">{{ \Carbon\Carbon::parse($beritaEndLine[3]->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
+                                        <h2>{{ $beritaEndLine[3]->judul }}</h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
-
         </div>
     </div>
 @endsection
