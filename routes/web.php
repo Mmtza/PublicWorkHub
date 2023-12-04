@@ -27,6 +27,7 @@ use App\Http\Controllers\PenyediaLokerController;
 Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
 
 Route::get('/berita/{slug?}', [BeritaController::class, 'showBeritaBySlug'])->name('guest.berita');
+Route::get('/berita/kategori/{kategori?}', [BeritaController::class, 'showBeritaByKategori'])->name('guest.berita.kategori');
 
 Route::get('/our-team', [TeamController::class, 'showAllCrew'])->name('guest.team');
 Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.loker');
