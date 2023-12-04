@@ -51,7 +51,7 @@
                                     class="bi bi-pencil-square" data-toggle="tooltip" title="Edit"></i></a>
 
                             <form class="delete" method="POST" action="{{ route('admin.pengaduan.delete', $row->id) }}"
-                                id="deletePengaduanForm">
+                                id="deletePengaduanForm{{ $row->id }}">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-none">
@@ -59,7 +59,7 @@
                                 </button>
                             </form>
                             <script>
-                                document.getElementById('deletePengaduanForm').addEventListener('submit', function(e) {
+                                document.getElementById('deletePengaduanForm' + {{ $row->id }}).addEventListener('submit', function(e) {
                                     e.preventDefault();
 
                                     Swal.fire({
