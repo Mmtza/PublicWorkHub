@@ -1,6 +1,6 @@
 @extends('users.layout.template')
 
-@section('title', 'Home')
+@section('title', 'PWH | Home')
 
 @section('content')
     <!-- Start retroy layout blog posts -->

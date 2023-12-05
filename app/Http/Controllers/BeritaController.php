@@ -39,7 +39,7 @@ class BeritaController extends Controller
     {
         $beritaHasKategori = new Berita();
 
-        $beritaHeadline = Berita::take(4)->get();
+        $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
         $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
         $allCategories = Kategori::all();
         // $allCategories = [];
@@ -55,7 +55,7 @@ class BeritaController extends Controller
         $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(18)->take(2)->get();
         $beritaEndLine = Berita::orderBy('id', 'desc')->skip(20)->take(4)->get();
         return view('users.pages.berita.all_berita', compact(
-            'beritaHeadline', 'allCategories', 
+            'beritaHeadLine', 'allCategories', 
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2', 
             'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
         ));
@@ -68,6 +68,24 @@ class BeritaController extends Controller
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName'));
+    }
+
+    public function showBeritaByKategori(Request $request, $kategori)
+    {
+        $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
+        $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
+        $beritaHeadLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->take(4)->get();
+        $beritaMidLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(4)->take(2)->get();
+        $beritaMidLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(6)->take(3)->get();
+        $beritaMidLineCol2 = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(9)->take(4)->get();
+        $beritaBotLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(13)->take(3)->get();
+        $beritaBotLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(18)->take(2)->get();
+        $beritaEndLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(20)->take(4)->get();
+        return view('users.pages.berita.show_berita_by_kategori', compact(
+            'kategori', 'beritaHeadLine', 
+            'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2', 
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
+        ));
     }
 
     public function previewBeritaDashboard($slug)
