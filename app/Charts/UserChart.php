@@ -2,11 +2,11 @@
 
 namespace App\Charts;
 
-use App\Models\Berita;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
-class BeritaChart
+class UserChart
 {
     protected $chart;
 
@@ -15,9 +15,8 @@ class BeritaChart
         $this->chart = $chart;
     }
 
-    public function buildPC(): \ArielMejiaDev\LarapexCharts\BarChart
+    public function buildPC(): \ArielMejiaDev\LarapexCharts\LineChart
     {
-        // Calculate the date and time of the beginning of the current week
         $startOfWeek = Carbon::now()->startOfWeek();
 
         // Retrieve records for each day of the week
@@ -26,20 +25,19 @@ class BeritaChart
             $currentDate = $startOfWeek->copy()->addDays($day);
 
             // Use whereDay to filter records for a specific day of the week
-            $records = Berita::whereDay('waktu_publikasi', $currentDate->day)->count();
+            $records = User::whereDay('created_at', $currentDate->day)->count();
 
             $data[$currentDate->locale('id')->isoformat('dddd')] = $records;
         }
-        return $this->chart->barChart()
+        return $this->chart->lineChart()
+            ->addData('Total User', [$data['Senin'], $data['Selasa'], $data['Rabu'], $data['Kamis'], $data['Jumat'], $data['Sabtu'], $data['Minggu']])
             ->setHeight(300)
             ->setWidth(600)
-            ->addData('Total Berita', [$data['Senin'], $data['Selasa'], $data['Rabu'], $data['Kamis'], $data['Jumat'], $data['Sabtu'], $data['Minggu']])
             ->setXAxis(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
     }
 
-    public function buildMobile(): \ArielMejiaDev\LarapexCharts\BarChart
+    public function buildMobile(): \ArielMejiaDev\LarapexCharts\LineChart
     {
-        // Calculate the date and time of the beginning of the current week
         $startOfWeek = Carbon::now()->startOfWeek();
 
         // Retrieve records for each day of the week
@@ -48,14 +46,14 @@ class BeritaChart
             $currentDate = $startOfWeek->copy()->addDays($day);
 
             // Use whereDay to filter records for a specific day of the week
-            $records = Berita::whereDay('waktu_publikasi', $currentDate->day)->count();
+            $records = User::whereDay('created_at', $currentDate->day)->count();
 
             $data[$currentDate->locale('id')->isoformat('dddd')] = $records;
         }
-        return $this->chart->barChart()
-            ->setHeight(300)
-            ->setWidth(300)
-            ->addData('Total Berita', [$data['Senin'], $data['Selasa'], $data['Rabu'], $data['Kamis'], $data['Jumat'], $data['Sabtu'], $data['Minggu']])
+        return $this->chart->lineChart()
+            ->addData('Total User', [$data['Senin'], $data['Selasa'], $data['Rabu'], $data['Kamis'], $data['Jumat'], $data['Sabtu'], $data['Minggu']])
+            ->setHeight(250)
+            ->setWidth(250)
             ->setXAxis(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
     }
 }
