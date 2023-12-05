@@ -2,36 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\PDF;
 use App\Models\Pengaduan;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
 
-class PengaduanController extends Controller
-{
-    public function showAllPengaduanDashboard()
-    {
+
+class PengaduanController extends Controller {
+    public function showAllPengaduanDashboard() {
         $pengaduan = Pengaduan::all();
         confirmDelete();
         return view('admins.pages.form_pengaduan.all_pengaduan', compact('pengaduan'));
     }
 
-    public function viewEditPengaduanDashboard(Request $request, $id)
-    {
+    public function viewEditPengaduanDashboard(Request $request, $id) {
         $pengaduan = Pengaduan::find($id);
 
         return view('admins.pages.form_pengaduan.edit_pengaduan', compact('pengaduan'));
     }
 
-    public function viewAddPengaduan()
-    {
+    public function viewAddPengaduan() {
         return view('admins.pages.form_pengaduan.tambah_pengaduan');
     }
 
-    public function showPengaduanUser()
-    {
+    public function showPengaduanUser() {
         $user_id = auth()->user()->id;
 
         $data = [
@@ -42,8 +38,7 @@ class PengaduanController extends Controller
         return view('users.pages.form_pengaduan.pengaduan', $data);
     }
 
-    public function addPengaduan(Request $request)
-    {
+    public function addPengaduan(Request $request) {
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
             'file_pengaduan' => ['file', 'mimes:jpg,png,jpeg,pdf,doc,docx', 'max:70000']
@@ -54,9 +49,9 @@ class PengaduanController extends Controller
             'file_pengaduan.max' => 'File yang diperbolehkan maksimal 70mb'
         ]);
 
-        if (isset($request->file_pengaduan)) {
+        if(isset($request->file_pengaduan)) {
 
-            $fileName = time() . '.' . $request->file_pengaduan->extension();
+            $fileName = time().'.'.$request->file_pengaduan->extension();
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
             $data['file_pengaduan'] = $fileName;
         }
@@ -74,8 +69,7 @@ class PengaduanController extends Controller
         return redirect()->route('users.pengaduan');
     }
 
-    public function addPengaduanDashboard(Request $request)
-    {
+    public function addPengaduanDashboard(Request $request) {
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
             'status' => ['required'],
@@ -87,9 +81,9 @@ class PengaduanController extends Controller
             'file_pengaduan.max' => 'File yang diperbolehkan maksimal 70mb'
         ]);
 
-        if (isset($request->file_pengaduan)) {
+        if(isset($request->file_pengaduan)) {
 
-            $fileName = time() . '.' . $request->file_pengaduan->extension();
+            $fileName = time().'.'.$request->file_pengaduan->extension();
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
             $data['file_pengaduan'] = $fileName;
         }
@@ -108,8 +102,7 @@ class PengaduanController extends Controller
         return redirect()->route('admin.pengaduan');
     }
 
-    public function editPengaduanDashboard(Request $request, $id)
-    {
+    public function editPengaduanDashboard(Request $request, $id) {
         $data = $request->validate([
             'isi_pengaduan' => ['required', 'min:4', 'max:65000'],
             'status' => ['required'],
@@ -124,18 +117,18 @@ class PengaduanController extends Controller
         $pengaduan = Pengaduan::find($id);
 
 
-        if (isset($request->file_berita)) {
-            $filePath = public_path('assets/pengaduan/files/' . $pengaduan->file);
+        if(isset($request->file_berita)) {
+            $filePath = public_path('assets/pengaduan/files/'.$pengaduan->file);
 
-            if (file_exists($filePath) && is_file($filePath)) {
+            if(file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
 
-            $fileName = time() . '.' . $request->file_pengaduan->extension();
+            $fileName = time().'.'.$request->file_pengaduan->extension();
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
             $data['file_pengaduan'] = $fileName;
         } else {
-            if (!isNull($pengaduan->file)) {
+            if(!isNull($pengaduan->file)) {
                 $data['file_pengaduan'] = $pengaduan->file;
             } else {
                 $data['file_pengaduan'] = null;
@@ -156,31 +149,29 @@ class PengaduanController extends Controller
         return redirect()->route('admin.pengaduan');
     }
 
-    public function downloadFiles(Request $request, $file)
-    {
+    public function downloadFiles(Request $request, $file) {
         $pengaduan = Pengaduan::where('file', $file)->first();
         $filePengaduan = $pengaduan->file;
-        $filePath = public_path('assets/pengaduan/files/' . $filePengaduan);
+        $filePath = public_path('assets/pengaduan/files/'.$filePengaduan);
         // Set the Content-Disposition header
         $headers = [
-            'Content-Disposition' => 'attachment; filename="' . $filePengaduan . '"',
+            'Content-Disposition' => 'attachment; filename="'.$filePengaduan.'"',
         ];
 
 
-        if (file_exists($filePath) && is_file($filePath)) {
-            return response()->download($filePath, 'File-pengaduan-' . $filePengaduan, $headers);
+        if(file_exists($filePath) && is_file($filePath)) {
+            return response()->download($filePath, 'File-pengaduan-'.$filePengaduan, $headers);
         }
         return redirect()->back();
     }
 
-    public function deletePengaduanDashboard($id)
-    {
+    public function deletePengaduanDashboard($id) {
         $pengaduan = Pengaduan::find($id);
 
-        if (!isNull($pengaduan->file)) {
-            $filePath = public_path('assets/pengaduan/files/' . $pengaduan->file);
+        if(!isNull($pengaduan->file)) {
+            $filePath = public_path('assets/pengaduan/files/'.$pengaduan->file);
 
-            if (file_exists($filePath) && is_file($filePath)) {
+            if(file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
             Pengaduan::destroy($pengaduan->id);
@@ -192,19 +183,18 @@ class PengaduanController extends Controller
 
     }
 
-    public function cetakLaporanPdf()
-    {
+    public function cetakLaporanPdf() {
         $pengaduan = Pengaduan::all(); //eloquent
         $data = [
             'pengaduan' => $pengaduan
         ];
-        $pdf = PDF::loadView(
+        $pdf = Pdf::loadView(
             'admins.pages.form_pengaduan.pengaduan_pdf',
             $data
         );
         // dd($pdf);
         // return $pdf->download('data_pengaduan_' . date('d-m-Y') . '.pdf');
-        return $pdf->download('data_pengaduan_' . date('d-m-Y') . '.pdf');
+        return $pdf->download('data_pengaduan_'.date('d-m-Y').'.pdf');
     }
 
 }
