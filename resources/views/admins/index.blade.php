@@ -12,161 +12,126 @@
                 <h2 class="mb-2">Dashboard</h2>
                 <h5 class="text-700 fw-semi-bold">Here’s what’s going on at publick work hub right now</h5>
               </div>
-              <div class="row align-items-center g-4">
-                <div class="col-12 col-md-auto">
-                  <div class="d-flex align-items-center">
-                    <span class="fa-stack" style="min-height: 46px; min-width: 46px"
-                      ><span class="fa-solid fa-square fa-stack-2x text-success-300" data-fa-transform="down-4 rotate--10 left-4"></span
-                      ><span class="fa-solid fa-circle fa-stack-2x stack-circle text-success-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-star text-success" data-fa-transform="shrink-2 up-8 right-6"></span
-                    ></span>
-                    <div class="ms-3">
-                      <h4 class="mb-0">57 new orders</h4>
-                      <p class="text-800 fs--1 mb-0">Awating processing</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-auto">
-                  <div class="d-flex align-items-center">
-                    <span class="fa-stack" style="min-height: 46px; min-width: 46px"
-                      ><span class="fa-solid fa-square fa-stack-2x text-warning-300" data-fa-transform="down-4 rotate--10 left-4"></span
-                      ><span class="fa-solid fa-circle fa-stack-2x stack-circle text-warning-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-pause text-warning" data-fa-transform="shrink-2 up-8 right-6"></span
-                    ></span>
-                    <div class="ms-3">
-                      <h4 class="mb-0">5 orders</h4>
-                      <p class="text-800 fs--1 mb-0">On hold</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-auto">
-                  <div class="d-flex align-items-center">
-                    <span class="fa-stack" style="min-height: 46px; min-width: 46px"
-                      ><span class="fa-solid fa-square fa-stack-2x text-danger-300" data-fa-transform="down-4 rotate--10 left-4"></span
-                      ><span class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-xmark text-danger" data-fa-transform="shrink-2 up-8 right-6"></span
-                    ></span>
-                    <div class="ms-3">
-                      <h4 class="mb-0">15 products</h4>
-                      <p class="text-800 fs--1 mb-0">Out of stock</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr class="bg-200 mb-6 mt-4" />
-              <div class="row flex-between-center mb-4 g-3">
-                <div class="col-auto">
-                  <h3>Total sells</h3>
-                  <p class="text-700 lh-sm mb-0">Payment received across all channels</p>
-                </div>
-                <div class="col-8 col-sm-4">
-                  <select class="form-select form-select-sm mt-2" id="select-gross-revenue-month">
-                    <option>Mar 1 - 31, 2022</option>
-                    <option>April 1 - 30, 2022</option>
-                    <option>May 1 - 31, 2022</option>
-                  </select>
-                </div>
-              </div>
-              <div class="echart-total-sales-chart" style="min-height: 320px; width: 100%"></div>
             </div>
-            <div class="col-12 col-xxl-6">
-              <div class="row g-3">
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">
-                            Total Pengaduan<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"><span class="badge-label">-6.8%</span></span>
-                          </h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>247</h4>
-                      </div>
-                      <div class="d-flex justify-content-center px-4 py-6">
-                        <div class="echart-total-orders" style="height: 85px; width: 115px"></div>
-                      </div>
-                      <div class="mt-2">
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Menunggu</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">25%</h6>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="bullet-item bg-primary-100 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Di terima</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">25%</h6>
-                        </div>
-                        <div class="d-flex align-items-center mt-2">
-                          <div class="bullet-item bg-info-500 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Di tolak</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">50%</h6>
-                        </div>
-                      </div>
+          </div>
+          <div class="row g-4">
+            <div class="col">              
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5 class="mb-1">
+                        Total Pengaduan<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"><span class="badge-label">-6.8%</span></span>
+                      </h5>
+                      <h6 class="text-700">Last 7 days</h6>
+                    </div>
+                    <h4>{{ $pengaduan }}</h4>
+                  </div>
+                  <div class="d-flex justify-content-center px-4 py-6">
+                    <div class="echart-total-orders" style="height: 85px; width: 115px"></div>
+                  </div>
+                  <div class="mt-2">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="bullet-item bg-primary me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Menunggu</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">25%</h6>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="bullet-item bg-primary-100 me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Di terima</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">25%</h6>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                      <div class="bullet-item bg-info-500 me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Di tolak</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">50%</h6>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">
-                            New Users<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"> <span class="badge-label">+26.5%</span></span>
-                          </h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>1227</h4>
-                      </div>
-                      <div class="pb-0 pt-4">
-                        <div class="echarts-new-customers" style="height: 180px; width: 100%"></div>
-                      </div>
+              </div>
+            </div>
+            <div class="col">              
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5 class="mb-1">
+                        New Users<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"> <span class="badge-label">+26.5%</span></span>
+                      </h5>
+                      <h6 class="text-700">Last 7 days</h6>
+                    </div>
+                    <h4>{{ $user }}</h4>
+                  </div>
+                  <div class="pb-0 pt-4">
+                    <div class="echarts-new-customers" style="height: 180px; width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5 class="mb-1">Total Berita</h5>
+                      <h6 class="text-700">Last 7 days</h6>
+                    </div>
+                    <h4>{{ $berita }}</h4>
+                  </div>
+                  <div class="d-flex justify-content-center px-4 py-6">
+                    <div>
+                      {!! $chart->container() !!}                  
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="bullet-item bg-warning me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Menunggu</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">
+                        @php
+                          $percentage = ($beritaMenunggu / $berita) * 100;
+                          echo(number_format($percentage, 2) . "%");
+                        @endphp
+                      </h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                      <div class="bullet-item bg-info me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Aktif</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">
+                        @php
+                          $percentage = ($beritaAktif / $berita) * 100;
+                          echo(number_format($percentage, 2) . "%");
+                        @endphp
+                      </h6>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="bullet-item bg-danger me-2"></div>
+                      <h6 class="text-900 fw-semi-bold flex-1 mb-0">Tidak Aktif</h6>
+                      <h6 class="text-900 fw-semi-bold mb-0">
+                        @php
+                          $percentage = ($beritaTidakAktif / $berita) * 100;
+                          echo(number_format($percentage, 2) . "%");
+                        @endphp
+                      </h6>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">
-                            Total Berita<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"><span class="badge-label">-6.8%</span></span>
-                          </h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>247</h4>
-                      </div>
-                      <div class="d-flex justify-content-center px-4 py-6">
-                        <div class="echart-total-orders" style="height: 85px; width: 115px"></div>
-                      </div>
-                      <div class="mt-2">
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Aktif</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">50%</h6>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="bullet-item bg-primary-100 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Tidak Aktif</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">50%</h6>
-                        </div>
-                      </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h5 class="mb-1">
+                        New Loker<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"> <span class="badge-label">+26.5%</span></span>
+                      </h5>
+                      <h6 class="text-700">Last 7 days</h6>
                     </div>
+                    <h4>{{ $loker }}</h4>
                   </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">
-                            New Loker<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"> <span class="badge-label">+26.5%</span></span>
-                          </h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>1227</h4>
-                      </div>
-                      <div class="pb-0 pt-4">
-                        <div class="echarts-new-customers" style="height: 180px; width: 100%"></div>
-                      </div>
-                    </div>
+                  <div class="pb-0 pt-4">
+                    <div class="echarts-new-customers" style="height: 180px; width: 100%"></div>
                   </div>
                 </div>
               </div>
@@ -1481,5 +1446,8 @@
           </div>
         </div>--}}
     </div>
-</main>
+    <script src="{{ $chart->cdn() }}"></script>
+
+    {{ $chart->script() }}
+  </main>
 @endSection
