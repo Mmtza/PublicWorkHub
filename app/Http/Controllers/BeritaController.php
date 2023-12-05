@@ -42,12 +42,6 @@ class BeritaController extends Controller
         $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
         $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
         $allCategories = Kategori::all();
-        // $allCategories = [];
-        // foreach ($BeritaHasKategori as $bk)
-        // {            
-        //     $bk_array = $bk->getKategori()->get();
-        //     $allCategories = array_merge($allCategories, $bk_array->toArray());        
-        // }
         $beritaMidLineCol = Berita::orderBy('id', 'desc')->skip(4)->take(2)->get();
         $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(6)->take(3)->get();
         $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(9)->take(4)->get();
@@ -69,11 +63,12 @@ class BeritaController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName'));
     }
-
+    
     public function showBeritaByKategori(Request $request, $kategori)
     {
         $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
         $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
+        $allCategories = Kategori::all();
         $beritaHeadLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->take(4)->get();
         $beritaMidLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(4)->take(2)->get();
         $beritaMidLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(6)->take(3)->get();
@@ -82,7 +77,7 @@ class BeritaController extends Controller
         $beritaBotLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(18)->take(2)->get();
         $beritaEndLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(20)->take(4)->get();
         return view('users.pages.berita.show_berita_by_kategori', compact(
-            'kategori', 'beritaHeadLine', 
+            'kategori', 'allCategories', 'beritaHeadLine', 
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2', 
             'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
         ));
