@@ -73,6 +73,8 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
     Route::delete('/admin/berita/delete/{slug?}', [BeritaController::class, 'deleteBeritaDashboard'])->name('admin.berita.delete');
 
+    Route::post('/admin/berita/export-excel', [BeritaController::class, 'excelBeritaDashboard'])->name('admin.berita.excel');
+
     Route::get('/admin/users', [UsersController::class, 'showAllUsersDashboard'])->name('admin.users');
 
     Route::get('/admin/users/edit/{id}', [UsersController::class, 'viewEditUsers'])->name('admin.users.edit');
@@ -166,4 +168,4 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
