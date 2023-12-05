@@ -7,6 +7,7 @@ use App\Http\Controllers\LokerController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\UserLokerController;
@@ -56,9 +57,7 @@ Route::get('/category', function () {
 // routes admin
 Route::middleware(['auth', 'Admin'])->group(function () {
 
-    Route::get('/admin', function () { //admin dashboard
-        return view('admins.index');
-    })->name('admin');
+    Route::get('/admin', [DashboardController::class, 'readDataDashboardAdmin'])->name('admin');
 
     Route::get('/admin/berita', [BeritaController::class, 'showAllBeritaDashboard'])->name('admin.berita');
 
