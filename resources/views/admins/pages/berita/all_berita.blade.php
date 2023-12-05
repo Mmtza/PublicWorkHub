@@ -5,9 +5,18 @@
 @section('content')
     <div class="container">
         <h1 class="fs-1 mb-5">Management Berita</h1>
+
         <div class="d-flex mb-3">
+            <form action="{{ route('admin.berita.excel') }}" method="POST" class="d-flex gap-2">
+                @csrf
+                @method('post')
+                <input type="date" class="form-control" name="start_date" placeholder="masukkan tanggal awal">
+                <span class="mt-2">to</span>
+                <input type="date" class="form-control" name="end_date" placeholder="masukkan tanggal akhir">
+                <button type="submit" class="btn btn-outline-info">Export</button>
+            </form>
             <a href={{ route('admin.berita.tambah') }} class="btn btn-primary ms-auto">Tambah</a>
-        </div>    
+        </div>
         <table class="table" id="myTable">
             <thead class="text-center">
                 <tr>
@@ -34,7 +43,9 @@
                         <td class="text-center">{{ $no++ }}</td>
                         <td class="text-center">{{ ucfirst($row->judul) }}</td>
                         <td class="text-center">{!! ucfirst($truncatedString) !!}</td>
-                        <td class="text-center">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</td>
+                        <td class="text-center">
+                            {{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}
+                        </td>
                         <td class="text-center">{{ ucfirst($row->status) }}</td>
                         <td class="text-center">
                             @if ($row->img)
