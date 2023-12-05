@@ -11,7 +11,7 @@
                 <hr>
                 @foreach ($team as $row)
                     <div class="col-12 col-lg-4 col-md-4 col-sm-12 justify-content-center d-flex gap-5 mt-3">
-                        <div class="card rounded-2 custom-card-hover shadow-lg" style="width: 18rem;">
+                        <div class="card rounded-2 custom-card-team-hover shadow-lg" style="width: 18rem;">
                             <img src="{{ asset('assets/team/images/' . $row->nama_anggota . '.jpg') }}" class='card-img-top'
                                 style="height: 80%">
                             <p class="border border-success rounded d-inline-block p-1 justify-content-end position-absolute end-0 m-2 bg-white text-dark"
