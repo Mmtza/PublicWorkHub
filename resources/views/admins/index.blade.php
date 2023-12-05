@@ -60,7 +60,7 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
                     <div>
-                      <h5 class="mb-1">Users</h5>
+                      <h5 class="mb-1">Total User</h5>
                       <h6 class="text-700">Last 7 days</h6>
                     </div>
                     <h4>{{ $user }}</h4>
