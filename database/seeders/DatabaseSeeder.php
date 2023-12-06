@@ -8,6 +8,7 @@ use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Database\Seeder;
 use App\Models\Berita_Has_Kategori;
+use App\Models\Loker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -181,5 +182,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Berita::factory()->count(100)->create();
+        Loker::factory()->count(20)->create();
     }
 }
