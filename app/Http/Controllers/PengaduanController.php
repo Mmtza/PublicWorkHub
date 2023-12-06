@@ -28,14 +28,21 @@ class PengaduanController extends Controller {
     }
 
     public function showPengaduanUser() {
-        $user_id = auth()->user()->id;
-
-        $data = [
-            'pengaduan' => Pengaduan::where('id_user', $user_id)->get()
-        ];
-
-        // dd($data);
-        return view('users.pages.form_pengaduan.pengaduan', $data);
+        if (Auth::check())
+        {
+            $user_id = auth()->user()->id;
+    
+            $data = [
+                'pengaduan' => Pengaduan::where('id_user', $user_id)->get()
+            ];
+    
+            // dd($data);
+            return view('users.pages.form_pengaduan.pengaduan', $data);
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
     }
 
     public function addPengaduan(Request $request) {

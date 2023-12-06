@@ -32,6 +32,9 @@ Route::get('/berita/kategori/{kategori?}', [BeritaController::class, 'showBerita
 
 Route::get('/our-team', [TeamController::class, 'showAllCrew'])->name('guest.team');
 Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.loker');
+Route::get('/loker/{slug?}', [UserLokerController::class, 'showLokerBySlug'])->name('guest.loker.slug');
+Route::post('/loker/daftar/{slug?}', [UserLokerController::class, 'applyLoker'])->name('guest.loker.apply');
+Route::delete('/loker/cancel/{slug?}', [UserLokerController::class, 'cancelApplyLoker'])->name('guest.loker.cancel');
 
 Route::middleware(['auth', 'User'])->group(function () {
     Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');

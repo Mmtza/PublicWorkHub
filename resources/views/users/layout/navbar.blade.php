@@ -43,6 +43,7 @@
                             </li>
                             <li><a href={{ route('guest.team') }}>Team</a></li>
                             <li class="mb-3"><a href="{{ route('guest.loker') }}">Loker</a></li>
+                            <li class="mb-3 d-none d-lg-inline-block"><a href="{{ route('users.pengaduan') }}">Pengaduan</a></li>                            
                             <li class="mb-3 border-bottom"></li>
                             @auth
                                 <li class="d-lg-none d-inline-block"><a href="{{ route('profile.edit') }}">Profile</a></li>
