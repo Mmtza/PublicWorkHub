@@ -5,7 +5,7 @@
 @section('content')
 
     <h1 class="fs-1 mb-5">Edit Berita</h1>
-    <form class="d-flex mb-3" method="POST" action="{{ route('admin.berita.delete', $berita->id) }}" id="deleteBeritaForm">
+    <form class="d-flex mb-3" method="POST" action="{{ route('admin.berita.delete', $berita->slug) }}" id="deleteBeritaForm">
         @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger ms-auto">Hapus</button>

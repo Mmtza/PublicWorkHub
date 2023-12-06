@@ -35,7 +35,7 @@ class Berita extends Model
     }
 
     public static function findSlug($slug) {
-        return static::where('slug', $slug)->get();
+        return static::where('slug', $slug)->first();
     }
 
     public function getKomentar() {
