@@ -13,6 +13,8 @@ class Apply_Loker extends Model
     protected $table = 'apply_loker';
 
     protected $fillable = [
+        'id_user',
+        'id_loker',
         'status',
         'waktu_apply'
     ];
