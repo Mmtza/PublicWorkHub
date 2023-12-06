@@ -86,6 +86,8 @@
 - DataTables
 - JQuery
 - QuillJS
+- Dompdf
+- Maatwebsite/Excel
 
 ### Package Manager
 - Composer
