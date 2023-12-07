@@ -144,7 +144,7 @@
                         </form>
                     </div>
                     <div class="berita-isi-wrapper">
-                        {{ $loker->deskripsi_loker }}
+                        {!! $loker->deskripsi_loker !!}
                     </div>
                 </div>
                 <div class="col-md-3 order-md-last order-md-first">
