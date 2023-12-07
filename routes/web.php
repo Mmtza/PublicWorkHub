@@ -119,9 +119,7 @@ Route::middleware(['auth', 'Admin'])->group(function () {
 
 Route::middleware(['auth', 'Penulis'])->group(function () {
     // Routes Penulis
-    Route::get('/penulis', function () { //penulis dashboard
-        return view('penulis.index');
-    })->name('penulis');
+    Route::get('/penulis', [DashboardController::class, 'readDataPenulisDashboard'])->name('penulis');
 
     Route::get('/penulis/berita', [PenulisBeritaController::class, 'showAllBeritaDashboard'])->name('penulis.berita');
 

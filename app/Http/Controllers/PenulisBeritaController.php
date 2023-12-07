@@ -28,7 +28,7 @@ class PenulisBeritaController extends Controller
 
     public function showAllBeritaDashboard()
     {
-        $berita = Berita::where('id_user', Auth::user()->id)->get();
+        $berita = Berita::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
         $beritaCount = Berita::where('id_user', Auth::user()->id)->count();
         confirmDelete();
         return view('penulis.pages.all_berita', compact('berita', 'beritaCount'));
@@ -162,9 +162,7 @@ class PenulisBeritaController extends Controller
 
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
-        $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
-        $berita->waktu_publikasi = now()->toDateTimeString();
         $berita->save();
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
     
