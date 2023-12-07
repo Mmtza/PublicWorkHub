@@ -77,29 +77,6 @@
                 </div>
               </div>
             </div>
-            {{-- <div class="col">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <h5 class="mb-1">Total Loker</h5>
-                      <h6 class="text-700">Last 7 days</h6>
-                    </div>
-                    <h4>{{ $loker }}</h4>
-                  </div>
-                  <div class="d-none d-lg-flex justify-content-center px-4 py-6">
-                    <div>
-                      {!! $chartLoker->container() !!}                  
-                    </div>
-                  </div>
-                  <div class="d-lg-none d-flex justify-content-center px-4 py-6">
-                    <div>
-                      {!! $chartLokerMobile->container() !!}                  
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> --}}
           </div>
         </div>
     </div>

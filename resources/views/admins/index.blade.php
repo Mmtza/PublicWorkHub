@@ -10,7 +10,7 @@
             <div class="col-12 col-xxl-6">
               <div class="mb-8">
                 <h2 class="mb-2">Dashboard</h2>
-                <h5 class="text-700 fw-semi-bold">Here’s what’s going on at publick work hub right now</h5>
+                <h5 class="text-700 fw-semi-bold">Here’s what’s going on at public work hub right now</h5>
               </div>
             </div>
           </div>

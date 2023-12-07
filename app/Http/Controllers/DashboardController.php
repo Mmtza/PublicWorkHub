@@ -56,7 +56,7 @@ class DashboardController extends Controller
 
     public function readDataPenulisDashboard(Request $request, BeritaChart $beritaChart)
     {
-        $berita = Berita::count();
+        $berita = Berita::where('id_user', Auth::user()->id)->count();
         $beritaMenunggu = Berita::where('status', 'menunggu')->where('id_user', Auth::user()->id)->count();
         $beritaAktif = Berita::where('status', 'aktif')->where('id_user', Auth::user()->id)->count();
         $beritaTidakAktif = Berita::where('status', 'tidak aktif')->where('id_user', Auth::user()->id)->count();
@@ -71,5 +71,13 @@ class DashboardController extends Controller
             'chartBerita', 'chartBeritaMobile', 'chartStatus', 'chartStatusMobile', 'berita', 
             'percentageBeritaMenunggu', 'percentageBeritaAktif', 'percentageBeritaTidakAktif'
         ));        
+    }
+
+    public function readDataPenyediaLokerDashboard(Request $request, LokerChart $lokerChart)
+    {
+        $loker = Loker::where('id_user', Auth::user()->id)->count();
+        $chartLoker = $lokerChart->buildPenyediaLokerPC();
+        $chartLokerMobile = $lokerChart->buildPenyediaLokerMobile();
+        return view('penyedia_loker.index', compact('loker', 'chartLoker', 'chartLokerMobile'));
     }
 }

@@ -142,9 +142,7 @@ Route::middleware(['auth', 'Penulis'])->group(function () {
 
 Route::middleware(['auth', 'PenyediaLoker'])->group(function () {
     // Routes Penulis
-    Route::get('/penyedia-loker', function () { //penyedia-loker dashboard
-        return view('penyedia_loker.index');
-    })->name('penyedia-loker');
+    Route::get('/penyedia-loker', [DashboardController::class, 'readDataPenyediaLokerDashboard'])->name('penyedia-loker');
 
     Route::get('/penyedia-loker/loker', [PenyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
 
