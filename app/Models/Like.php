@@ -13,11 +13,17 @@ class Like extends Model
 
     protected $table = 'like';
 
-    public function getUser() {
+    protected $fillable = ['id_berita', 'id_user'];
+
+    public $timestamps = false;
+
+    public function getUser()
+    {
         return $this->hasOne(User::class);
     }
 
-    public function getBerita() {
+    public function getBerita()
+    {
         return $this->hasMany(Berita::class);
     }
 }
