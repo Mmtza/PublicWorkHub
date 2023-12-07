@@ -51,40 +51,40 @@
                             </button> --}}
                             <span id="likeCount" class="text-primary">{{ $likeCount }}</span>
 
-                            <script>
-                                // Your JavaScript file or inline script
-                                document.getElementById('likeButton').addEventListener('click', function() {
-                                    console.log('berhasil');
-                                    var likeButton = document.getElementById('likeButton');
-                                    var isLiked = likeButton.getAttribute('data-liked');
-                                    // Get the element by ID
-                                    var iElement = document.getElementById('icon');
+                            @auth
+                                <script>
+                                    // Your JavaScript file or inline script
+                                    document.getElementById('likeButton').addEventListener('click', function() {
+                                        var likeButton = document.getElementById('likeButton');
+                                        var isLiked = likeButton.getAttribute('data-liked');
+                                        // Get the element by ID
+                                        var iElement = document.getElementById('icon');
 
-                                    axios.post("{{ route('all.berita.like.toggle', $berita->id) }}")
-                                        .then(function(response) {
-                                            console.log('berhasil2');
-                                            if (response.data.success) {
-                                                // Assuming you have an element with id 'likeCount' to display the like count
-                                                var likeCountElement = document.getElementById('likeCount');
-                                                likeCountElement.innerText = response.data.likeCount;
+                                        axios.post("{{ route('all.berita.like.toggle', $berita->id) }}")
+                                            .then(function(response) {
+                                                if (response.data.success) {
+                                                    // Assuming you have an element with id 'likeCount' to display the like count
+                                                    var likeCountElement = document.getElementById('likeCount');
+                                                    likeCountElement.innerText = response.data.likeCount;
 
-                                                // Change the button text and data-liked attribute based on the current state
-                                                if (isLiked === 'true') {
-                                                    // Set the class (replace existing classes)
-                                                    iElement.className = 'fa-regular fa-heart text-danger';
-                                                    likeButton.setAttribute('data-liked', 'false');
-                                                } else {
-                                                    iElement.className = 'fa-solid fa-heart text-danger';
-                                                    likeButton.setAttribute('data-liked', 'true');
+                                                    // Change the button text and data-liked attribute based on the current state
+                                                    if (isLiked === 'true') {
+                                                        // Set the class (replace existing classes)
+                                                        iElement.className = 'fa-regular fa-heart text-danger';
+                                                        likeButton.setAttribute('data-liked', 'false');
+                                                    } else {
+                                                        iElement.className = 'fa-solid fa-heart text-danger';
+                                                        likeButton.setAttribute('data-liked', 'true');
+                                                    }
                                                 }
-                                            }
-                                        })
-                                        .catch(function(error) {
-                                            // Handle error
-                                            console.error('Error toggling like:', error);
-                                        });
-                                });
-                            </script>
+                                            })
+                                            .catch(function(error) {
+                                                // Handle error
+                                                console.error('Error toggling like:', error);
+                                            });
+                                    });
+                                </script>
+                            @endauth
 
                             {{-- Komentar --}}
                             <label for="isi_komentar" style="cursor: pointer">
