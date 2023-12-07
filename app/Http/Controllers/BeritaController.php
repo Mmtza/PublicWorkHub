@@ -71,7 +71,7 @@ class BeritaController extends Controller
         if (Auth::check())
         {
             $user = Auth::user();
-            $likeByUser = Like::where('id_user', $user->id)->exists();
+            $likeByUser = Like::where('id_user', $user->id)->where('id_berita', $berita->id)->exists();
         }
         $likeCount = Like::where('id_berita', $berita->id)->count();
         // dd($likeByUser);
