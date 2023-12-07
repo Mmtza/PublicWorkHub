@@ -20,7 +20,6 @@ class Loker extends Model
         'deskripsi_loker',
         'alamat',
         'waktu_publikasi',
-        'status'
     ];
 
     public $timestamps = false;
@@ -30,7 +29,7 @@ class Loker extends Model
     }
 
     public static function findSlug($slug) {
-        return static::where('slug', $slug)->get();
+        return static::where('slug', $slug)->first();
     }
 
     public function getUser()
