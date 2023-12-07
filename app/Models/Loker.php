@@ -28,7 +28,11 @@ class Loker extends Model
         return $this->slug;
     }
 
-    public static function findSlug($slug) {
+    public static function findSlugFirst($slug) {
+        return static::where('slug', $slug)->first();
+    }
+
+    public static function findSlugGet($slug) {
         return static::where('slug', $slug)->get();
     }
 

@@ -24,9 +24,10 @@ class PenyediaLokerController extends Controller
     {
         return view('penyedia_loker.pages.applier_loker');
     }
+    
     public function viewEditLokerDashboard($slug)
     {
-        $loker = Loker::findSlug($slug);
+        $loker = Loker::findSlugFirst($slug);
         $publisher = Loker::with('getUser')->find($loker->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
@@ -36,7 +37,7 @@ class PenyediaLokerController extends Controller
 
     public function previewLokerDashboard($slug)
     {
-        $loker = Loker::findSlug($slug);
+        $loker = Loker::findSlugFirst($slug);
         $publisher = Loker::with('getUser')->find($loker->id);
         $publisherData = $publisher->getUser()->first();
         return view('penyedia_loker.pages.detail_loker', compact('loker', 'publisherData'));
@@ -104,7 +105,7 @@ class PenyediaLokerController extends Controller
             'nama_kategori' => ['required'],
         ]);
 
-        $loker = Loker::findSlug($slug);
+        $loker = Loker::findSlugFirst($slug);
 
         if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             Loker_Has_Kategori::where('id_loker', $loker->id)->delete();
@@ -133,7 +134,7 @@ class PenyediaLokerController extends Controller
 
     public function deleteLokerDashboard($slug)
     {
-        $loker = Loker::findSlug($slug);        
+        $loker = Loker::findSlugFirst($slug);        
         Loker::destroy($loker->id);
         alert('Notifikasi', 'Berhasil menghapus loker', 'success');
         return redirect()->route('penyedia-loker.loker');

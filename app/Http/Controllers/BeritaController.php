@@ -54,7 +54,7 @@ class BeritaController extends Controller {
     }
 
     public function showBeritaBySlug(Request $request, $slug) {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         $berita_side = Berita::where('id', '!=', $berita->id)->take(5)->get();
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
@@ -80,14 +80,14 @@ class BeritaController extends Controller {
     }
 
     public function previewBeritaDashboard($slug) {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         return view('admins.pages.berita.detail_berita', compact('berita', 'publisherName'));
     }
 
     public function viewEditBeritaDashboard($slug) {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
@@ -174,7 +174,7 @@ class BeritaController extends Controller {
             'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
 
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
 
         if(isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             Berita_Has_Kategori::where('id_berita', $berita->id)->delete();
@@ -222,7 +222,7 @@ class BeritaController extends Controller {
     }
 
     public function deleteBeritaDashboard($slug) {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
 
         if(!isNull($berita->img)) {
             $filePath = public_path('assets/berita/images/'.$berita->img);
