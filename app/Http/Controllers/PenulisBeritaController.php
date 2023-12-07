@@ -28,7 +28,7 @@ class PenulisBeritaController extends Controller
 
     public function showAllBeritaDashboard()
     {
-        $berita = Berita::where('id_user', Auth::user()->id)->get();
+        $berita = Berita::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
         $beritaCount = Berita::where('id_user', Auth::user()->id)->count();
         confirmDelete();
         return view('penulis.pages.all_berita', compact('berita', 'beritaCount'));
@@ -36,7 +36,7 @@ class PenulisBeritaController extends Controller
 
     public function viewEditBeritaDashboard($slug)
     {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
@@ -46,7 +46,7 @@ class PenulisBeritaController extends Controller
 
     public function previewBeritaDashboard($slug)
     {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         return view('penulis.pages.detail_berita', compact('berita', 'publisherName'));
@@ -114,7 +114,7 @@ class PenulisBeritaController extends Controller
             'image_berita' => ['image', 'mimes:jpg,png,jpeg', 'max:70000']
         ]);
 
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
 
         if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori']))
         {
@@ -162,9 +162,7 @@ class PenulisBeritaController extends Controller
 
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
-        $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
-        $berita->waktu_publikasi = now()->toDateTimeString();
         $berita->save();
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
     
@@ -173,7 +171,7 @@ class PenulisBeritaController extends Controller
 
     public function deleteBeritaDashboard($slug)
     {
-        $berita = Berita::findSlug($slug);
+        $berita = Berita::findSlugFirst($slug);
         
         if ($berita->img) 
         {

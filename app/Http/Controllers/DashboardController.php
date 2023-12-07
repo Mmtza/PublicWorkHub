@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Loker;
 use App\Models\Berita;
-use App\Models\Pengaduan;
-use App\Charts\BeritaChart;
-use App\Charts\LokerChart;
-use App\Charts\PengaduanChart;
 use App\Charts\UserChart;
+use App\Models\Pengaduan;
+use App\Charts\LokerChart;
+use App\Charts\BeritaChart;
 use Illuminate\Http\Request;
+use App\Charts\PengaduanChart;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -51,5 +52,32 @@ class DashboardController extends Controller
             'pengaduan', 'percentagePengaduanMenunggu', 'percentagePengaduanDiterima', 'percentagePengaduanDitolak', 
             'loker', 
             'user'));        
+    }
+
+    public function readDataPenulisDashboard(Request $request, BeritaChart $beritaChart)
+    {
+        $berita = Berita::where('id_user', Auth::user()->id)->count();
+        $beritaMenunggu = Berita::where('status', 'menunggu')->where('id_user', Auth::user()->id)->count();
+        $beritaAktif = Berita::where('status', 'aktif')->where('id_user', Auth::user()->id)->count();
+        $beritaTidakAktif = Berita::where('status', 'tidak aktif')->where('id_user', Auth::user()->id)->count();
+        $percentageBeritaMenunggu = number_format((($beritaMenunggu / $berita) * 100), 2);
+        $percentageBeritaAktif = number_format((($beritaAktif / $berita) * 100), 2);
+        $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
+        $chartBerita = $beritaChart->buildPenulisPC();
+        $chartBeritaMobile = $beritaChart->buildPenulisMobile();
+        $chartStatus = $beritaChart->buildPenulisPCDonut();
+        $chartStatusMobile = $beritaChart->buildPenulisMobileDonut();
+        return view('penulis.index', compact(
+            'chartBerita', 'chartBeritaMobile', 'chartStatus', 'chartStatusMobile', 'berita', 
+            'percentageBeritaMenunggu', 'percentageBeritaAktif', 'percentageBeritaTidakAktif'
+        ));        
+    }
+
+    public function readDataPenyediaLokerDashboard(Request $request, LokerChart $lokerChart)
+    {
+        $loker = Loker::where('id_user', Auth::user()->id)->count();
+        $chartLoker = $lokerChart->buildPenyediaLokerPC();
+        $chartLokerMobile = $lokerChart->buildPenyediaLokerMobile();
+        return view('penyedia_loker.index', compact('loker', 'chartLoker', 'chartLokerMobile'));
     }
 }

@@ -66,7 +66,7 @@ class UserLokerController extends Controller
 
     public function showLokerBySlug($slug)
     {
-        $loker = Loker::findSlug($slug)->first();
+        $loker = Loker::findSlugGet($slug)->first();
         $lokerPublisher = User::where('id', $loker->id_user)->first()->name;
         $loker_side = Loker::orderBy('id', 'desc')->where('id', '!=', $loker->id)->get();
         $lokerPublisherSide = [];
@@ -102,7 +102,7 @@ class UserLokerController extends Controller
     {
         if (Auth::check())
         {
-            $loker = Loker::findSlug($slug)->first();
+            $loker = Loker::findSlugGet($slug)->first();
             Apply_Loker::insertGetId([
                 'id_user' => Auth::user()->id,
                 'id_loker' => $loker->id,
@@ -122,7 +122,7 @@ class UserLokerController extends Controller
     {        
         if (Auth::check())
         {
-            $loker = Loker::findSlug($slug)->first();
+            $loker = Loker::findSlugGet($slug)->first();
             $applyLoker = Apply_Loker::where('id_user', Auth::user()->id)->where('id_loker', $loker->id)->first();
             Apply_Loker::destroy($applyLoker->id);
             alert('Notifikasi', 'Kamu batal mendaftar di lowongan pekerjaan', 'success');
