@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Loker;
 use App\Models\Kategori;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Exports\LokerExport;
+use Illuminate\Http\Request;
 use App\Models\Loker_Has_Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LokerController extends Controller
 {
     public function showAllLokerDashboard()
     {
-        $loker = Loker::all();
+        $loker = Loker::orderBy('id', 'desc')->get();
         $lokerCount = Loker::count();
         return view('admins.pages.loker.all_loker', compact('loker', 'lokerCount'));
     }
@@ -34,6 +36,14 @@ class LokerController extends Controller
         $kategori = Kategori::all();
         confirmDelete();
         return view('admins.pages.loker.edit_loker', compact('kategori', 'loker', 'publisherName'));
+    }
+
+    public function previewLokerDashboard($slug) 
+    {
+        $loker = Loker::findSlug($slug);
+        $publisher = Loker::with('getUser')->find($loker->id);
+        $publisherData = $publisher->getUser()->first();
+        return view('admins.pages.loker.detail_loker', compact('loker', 'publisherData'));
     }
 
     public function addLokerDashboard(Request $request)
@@ -122,8 +132,6 @@ class LokerController extends Controller
         $loker->deskripsi_loker = $data['deskripsi_loker'];
         $loker->alamat = $data['alamat_loker'];
         $loker->slug = $data['nama_loker'].'-'.$loker->id . $loker->waktu_publikasi;
-        $loker->id_user = Auth::user()->id;
-        $loker->waktu_publikasi = now()->toDateTimeString();
         $loker->save();
         alert('Notifikasi', 'Berhasil mengedit loker', 'success');
 
@@ -136,5 +144,13 @@ class LokerController extends Controller
         Loker::destroy($loker->id);
         alert('Notifikasi', 'Berhasil menghapus loker', 'success');
         return redirect()->route('admin.loker');
+    }
+
+    public function excelLokerDashboard(Request $request) {
+        if(isset($request->start_date) && isset($request->end_date)) {
+            return Excel::download(new LokerExport($request->start_date, $request->end_date, false), 'data_loker_'.$request->start_date.'-'.$request->end_date.'.xlsx');
+        } else {
+            return Excel::download(new LokerExport($request->start_date, $request->end_date, true), 'data_loker_'.date('d-m-Y').'_all.xlsx');
+        }
     }
 }

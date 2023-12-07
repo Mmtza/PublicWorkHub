@@ -28,7 +28,7 @@ class BeritaController extends Controller {
     }
 
     public function showAllBeritaDashboard() {
-        $berita = Berita::all();
+        $berita = Berita::orderBy('id', 'desc')->get();
         $beritaCount = Berita::count();
         confirmDelete();
         return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount'));
@@ -214,9 +214,7 @@ class BeritaController extends Controller {
         $berita->isi = $data['isi_berita'];
         $berita->status = $data['status_berita'];
         $berita->slug = Str::slug($data['judul_berita']).$berita->id.$berita->waktu_publikasi;
-        $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
-        $berita->waktu_publikasi = now()->toDateTimeString();
         $berita->save();
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
 
