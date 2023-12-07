@@ -277,26 +277,33 @@ class BeritaController extends Controller
 
     public function toggleLike($id)
     {
-        $user = Auth::user();
-        $like = Like::where('id_user', $user->id)
-            ->where('id_berita', $id)
-            ->first();
-
-        if ($like) {
-            // User has already liked, so unlike
-            $like->delete();
-        } else {
-            // User has not liked, so add a like
-            Like::create([
-                'id_user' => $user->id,
-                'id_berita' => $id,
-            ]);
+        if (Auth::check())
+        {
+            $user = Auth::user();
+            $like = Like::where('id_user', $user->id)
+                ->where('id_berita', $id)
+                ->first();
+    
+            if ($like) {
+                // User has already liked, so unlike
+                $like->delete();
+            } else {
+                // User has not liked, so add a like
+                Like::create([
+                    'id_user' => $user->id,
+                    'id_berita' => $id,
+                ]);
+            }
+    
+            // You might also return the updated like count for the AJAX response
+            $likeCount = Like::where('id_berita', $id)->count();
+    
+            return response()->json(['success' => true, 'likeCount' => $likeCount]);
         }
-
-        // You might also return the updated like count for the AJAX response
-        $likeCount = Like::where('id_berita', $id)->count();
-
-        return response()->json(['success' => true, 'likeCount' => $likeCount]);
+        else
+        {
+            return redirect()->route('login');
+        }
     }
 
     public function saveKomentar(Request $request, $id)
