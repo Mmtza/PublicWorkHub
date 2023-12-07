@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Like;
+use App\Models\Komentar;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -14,11 +16,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use function PHPUnit\Framework\isNull;
 
-class BeritaController extends Controller {
+class BeritaController extends Controller
+{
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         $model = Berita::join('kategori', 'berita.id_kategori', '=', 'id.kategori')->get();
         $data = [
             "berita" => $model,
@@ -27,14 +31,16 @@ class BeritaController extends Controller {
         return view("users.pages.blog", $data);
     }
 
-    public function showAllBeritaDashboard() {
+    public function showAllBeritaDashboard()
+    {
         $berita = Berita::all();
         $beritaCount = Berita::count();
         confirmDelete();
         return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount'));
     }
 
-    public function showAllBerita() {
+    public function showAllBerita()
+    {
         $beritaHasKategori = new Berita();
 
         $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
@@ -53,15 +59,29 @@ class BeritaController extends Controller {
         ));
     }
 
-    public function showBeritaBySlug(Request $request, $slug) {
+    public function showBeritaBySlug(Request $request, $slug)
+    {
         $berita = Berita::findSlug($slug);
         $berita_side = Berita::where('id', '!=', $berita->id)->take(5)->get();
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
-        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName'));
+
+        // like
+        $user = Auth::user();
+        $likeByUser = Like::where('id_user', $user->id)->exists();
+        $likeCount = Like::where('id_berita', $berita->id)->count();
+        // dd($likeByUser);
+
+        // komentar
+        $komentar = Komentar::with('getUser')->where('id_berita', $berita->id)->get();
+        $komentarCount = Komentar::where('id_berita', $berita->id)->count();
+        // dd($komentar);
+
+        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount'));
     }
 
-    public function showBeritaByKategori(Request $request, $kategori) {
+    public function showBeritaByKategori(Request $request, $kategori)
+    {
         $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
         $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
         $allCategories = Kategori::all();
@@ -79,14 +99,16 @@ class BeritaController extends Controller {
         ));
     }
 
-    public function previewBeritaDashboard($slug) {
+    public function previewBeritaDashboard($slug)
+    {
         $berita = Berita::findSlug($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         return view('admins.pages.berita.detail_berita', compact('berita', 'publisherName'));
     }
 
-    public function viewEditBeritaDashboard($slug) {
+    public function viewEditBeritaDashboard($slug)
+    {
         $berita = Berita::findSlug($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
@@ -95,13 +117,15 @@ class BeritaController extends Controller {
         return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }
 
-    public function viewAddBeritaDashboard() {
+    public function viewAddBeritaDashboard()
+    {
         $kategori = Kategori::all();
         $publisherName = Auth::user()->name;
         return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName'));
     }
 
-    public function addBeritaDashboard(Request $request) {
+    public function addBeritaDashboard(Request $request)
+    {
         $data = $request->validate([
             'judul_berita' => ['required', 'min:4', 'max:65000'],
             'isi_berita' => ['required', 'max:4000000000'],
@@ -120,9 +144,9 @@ class BeritaController extends Controller {
             'image_berita.max' => 'Image yang diperbolehkan maksimal 70mb',
         ]);
 
-        if(isset($request->image_berita)) {
+        if (isset($request->image_berita)) {
 
-            $imageName = time().'.'.$request->image_berita->extension();
+            $imageName = time() . '.' . $request->image_berita->extension();
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
         }
@@ -130,20 +154,20 @@ class BeritaController extends Controller {
         $dataBerita = Berita::insertGetId([
             'judul' => $data['judul_berita'],
             'isi' => $data['isi_berita'],
-            'slug' => Str::slug($data['judul_berita']).'-'.$waktu,
+            'slug' => Str::slug($data['judul_berita']) . '-' . $waktu,
             'status' => $data['status_berita'],
             'id_user' => Auth::user()->id,
             'waktu_publikasi' => $waktu,
             'img' => isset($request->image_berita) ? $data['image_berita'] : null
         ]);
 
-        if(isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             $kategori = $_POST['nama_kategori'];
 
-            foreach($kategori as $i) {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
 
-                foreach($dataKategori as $j) {
+                foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([
                         'id_berita' => $dataBerita,
                         'id_kategori' => $j->id
@@ -155,7 +179,8 @@ class BeritaController extends Controller {
         return redirect()->route('admin.berita');
     }
 
-    public function editBeritaDashboard(Request $request, $slug) {
+    public function editBeritaDashboard(Request $request, $slug)
+    {
         $data = $request->validate([
             'judul_berita' => ['required', 'min:4', 'max:65000'],
             'isi_berita' => ['required', 'max:4000000000'],
@@ -176,13 +201,13 @@ class BeritaController extends Controller {
 
         $berita = Berita::findSlug($slug);
 
-        if(isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
+        if (isset($_POST['nama_kategori']) && is_array($_POST['nama_kategori'])) {
             Berita_Has_Kategori::where('id_berita', $berita->id)->delete();
             $kategori = $_POST['nama_kategori'];
-            foreach($kategori as $i) {
+            foreach ($kategori as $i) {
                 $dataKategori = Kategori::where('nama_kategori', $i)->get();
 
-                foreach($dataKategori as $j) {
+                foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([
                         'id_berita' => $berita->id,
                         'id_kategori' => $j->id
@@ -192,18 +217,18 @@ class BeritaController extends Controller {
         }
 
 
-        if(isset($request->image_berita)) {
-            $filePath = public_path('assets/berita/images/'.$berita->img);
+        if (isset($request->image_berita)) {
+            $filePath = public_path('assets/berita/images/' . $berita->img);
 
-            if(file_exists($filePath) && is_file($filePath)) {
+            if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
 
-            $imageName = time().'.'.$request->image_berita->extension();
+            $imageName = time() . '.' . $request->image_berita->extension();
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
         } else {
-            if(!isNull($berita->img)) {
+            if (!isNull($berita->img)) {
                 $data['image_berita'] = $berita->img;
             } else {
                 $data['image_berita'] = null;
@@ -213,7 +238,7 @@ class BeritaController extends Controller {
         $berita->judul = $data['judul_berita'];
         $berita->isi = $data['isi_berita'];
         $berita->status = $data['status_berita'];
-        $berita->slug = Str::slug($data['judul_berita']).$berita->id.$berita->waktu_publikasi;
+        $berita->slug = Str::slug($data['judul_berita']) . $berita->id . $berita->waktu_publikasi;
         $berita->id_user = Auth::user()->id;
         $berita->img = $data['image_berita'];
         $berita->waktu_publikasi = now()->toDateTimeString();
@@ -223,13 +248,14 @@ class BeritaController extends Controller {
         return redirect()->route('admin.berita');
     }
 
-    public function deleteBeritaDashboard($slug) {
+    public function deleteBeritaDashboard($slug)
+    {
         $berita = Berita::findSlug($slug);
 
-        if(!isNull($berita->img)) {
-            $filePath = public_path('assets/berita/images/'.$berita->img);
+        if (!isNull($berita->img)) {
+            $filePath = public_path('assets/berita/images/' . $berita->img);
 
-            if(file_exists($filePath) && is_file($filePath)) {
+            if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
         }
@@ -238,11 +264,59 @@ class BeritaController extends Controller {
         return redirect()->route('admin.berita');
     }
 
-    public function excelBeritaDashboard(Request $request) {
-        if(isset($request->start_date) && isset($request->end_date)) {
-            return Excel::download(new BeritaExport($request->start_date, $request->end_date, false), 'data_berita_'.$request->start_date.'-'.$request->end_date.'.xlsx');
+    public function excelBeritaDashboard(Request $request)
+    {
+        if (isset($request->start_date) && isset($request->end_date)) {
+            return Excel::download(new BeritaExport($request->start_date, $request->end_date, false), 'data_berita_' . $request->start_date . '-' . $request->end_date . '.xlsx');
         } else {
-            return Excel::download(new BeritaExport($request->start_date, $request->end_date, true), 'data_berita_'.date('d-m-Y').'_all.xlsx');
+            return Excel::download(new BeritaExport($request->start_date, $request->end_date, true), 'data_berita_' . date('d-m-Y') . '_all.xlsx');
         }
     }
+
+    public function toggleLike($id)
+    {
+        $user = Auth::user();
+        $like = Like::where('id_user', $user->id)
+            ->where('id_berita', $id)
+            ->first();
+
+        if ($like) {
+            // User has already liked, so unlike
+            $like->delete();
+        } else {
+            // User has not liked, so add a like
+            Like::create([
+                'id_user' => $user->id,
+                'id_berita' => $id,
+            ]);
+        }
+
+        // You might also return the updated like count for the AJAX response
+        $likeCount = Like::where('id_berita', $id)->count();
+
+        return response()->json(['success' => true, 'likeCount' => $likeCount]);
+    }
+
+    public function saveKomentar(Request $request, $id)
+    {
+        $berita = Berita::find($id);
+        $user = Auth::user();
+        $waktu = now()->toDateTimeString();
+
+        $data = $request->validate([
+            'isi_komentar' => ['required', 'min:4', 'max:65000'],
+        ], [
+            'isi_komentar.required' => 'Tidak boleh mengirim komentar kosong',
+        ]);
+        Komentar::create([
+            'id_berita' => $berita->id,
+            'id_user' => $user->id,
+            'isi_komentar' => $data['isi_komentar'],
+            'waktu_komentar' => $waktu
+        ]);
+
+        return redirect()->back();
+    }
+
+
 }
