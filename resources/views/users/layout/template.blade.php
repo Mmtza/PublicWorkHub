@@ -33,6 +33,9 @@
 
     <link rel="stylesheet" href="{{ asset('users/themes') }}/css/flatpickr.min.css">
 
+    {{-- Axios CDN --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+
     <title>Public Work Hub</title>
 </head>
 
