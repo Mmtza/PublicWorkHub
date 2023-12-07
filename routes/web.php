@@ -35,11 +35,14 @@ Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.
 Route::get('/loker/{slug?}', [UserLokerController::class, 'showLokerBySlug'])->name('guest.loker.slug');
 Route::post('/loker/daftar/{slug?}', [UserLokerController::class, 'applyLoker'])->name('guest.loker.apply');
 Route::delete('/loker/cancel/{slug?}', [UserLokerController::class, 'cancelApplyLoker'])->name('guest.loker.cancel');
+Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
 
-Route::middleware(['auth', 'User'])->group(function () {
-    Route::get('/pengaduan-masyarakat', [PengaduanController::class, 'showPengaduanUser'])->name('users.pengaduan');
+Route::middleware(['auth'])->group(function () {
     Route::post('/pengaduan-masyarakat/tambah', [PengaduanController::class, 'addPengaduan'])->name('users.pengaduan.post');
     Route::get('/pengaduan-masyarakat/download/{file?}', [PengaduanController::class, 'downloadFiles'])->name('users.pengaduan.download');
+    Route::post('/berita/like/{id}', [BeritaController::class, 'toggleLike'])->name('all.berita.like.toggle');
+
+    Route::post('/berita/save-comment/{id}', [BeritaController::class, 'saveKomentar'])->name('users.comment');
 });
 
 
@@ -171,4 +174,4 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
