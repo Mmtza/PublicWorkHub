@@ -67,8 +67,12 @@ class BeritaController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
 
         // like
-        $user = Auth::user();
-        $likeByUser = Like::where('id_user', $user->id)->exists();
+        $likeByUser = false;
+        if (Auth::check())
+        {
+            $user = Auth::user();
+            $likeByUser = Like::where('id_user', $user->id)->exists();
+        }
         $likeCount = Like::where('id_berita', $berita->id)->count();
         // dd($likeByUser);
 

@@ -32,9 +32,19 @@ class DashboardController extends Controller
         $pengaduanMenunggu = Pengaduan::where('status', 'menunggu')->count();
         $pengaduanDiterima = Pengaduan::where('status', 'diterima')->count();
         $pengaduanDitolak = Pengaduan::where('status', 'ditolak')->count();
-        $percentagePengaduanMenunggu = number_format((($pengaduanMenunggu / $pengaduan) * 100), 2);
-        $percentagePengaduanDiterima = number_format((($pengaduanDiterima / $pengaduan) * 100), 2);
-        $percentagePengaduanDitolak = number_format((($pengaduanDitolak / $pengaduan) * 100), 2);
+        $percentagePengaduanMenunggu = 0;
+        $percentagePengaduanDiterima = 0;
+        $percentagePengaduanDitolak = 0;
+
+        if ($pengaduanMenunggu > 0)
+            $percentagePengaduanMenunggu = number_format((($pengaduanMenunggu / $pengaduan) * 100), 2);
+
+        if ($pengaduanDiterima > 0)
+            $percentagePengaduanDiterima = number_format((($pengaduanDiterima / $pengaduan) * 100), 2);
+
+        if ($pengaduanDitolak > 0)
+            $percentagePengaduanDitolak = number_format((($pengaduanDitolak / $pengaduan) * 100), 2);
+
         $loker = Loker::count();
         $user  = User::count();
         $chartBerita = $beritaChart->buildPC();
@@ -60,9 +70,19 @@ class DashboardController extends Controller
         $beritaMenunggu = Berita::where('status', 'menunggu')->where('id_user', Auth::user()->id)->count();
         $beritaAktif = Berita::where('status', 'aktif')->where('id_user', Auth::user()->id)->count();
         $beritaTidakAktif = Berita::where('status', 'tidak aktif')->where('id_user', Auth::user()->id)->count();
-        $percentageBeritaMenunggu = number_format((($beritaMenunggu / $berita) * 100), 2);
-        $percentageBeritaAktif = number_format((($beritaAktif / $berita) * 100), 2);
-        $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
+        $percentageBeritaMenunggu = 0;
+        $percentageBeritaAktif = 0;
+        $percentageBeritaTidakAktif = 0;
+        
+        if ($beritaMenunggu > 0)
+            $percentageBeritaMenunggu = number_format((($beritaMenunggu / $berita) * 100), 2);
+
+        if($beritaAktif > 0)
+            $percentageBeritaAktif = number_format((($beritaAktif / $berita) * 100), 2);
+
+        if($beritaTidakAktif > 0)
+            $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
+
         $chartBerita = $beritaChart->buildPenulisPC();
         $chartBeritaMobile = $beritaChart->buildPenulisMobile();
         $chartStatus = $beritaChart->buildPenulisPCDonut();
