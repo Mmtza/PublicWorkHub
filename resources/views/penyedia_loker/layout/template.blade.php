@@ -37,7 +37,7 @@
         id="user-style-rtl" />
     <link href="{{ asset('admins/themes') }}/assets/css/user.min.css" type="text/css" rel="stylesheet"
         id="user-style-default" />
-    <link href="{{ asset('admins/themes') }}/assets/css/formUser.css" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('admins/themes') }}/assets/css/formUser.css" type="text/css" rel="stylesheet" />
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -58,6 +58,11 @@
     <link href="{{ asset('admins/themes') }}/vendors/leaflet.markercluster/MarkerCluster.Default.css"
         rel="stylesheet" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    {{-- Data Tables CDN --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+    {{-- Bootstrap Icon CDN --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -175,8 +180,7 @@
     <script src="{{ asset('admins/themes') }}/vendors/is/is.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/fontawesome/all.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/lodash/lodash.min.js"></script>
-    <script src="{{ asset('admins/themes') }}/../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll">
-    </script>
+    <script src="{{ asset('admins/themes') }}/../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
     <script src="{{ asset('admins/themes') }}/vendors/list.js/list.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/feather-icons/feather.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/dayjs/dayjs.min.js"></script>
@@ -194,13 +198,19 @@
             theme: 'snow',
             modules: {
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }], // Color and background color
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }], // Color and background color
                     ['link'],
                     ['clean']
                 ]
-            },        
+            },
         });
 
         quilleditberita.clipboard.dangerouslyPasteHTML(document.getElementById('isi_berita').value);
@@ -209,20 +219,25 @@
             document.getElementById('isi_berita').value = quilleditberita.root.innerHTML;
             console.log(document.getElementById('isi_berita').value)
         }
-        
     </script>
     <script>
         const quilleditloker = new Quill('#quilleditloker', {
             theme: 'snow',
             modules: {
                 toolbar: [
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
                     ['bold', 'italic', 'underline', 'strike'],
-                    [{ 'color': [] }, { 'background': [] }], // Color and background color
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }], // Color and background color
                     ['link'],
                     ['clean']
                 ]
-            },        
+            },
         });
 
         quilleditloker.clipboard.dangerouslyPasteHTML(document.getElementById('deskripsi_loker').value);
@@ -230,6 +245,14 @@
         function sendDataEditLoker() {
             document.getElementById('deskripsi_loker').value = quilleditloker.root.innerHTML;
         }
+    </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
     </script>
 </body>
 
