@@ -14,15 +14,22 @@ class Komentar extends Model
     protected $table = 'komentar';
 
     protected $fillable = [
+        'id',
+        'id_berita',
+        'id_user',
         'isi_komentar',
         'waktu_komentar',
     ];
 
-    public function getUser() {
-        return $this->hasMany(User::class);
+    public $timestamps = false;
+
+    public function getUser()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function getBerita() {
+    public function getBerita()
+    {
         return $this->hasMany(Berita::class);
     }
 }
