@@ -29,7 +29,7 @@ class Loker extends Model
     }
 
     public static function findSlug($slug) {
-        return static::where('slug', $slug)->first();
+        return static::where('slug', $slug)->get();
     }
 
     public function getUser()
