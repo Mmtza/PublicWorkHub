@@ -59,7 +59,6 @@
         </div>
     </div>
 
-
     <script src="{{ asset('users/themes') }}/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('users/themes') }}/js/tiny-slider.js"></script>
 
@@ -71,6 +70,8 @@
     <script src="{{ asset('users/themes') }}/js/navbar.js"></script>
     <script src="{{ asset('users/themes') }}/js/counter.js"></script>
     <script src="{{ asset('users/themes') }}/js/custom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>
