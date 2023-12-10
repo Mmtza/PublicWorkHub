@@ -13,18 +13,18 @@ use Illuminate\Validation\Rules\Password;
 
 use function PHPUnit\Framework\isNull;
 
-class ApiController extends Controller
+class ApiUser extends Controller
 {
     public function getAllUser()
     {
         $users = User::all();
         if ($users)
         {
-            return new ApiResource(true, 'Berhasil mendapatkan data semua user', $users);
+            return new ApiResource(200, true, 'Berhasil mendapatkan data semua user', $users);
         }
         else
         {
-            return new ApiResource(false, 'Gagal mendapatkan data semua user, tidak ada data', $users);
+            return new ApiResource(404, false, 'Gagal mendapatkan data semua user, tidak ada data', $users);
         }
     }
 
@@ -33,11 +33,11 @@ class ApiController extends Controller
         $user = User::find($id);
         if ($user)
         {
-            return new ApiResource(true, 'Berhasil mendapatkan data user', $user);
+            return new ApiResource(200, true, 'Berhasil mendapatkan data user', $user);
         }
         else
         {
-            return new ApiResource(false, 'Gagal mendapatkan data user, tidak ada data', $user);
+            return new ApiResource(404, false, 'Gagal mendapatkan data user, tidak ada data', $user);
         }
     }
 
@@ -54,7 +54,7 @@ class ApiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return new ApiResource(false, $validator->errors(), null);
+            return new ApiResource(422, false, $validator->errors(), null);
         }
         $validatedData = $validator->validated();
         
@@ -73,7 +73,7 @@ class ApiController extends Controller
         $userEdit = User::find($user);
         $userEdit->foto = $validatedData['foto'];
         $userEdit->save();
-        return new ApiResource(true, 'Berhasil membuat user', $user);
+        return new ApiResource(201, true, 'Berhasil membuat user', $userEdit);
     }
 
     public function updateUserById(Request $request, $id)
@@ -81,7 +81,7 @@ class ApiController extends Controller
         $user = User::find($id);
         if (!$user)
         {
-            return new ApiResource(false, 'Gagal mengubah data user, tidak ada data', $user);
+            return new ApiResource(404, false, 'Gagal mengubah data user, tidak ada data', $user);
         }
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
@@ -92,7 +92,7 @@ class ApiController extends Controller
             'foto' => ['image', 'mimes:jpg,png,jpeg', 'max:10000']
         ]);
         if ($validator->fails()) {
-            return new ApiResource(false, $validator->errors(), null);
+            return new ApiResource(422, false, $validator->errors(), null);
         }
         $validatedData = $validator->validated();
         if (isset($request->foto)) {
@@ -125,7 +125,7 @@ class ApiController extends Controller
         $user->alamat = $validatedData['address'];
         $user->deskripsi_diri = $validatedData['deskripsi_diri_content'];
         $user->save();
-        return new ApiResource(true, 'Berhasil mengubah data user', $user);
+        return new ApiResource(200, true, 'Berhasil mengubah data user', $user);
     }
 
     public function deleteUserById($id)
@@ -133,10 +133,10 @@ class ApiController extends Controller
         $user = User::find($id);
         if (!$user)
         {
-            return new ApiResource(false, 'Gagal mendapatkan data user, tidak ada data', $user);            
+            return new ApiResource(404, false, 'Gagal mendapatkan data user, tidak ada data', $user);            
         }
         if (!isNull($user->foto)) {
-            $filePath = public_path('assets/berita/images/' . $user->foto);
+            $filePath = public_path('assets/users/images/' . $user->foto);
             
             if (file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
@@ -144,6 +144,6 @@ class ApiController extends Controller
         }        
         $userDump = $user;
         $user->delete();
-        return new ApiResource(true, 'Berhasil menghapus user', $userDump);
+        return new ApiResource(200, true, 'Berhasil menghapus user', $userDump);
     }
 }

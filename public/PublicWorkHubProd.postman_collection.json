@@ -1,0 +1,969 @@
+{
+	"info": {
+		"_postman_id": "abd7f593-7255-47f5-a98b-af54ed0e57f7",
+		"name": "PublicWorkHubProd",
+		"description": "Bearer Token: 1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27116353"
+	},
+	"item": [
+		{
+			"name": "getAllUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/PublicWorkHub/api/user/get/all",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"PublicWorkHub",
+						"api",
+						"user",
+						"get",
+						"all"
+					]
+				},
+				"description": "Menampilkan semua user"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/user/get/1",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"get",
+						"1"
+					]
+				},
+				"description": "Menampilkan user by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anwar Fauzan",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anwarfauzan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anwarfauzan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "birthdate",
+							"value": "2000-09-12",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Serang, Banten",
+							"type": "text"
+						},
+						{
+							"key": "deskripsi_diri_content",
+							"value": "Saya suka ngoding",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/user/create",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				},
+				"description": "Membuah user"
+			},
+			"response": []
+		},
+		{
+			"name": "updateUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anwar Fauzan",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anwarfauzan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anwarfauzan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "birthdate",
+							"value": "2000-09-12",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Serang, Banten",
+							"type": "text"
+						},
+						{
+							"key": "deskripsi_diri_content",
+							"value": "Saya suka ngoding",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/user/update/1",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"update",
+						"1"
+					]
+				},
+				"description": "Edit user"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/user/delete/4",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"delete",
+						"4"
+					]
+				},
+				"description": "Hapus user"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllPengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/pengaduan",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"pengaduan"
+					]
+				},
+				"description": "Menampilkan semua data pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "showPengaduanById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/pengaduan/3",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"pengaduan",
+						"3"
+					]
+				},
+				"description": "Menampilkan data pengaduan by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createPengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "isi_pengaduan",
+							"value": "hehe",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/pengaduan/createPengaduan",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"pengaduan",
+						"createPengaduan"
+					]
+				},
+				"description": "Membuat pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "updatePengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "isi_pengaduan",
+							"value": "heheeee",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/pengaduan/update/3",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"pengaduan",
+						"update",
+						"3"
+					]
+				},
+				"description": "Edit pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "deletePengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/pengaduan/delete/2",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"pengaduan",
+						"delete",
+						"2"
+					]
+				},
+				"description": "Hapus Pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/berita",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"berita"
+					]
+				},
+				"description": "Menampilkan semua berita"
+			},
+			"response": []
+		},
+		{
+			"name": "showBeritaById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/berita/100",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"berita",
+						"100"
+					]
+				},
+				"description": "Menampilkan berita by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "judul_berita",
+							"value": "heheeeeeee",
+							"type": "default"
+						},
+						{
+							"key": "isi_berita",
+							"value": "berita ini berisa berita heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "status_berita",
+							"value": "menunggu",
+							"type": "default"
+						},
+						{
+							"key": "image_berita",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/berita/create",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"berita",
+						"create"
+					]
+				},
+				"description": "Membuat berita"
+			},
+			"response": []
+		},
+		{
+			"name": "updateBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "judul_berita",
+							"value": "heheeeeeee",
+							"type": "default"
+						},
+						{
+							"key": "isi_berita",
+							"value": "berita ini berisa berita heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "status_berita",
+							"value": "menunggu",
+							"type": "default"
+						},
+						{
+							"key": "image_berita",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/berita/update/101",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"berita",
+						"update",
+						"101"
+					]
+				},
+				"description": "Edit berita"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/berita/delete/101",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"berita",
+						"delete",
+						"101"
+					]
+				},
+				"description": "Hapus berita"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/loker",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"loker"
+					]
+				},
+				"description": "Menampilkan semua loker"
+			},
+			"response": []
+		},
+		{
+			"name": "showLokerById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/loker/21",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"loker",
+						"21"
+					]
+				},
+				"description": "Menampilkan loker by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "nama_loker",
+							"value": "heheeeeeee",
+							"type": "default"
+						},
+						{
+							"key": "deskripsi_loker",
+							"value": "loker ini berisa loker yang heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "alamat_loker",
+							"value": "Jl. hehe",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/loker/create",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"loker",
+						"create"
+					]
+				},
+				"description": "Membuat loker"
+			},
+			"response": []
+		},
+		{
+			"name": "updateLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "nama_loker",
+							"value": "Awikwok",
+							"type": "default"
+						},
+						{
+							"key": "deskripsi_loker",
+							"value": "Loker ini sangat awikwok",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "alamat_loker",
+							"value": "Jl. Bahagia",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/loker/update/21",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"loker",
+						"update",
+						"21"
+					]
+				},
+				"description": "Edit loker"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://peserta18-fwd.sib5.nurulfikri.com/api/loker/delete/20",
+					"protocol": "https",
+					"host": [
+						"peserta18-fwd",
+						"sib5",
+						"nurulfikri",
+						"com"
+					],
+					"path": [
+						"api",
+						"loker",
+						"delete",
+						"20"
+					]
+				},
+				"description": "Hapus loker"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
