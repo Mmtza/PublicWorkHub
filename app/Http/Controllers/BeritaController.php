@@ -68,8 +68,7 @@ class BeritaController extends Controller
 
         // like
         $likeByUser = false;
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
             $likeByUser = Like::where('id_user', $user->id)->where('id_berita', $berita->id)->exists();
         }
@@ -81,7 +80,11 @@ class BeritaController extends Controller
         $komentarCount = Komentar::where('id_berita', $berita->id)->count();
         // dd($komentar);
 
-        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount'));
+        // share
+        $currentUrl = request()->url();
+        // dd($currentUrl);
+
+        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount', 'currentUrl'));
     }
 
     public function showBeritaByKategori(Request $request, $kategori)
@@ -277,13 +280,12 @@ class BeritaController extends Controller
 
     public function toggleLike($id)
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
             $like = Like::where('id_user', $user->id)
                 ->where('id_berita', $id)
                 ->first();
-    
+
             if ($like) {
                 // User has already liked, so unlike
                 $like->delete();
@@ -294,14 +296,12 @@ class BeritaController extends Controller
                     'id_berita' => $id,
                 ]);
             }
-    
+
             // You might also return the updated like count for the AJAX response
             $likeCount = Like::where('id_berita', $id)->count();
-    
+
             return response()->json(['success' => true, 'likeCount' => $likeCount]);
-        }
-        else
-        {
+        } else {
             return redirect()->route('login');
         }
     }
@@ -326,6 +326,5 @@ class BeritaController extends Controller
 
         return redirect()->back();
     }
-
 
 }
