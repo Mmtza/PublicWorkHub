@@ -15,6 +15,7 @@ class Loker extends Model
     protected $table = 'loker';
 
     protected $fillable = [
+        'id_user',
         'nama_loker',
         'slug',
         'deskripsi_loker',
@@ -24,15 +25,18 @@ class Loker extends Model
 
     public $timestamps = false;
 
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
-    public static function findSlugFirst($slug) {
+    public static function findSlugFirst($slug)
+    {
         return static::where('slug', $slug)->first();
     }
 
-    public static function findSlugGet($slug) {
+    public static function findSlugGet($slug)
+    {
         return static::where('slug', $slug)->get();
     }
 
