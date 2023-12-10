@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiAuth;
 use App\Http\Controllers\ApiUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiBerita;
@@ -20,6 +21,8 @@ use App\Http\Controllers\ApiPengaduan;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('/login', [ApiAuth::class, 'Login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
