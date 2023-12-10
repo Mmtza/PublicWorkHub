@@ -91,9 +91,141 @@
                                 <i class="fa-regular fa-comment text-primary"></i> <span
                                     class="text-primary">{{ $komentarCount }}</span>
                             </label>
-                            <a href="">
+                            <span style="cursor: pointer" class="text-primary" id="shareButton">
                                 <i class="fa-regular fa-share-from-square"></i>
-                            </a>
+                            </span>
+
+                            <!-- Modal Container -->
+                            <div id="shareModal" class="modal-container">
+                                <!-- Modal Content -->
+                                <div class="modal-content shadow-lg border mx-auto">
+                                    <div class="d-flex flex-row">
+                                        <span class="close" onclick="closeModal()">&times;</span> <span
+                                            class="text-primary mx-auto">Share</span>
+                                    </div>
+
+                                    <div class="d-flex flex-row justify-content-center gap-5 fs-1`1">
+                                        <span id="iconShare" onclick="shareOnFacebook()"><i class="fa-brands fa-facebook"
+                                                style="color: #3b5998"></i></span>
+                                        <span id="iconShare" onclick="shareOnTwitter()"><i
+                                                class="fa-brands fa-square-x-twitter" style="color: #14171A"></i></span>
+                                        <span id="iconShare" onclick="shareOnWhatsApp()"><i class="fa-brands fa-whatsapp"
+                                                style="color: #25D366"></i></span>
+                                        <span id="iconShare" onclick="copyLink()"><i class="fa-regular fa-copy"
+                                                id="copyLink"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                // Tampilkan modal saat tombol diklik
+                                document.getElementById('shareButton').addEventListener('click', function() {
+                                    document.getElementById('shareModal').style.display = 'block';
+                                });
+
+                                // Sembunyikan modal saat menekan ikon close
+                                function closeModal() {
+                                    document.getElementById('shareModal').style.display = 'none';
+                                }
+
+                                var shareUrl = '{{ $currentUrl }}';
+                                var shareText = '{{ $berita->judul }} - {{ $truncatedString }}';
+
+                                // Fungsi untuk berbagi ke Facebook
+                                function shareOnFacebook() {
+                                    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&text=' +
+                                        encodeURIComponent(shareText), '_blank');
+                                }
+
+                                // Fungsi untuk berbagi ke Twitter
+                                function shareOnTwitter() {
+                                    window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' +
+                                        encodeURIComponent(shareText), '_blank');
+                                }
+
+                                // Fungsi untuk berbagi ke WhatsApp
+                                function shareOnWhatsApp() {
+                                    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(shareUrl) + '&text=' +
+                                        encodeURIComponent(shareText), '_blank');
+                                }
+
+                                // fungsi untuk copy link
+                                // function copyLink() {
+                                //     var linkToCopy = shareUrl;
+
+                                //     // Buat elemen input untuk menempatkan tautan ke dalamnya
+                                //     var inputElement = document.createElement('input');
+                                //     inputElement.value = linkToCopy;
+                                //     document.body.appendChild(inputElement);
+
+                                //     // Pilih teks di dalam input
+                                //     inputElement.select();
+                                //     inputElement.setSelectionRange(0, 99999); // Untuk mendukung peramban yang berbeda
+
+                                //     // Salin teks ke clipboard
+                                //     document.execCommand('copy');
+
+                                //     // Hapus elemen input
+                                //     document.body.removeChild(inputElement);
+
+                                //     // Tambahkan logika atau pemberitahuan bahwa tautan telah disalin
+                                //     // alert('hehe')
+                                //     Swal.fire({
+                                //         icon: 'success',
+                                //         title: 'Link copied to clipboard!',
+                                //         showConfirmButton: false,
+                                //     });
+
+                                // }
+
+                                document.getElementById("copyLink").addEventListener('click', function(e) {
+                                    e.preventDefault();
+
+                                    var linkToCopy = shareUrl;
+
+                                    // Buat elemen input untuk menempatkan tautan ke dalamnya
+                                    var inputElement = document.createElement('input');
+                                    inputElement.value = linkToCopy;
+                                    document.body.appendChild(inputElement);
+
+                                    // Pilih teks di dalam input
+                                    inputElement.select();
+                                    inputElement.setSelectionRange(0, 99999); // Untuk mendukung peramban yang berbeda
+
+                                    // Salin teks ke clipboard
+                                    document.execCommand('copy');
+
+                                    // Hapus elemen input
+                                    document.body.removeChild(inputElement);
+
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Link copied to clipboard!',
+                                        showConfirmButton: true,
+                                    });
+                                });
+                            </script>
+
+                            {{-- <script>
+                                document.getElementById('shareButton').addEventListener('click', function() {
+                                    // Gantilah URL dan teks yang sesuai dengan konten yang ingin Anda bagikan
+                                    var shareUrl = '{{ $currentUrl }}';
+                                    var shareText = '{{ $berita->judul }} - {{ $truncatedString }}';
+
+                                    // Facebook
+                                    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+
+                                    // Twitter
+                                    window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(shareUrl) + '&text=' +
+                                        encodeURIComponent(shareText), '_blank');
+
+                                    // LinkedIn
+                                    window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl) + '&title=' +
+                                        encodeURIComponent(shareText), '_blank');
+
+                                    // Pinterest
+                                    window.open('https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(shareUrl), '_blank');
+                                });
+                            </script> --}}
                         </div>
                     </div>
                     <div class="row mt-4 d-flex">
