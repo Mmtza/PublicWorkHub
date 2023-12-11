@@ -1,0 +1,964 @@
+{
+	"info": {
+		"_postman_id": "8d588ef5-08d2-4982-ba8b-3db5b136bbbd",
+		"name": "PublicWorkHubDev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27116353"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Menampilkan semua user"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/get/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"get",
+						"all"
+					]
+				},
+				"description": "Menampilkan semua user"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/get/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"get",
+						"1"
+					]
+				},
+				"description": "Menampilkan user by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anwar Fauzan",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anwarfauzan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anwarfauzan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "birthdate",
+							"value": "2000-09-12",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Serang, Banten",
+							"type": "text"
+						},
+						{
+							"key": "deskripsi_diri_content",
+							"value": "Saya suka ngoding",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"create"
+					]
+				},
+				"description": "Membuah user"
+			},
+			"response": []
+		},
+		{
+			"name": "updateUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anwar Fauzan",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anwarfauzan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anwarfauzan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "birthdate",
+							"value": "2000-09-12",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Serang, Banten",
+							"type": "text"
+						},
+						{
+							"key": "deskripsi_diri_content",
+							"value": "Saya suka ngoding",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"update",
+						"1"
+					]
+				},
+				"description": "Edit user"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/user/delete/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"delete",
+						"4"
+					]
+				},
+				"description": "Hapus user"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllPengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/pengaduan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pengaduan"
+					]
+				},
+				"description": "Menampilkan semua data pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "showPengaduanById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/pengaduan/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pengaduan",
+						"3"
+					]
+				},
+				"description": "Menampilkan data pengaduan by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createPengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "isi_pengaduan",
+							"value": "hehe",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/pengaduan/createPengaduan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pengaduan",
+						"createPengaduan"
+					]
+				},
+				"description": "Membuat pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "updatePengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "isi_pengaduan",
+							"value": "heheeee",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/pengaduan/update/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pengaduan",
+						"update",
+						"3"
+					]
+				},
+				"description": "Edit pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "deletePengaduan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/pengaduan/delete/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pengaduan",
+						"delete",
+						"2"
+					]
+				},
+				"description": "Hapus Pengaduan"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/berita",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"berita"
+					]
+				},
+				"description": "Menampilkan semua berita"
+			},
+			"response": []
+		},
+		{
+			"name": "showBeritaById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/berita/100",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"berita",
+						"100"
+					]
+				},
+				"description": "Menampilkan berita by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "judul_berita",
+							"value": "heheeeeeee",
+							"type": "default"
+						},
+						{
+							"key": "isi_berita",
+							"value": "berita ini berisa berita heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "status_berita",
+							"value": "menunggu",
+							"type": "default"
+						},
+						{
+							"key": "image_berita",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/berita/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"berita",
+						"create"
+					]
+				},
+				"description": "Membuat berita"
+			},
+			"response": []
+		},
+		{
+			"name": "updateBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "judul_berita",
+							"value": "heheeeeeeeasdasd",
+							"type": "default"
+						},
+						{
+							"key": "isi_berita",
+							"value": "berita ini berisa berita heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "status_berita",
+							"value": "menunggu",
+							"type": "default"
+						},
+						{
+							"key": "image_berita",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/berita/update/40",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"berita",
+						"update",
+						"40"
+					]
+				},
+				"description": "Edit berita"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBerita",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/berita/delete/101",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"berita",
+						"delete",
+						"101"
+					]
+				},
+				"description": "Hapus berita"
+			},
+			"response": []
+		},
+		{
+			"name": "showAllLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/loker",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"loker"
+					]
+				},
+				"description": "Menampilkan semua loker"
+			},
+			"response": []
+		},
+		{
+			"name": "showLokerById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/loker/21",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"loker",
+						"21"
+					]
+				},
+				"description": "Menampilkan loker by id"
+			},
+			"response": []
+		},
+		{
+			"name": "createLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "nama_loker",
+							"value": "heheeeeeee",
+							"type": "default"
+						},
+						{
+							"key": "deskripsi_loker",
+							"value": "loker ini berisa loker yang heheeee",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "alamat_loker",
+							"value": "Jl. hehe",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/loker/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"loker",
+						"create"
+					]
+				},
+				"description": "Membuat loker"
+			},
+			"response": []
+		},
+		{
+			"name": "updateLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_user",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "nama_loker",
+							"value": "Awikwok",
+							"type": "default"
+						},
+						{
+							"key": "deskripsi_loker",
+							"value": "Loker ini sangat awikwok",
+							"type": "default"
+						},
+						{
+							"key": "nama_kategori",
+							"value": "Pendidikan",
+							"type": "default"
+						},
+						{
+							"key": "alamat_loker",
+							"value": "Jl. Bahagia",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/loker/update/21",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"loker",
+						"update",
+						"21"
+					]
+				},
+				"description": "Edit loker"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteLoker",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|OsEQEqMzK7XgF7aTJLtfUABpHdSSWSIrKNDAQmOScf2f552e",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/loker/delete/20",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"loker",
+						"delete",
+						"20"
+					]
+				},
+				"description": "Hapus loker"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1",
+			"type": "default"
+		}
+	]
+}

@@ -5,13 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Loker;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Resources\ApiResource;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ApiLoker extends Controller
 {
     public function index()
     {
         $loker = Loker::all();
-        return response()->json($loker, 200);
+        if ($loker)
+        {
+            return new ApiResource(200, true, 'Berhasil mendapatkan data semua loker', $loker);
+        }
+        else
+        {
+            return new ApiResource(404, false, 'Gagal mendapatkan data semua loker, tidak ada data', $loker);
+        }
     }
 
     /**
@@ -19,13 +29,15 @@ class ApiLoker extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'id_user' => ['required'],
             'nama_loker' => ['required', 'min:4', 'max:65000'],
             'deskripsi_loker' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
             'alamat_loker' => ['required', 'max:65000'],
-        ], [
+        ];
+        
+        $messages = [
             'nama_loker.required' => 'Nama loker tidak diperbolehkan kosong',
             'nama_loker.min' => 'Nama loker diperbolehkan minimal 4 karakter',
             'nama_loker.max' => 'Nama loker diperbolehkan maksimal 65.000 karakter',
@@ -34,20 +46,27 @@ class ApiLoker extends Controller
             'nama_kategori.required' => 'Kategori tidak diperbolehkan kosong',
             'alamat_loker.required' => 'Alamat loker tidak diperbolehkan kosong',
             'alamat_loker.max' => 'Alamat loker diperbolehkan maksimal 65.000 karakter',
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return new ApiResource(422, false, $validator->errors(), null);
+        }
+        $validatedData = $validator->validated();
 
         $waktu = now()->toDateTimeString();
 
         $dataLoker = Loker::create([
-            'nama_loker' => $data['nama_loker'],
-            'deskripsi_loker' => $data['deskripsi_loker'],
-            'slug' => Str::slug($data['nama_loker']) . '-' . $waktu,
-            'alamat' => $data['alamat_loker'],
-            'id_user' => $data['id_user'],
+            'nama_loker' => $validatedData['nama_loker'],
+            'deskripsi_loker' => $validatedData['deskripsi_loker'],
+            'slug' => Str::slug($validatedData['nama_loker']) . '-' . $waktu,
+            'alamat' => $validatedData['alamat_loker'],
+            'id_user' => $validatedData['id_user'],
             'waktu_publikasi' => $waktu,
         ]);
 
-        return response()->json($dataLoker, 201);
+        return new ApiResource(201, true, 'Berhasil membuat loker', $dataLoker);
     }
 
     /**
@@ -57,11 +76,14 @@ class ApiLoker extends Controller
     {
         $loker = Loker::find($id);
 
-        if (!$loker) {
-            return response()->json(['message' => 'Loker tidak ditemukan'], 404);
+        if ($loker)
+        {
+            return new ApiResource(200, true, 'Berhasil mendapatkan data loker', $loker);
         }
-
-        return response()->json($loker, 200);
+        else
+        {
+            return new ApiResource(404, false, 'Gagal mendapatkan data loker, tidak ada data', $loker);
+        }    
     }
 
     /**
@@ -70,12 +92,14 @@ class ApiLoker extends Controller
     public function update(Request $request, $id)
     {
 
-        $data = $request->validate([
+        $rules = [
             'nama_loker' => ['required', 'min:4', 'max:65000'],
             'deskripsi_loker' => ['required', 'max:4000000000'],
             'nama_kategori' => ['required'],
             'alamat_loker' => ['required', 'max:65000'],
-        ], [
+        ];
+        
+        $messages = [
             'nama_loker.required' => 'Nama loker tidak diperbolehkan kosong',
             'nama_loker.min' => 'Nama loker diperbolehkan minimal 4 karakter',
             'nama_loker.max' => 'Nama loker diperbolehkan maksimal 65.000 karakter',
@@ -84,24 +108,32 @@ class ApiLoker extends Controller
             'nama_kategori.required' => 'Kategori tidak diperbolehkan kosong',
             'alamat_loker.required' => 'Alamat loker tidak diperbolehkan kosong',
             'alamat_loker.max' => 'Alamat loker diperbolehkan maksimal 65.000 karakter',
-        ]);
+        ];
 
         $loker = Loker::find($id);
 
-        if (!$loker) {
-            return response()->json(['message' => 'Loker tidak ditemukan'], 404);
+        if (!$loker)
+        {
+            return new ApiResource(404, false, 'Gagal mendapatkan data loker, tidak ada data', $loker);
         }
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return new ApiResource(422, false, $validator->errors(), null);
+        }
+        $validatedData = $validator->validated();
 
         $waktu = now()->toDateTimeString();
         $loker->update([
-            'nama_loker' => $data['nama_loker'],
-            'nama_kategori' => $data['nama_kategori'],
-            'alamat_loker' => $data['alamat_loker'],
-            'slug' => Str::slug($data['nama_loker']) . '-' . $loker->id . $waktu,
+            'nama_loker' => $validatedData['nama_loker'],
+            'nama_kategori' => $validatedData['nama_kategori'],
+            'alamat_loker' => $validatedData['alamat_loker'],
+            'slug' => Str::slug($validatedData['nama_loker']) . '-' . $loker->id . $waktu,
             'waktu_publikasi' => $waktu,
         ]);
 
-        return response()->json($loker, 200);
+        return new ApiResource(200, true, 'Berhasil mengubah data berita', $loker);
     }
 
     /**
@@ -111,13 +143,13 @@ class ApiLoker extends Controller
     {
         $loker = Loker::find($id);
 
-        if (!$loker) {
-            return response()->json(['message' => 'Loker tidak ditemukan'], 404);
-        } else {
-            $loker->delete();
+        if (!$loker)
+        {
+            return new ApiResource(404, false, 'Gagal mendapatkan data loker, tidak ada data', $loker);            
         }
 
-
-        return response()->json(['message' => 'Loker berhasil dihapus'], 200);
+        $lokerDump = $loker;
+        $loker->delete();
+        return new ApiResource(200, true, 'Berhasil menghapus berita', $lokerDump);
     }
 }
