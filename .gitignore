@@ -13,6 +13,7 @@ yarn-error.log
 /.idea
 /.vscode
 vendor/
+!/public/vendor/
 !/resources/views/vendor/
 !/app/Http/Controllers/vendor/
 node_modules/
