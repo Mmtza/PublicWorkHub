@@ -25,10 +25,19 @@ class DashboardController extends Controller
         $beritaMenunggu = Berita::where('status', 'menunggu')->count();
         $beritaAktif = Berita::where('status', 'aktif')->count();
         $beritaTidakAktif = Berita::where('status', 'tidak aktif')->count();
-        $percentageBeritaMenunggu = number_format((($beritaMenunggu / $berita) * 100), 2);
-        $percentageBeritaAktif = number_format((($beritaAktif / $berita) * 100), 2);
-        $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
-        $pengaduan = Pengaduan::count();
+        $percentageBeritaMenunggu = 0;
+        $percentageBeritaAktif = 0;
+        $percentageBeritaTidakAktif = 0;
+        if ($beritaMenunggu > 0)
+            $percentageBeritaMenunggu = number_format((($beritaMenunggu / $berita) * 100), 2);
+
+        if($beritaAktif > 0)
+            $percentageBeritaAktif = number_format((($beritaAktif / $berita) * 100), 2);
+
+        if($beritaTidakAktif > 0)
+            $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
+
+            $pengaduan = Pengaduan::count();
         $pengaduanMenunggu = Pengaduan::where('status', 'menunggu')->count();
         $pengaduanDiterima = Pengaduan::where('status', 'diterima')->count();
         $pengaduanDitolak = Pengaduan::where('status', 'ditolak')->count();

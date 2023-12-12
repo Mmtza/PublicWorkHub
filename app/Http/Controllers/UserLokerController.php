@@ -31,6 +31,8 @@ class UserLokerController extends Controller
 
     public function showAllLoker()
     {
+        $allCategories = Kategori::all();
+        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         $loker = Loker::orderBy('id', 'desc')->first();
         $lokerPublisher = User::where('id', $loker->id_user)->first();
         $loker_side = Loker::orderBy('id', 'desc')->where('id', '!=', $loker->id)->get();
@@ -59,13 +61,15 @@ class UserLokerController extends Controller
         confirmDelete();
         return view('users.pages.form_loker.loker', compact(
             'loker', 'lokerPublisher', 'loker_side', 'lokerPublisherSide', 
-            'loker_applier', 'user_apply_loker', 'user_loker_applier', 'user_loker'
+            'loker_applier', 'user_apply_loker', 'user_loker_applier', 'user_loker', 'beritaFooterLine', 'allCategories'
         ));
     }
 
 
     public function showLokerBySlug($slug)
     {
+        $allCategories = Kategori::all();
+        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         $loker = Loker::findSlugGet($slug)->first();
         $lokerPublisher = User::where('id', $loker->id_user)->first();
         $loker_side = Loker::orderBy('id', 'desc')->where('id', '!=', $loker->id)->get();
@@ -94,7 +98,7 @@ class UserLokerController extends Controller
         confirmDelete();
         return view('users.pages.form_loker.loker', compact(
             'loker', 'lokerPublisher', 'loker_side', 'lokerPublisherSide', 
-            'loker_applier', 'user_apply_loker', 'user_loker_applier', 'user_loker'
+            'loker_applier', 'user_apply_loker', 'user_loker_applier', 'user_loker', 'beritaFooterLine', 'allCategories'
         ));
     }
 

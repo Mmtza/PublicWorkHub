@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\Pengaduan;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
@@ -30,14 +31,11 @@ class PengaduanController extends Controller {
     public function showPengaduanUser() {
         if (Auth::check())
         {
-            $user_id = auth()->user()->id;
-    
-            $data = [
-                'pengaduan' => Pengaduan::where('id_user', $user_id)->get()
-            ];
-    
+            $pengaduan = Pengaduan::where('id_user', Auth::user()->id)->get();
+            $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        
             // dd($data);
-            return view('users.pages.form_pengaduan.pengaduan', $data);
+            return view('users.pages.form_pengaduan.pengaduan', compact('pengaduan', 'beritaFooterLine'));
         }
         else
         {
@@ -135,7 +133,7 @@ class PengaduanController extends Controller {
             $request->file_pengaduan->move(public_path('assets/pengaduan/files/'), $fileName);
             $data['file_pengaduan'] = $fileName;
         } else {
-            if(!isNull($pengaduan->file)) {
+            if($pengaduan->file) {
                 $data['file_pengaduan'] = $pengaduan->file;
             } else {
                 $data['file_pengaduan'] = null;

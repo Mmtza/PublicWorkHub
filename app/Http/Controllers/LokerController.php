@@ -18,6 +18,7 @@ class LokerController extends Controller
     {
         $loker = Loker::orderBy('id', 'desc')->get();
         $lokerCount = Loker::count();
+        confirmDelete();
         return view('admins.pages.loker.all_loker', compact('loker', 'lokerCount'));
     }
 
