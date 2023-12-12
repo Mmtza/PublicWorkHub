@@ -79,7 +79,7 @@
                             <h6>{{ $loker->alamat }}</h6>
                         </span>
                         <span class="d-flex gap-2"><i class="fa-solid fa-building"></i>
-                            <h6>{{ $lokerPublisher }}</h6>
+                            <h6>{{ $lokerPublisher->name }}</h6>
                         </span>
                     </div>
                     <hr>
@@ -137,11 +137,7 @@
                                 });
                             </script>
                         @endif
-                        <form action="" method="POST">
-                            @csrf
-                            @method('post')
-                            <button class="btn btn-outline-primary rounded">Hubungi</button>
-                        </form>
+                        <a class="btn btn-outline-primary rounded" href="{{ route('user', $lokerPublisher->id) }}">Hubungi</a>
                     </div>
                     <div class="berita-isi-wrapper">
                         {!! $loker->deskripsi_loker !!}

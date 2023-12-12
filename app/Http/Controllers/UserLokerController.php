@@ -32,7 +32,7 @@ class UserLokerController extends Controller
     public function showAllLoker()
     {
         $loker = Loker::orderBy('id', 'desc')->first();
-        $lokerPublisher = User::where('id', $loker->id_user)->first()->name;
+        $lokerPublisher = User::where('id', $loker->id_user)->first();
         $loker_side = Loker::orderBy('id', 'desc')->where('id', '!=', $loker->id)->get();
         $lokerPublisherSide = [];
         foreach ($loker_side as $lokerside)
@@ -67,7 +67,7 @@ class UserLokerController extends Controller
     public function showLokerBySlug($slug)
     {
         $loker = Loker::findSlugGet($slug)->first();
-        $lokerPublisher = User::where('id', $loker->id_user)->first()->name;
+        $lokerPublisher = User::where('id', $loker->id_user)->first();
         $loker_side = Loker::orderBy('id', 'desc')->where('id', '!=', $loker->id)->get();
         $lokerPublisherSide = [];
         foreach ($loker_side as $lokerside)
