@@ -1,4 +1,4 @@
-@extends('admins.layout.template')
+@extends('penulis.layout.template')
 
 @section('title', 'PWH | Management Berita')
 

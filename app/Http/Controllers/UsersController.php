@@ -83,7 +83,7 @@ class UsersController extends Controller
         }
         else
         {
-            if (!isNull($user->foto))
+            if ($user->foto)
             {
                 $data['image'] = $user->foto;
             }

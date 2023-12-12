@@ -284,11 +284,11 @@
                                     <span
                                         class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                     <h2 class="text-white">{{ ucfirst($row->judul) }}</h2>
-                                    <span>
+                                    {{-- <span>
                                         @php
                                             echo $truncatedString;
                                         @endphp
-                                    </span>
+                                    </span> --}}
                                 </div>
 
                             </a>

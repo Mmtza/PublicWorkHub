@@ -41,21 +41,19 @@ class BeritaController extends Controller
 
     public function showAllBerita()
     {
-        $beritaHasKategori = new Berita();
-
-        $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
-        $BeritaHasKategori = Berita_Has_Kategori::with('getKategori')->get();
         $allCategories = Kategori::all();
+        $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
         $beritaMidLineCol = Berita::orderBy('id', 'desc')->skip(4)->take(2)->get();
         $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(6)->take(3)->get();
         $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(9)->take(4)->get();
         $beritaBotLineRow = Berita::orderBy('id', 'desc')->skip(13)->take(3)->get();
         $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(18)->take(2)->get();
         $beritaEndLine = Berita::orderBy('id', 'desc')->skip(20)->take(4)->get();
+        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         return view('users.pages.berita.all_berita', compact(
             'beritaHeadLine', 'allCategories',
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2',
-            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine'
         ));
     }
 
@@ -65,6 +63,8 @@ class BeritaController extends Controller
         $berita_side = Berita::where('id', '!=', $berita->id)->take(5)->get();
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
+        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        $allCategories = Kategori::all();
 
         // like
         $likeByUser = false;
@@ -84,7 +84,7 @@ class BeritaController extends Controller
         $currentUrl = request()->url();
         // dd($currentUrl);
 
-        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount', 'currentUrl'));
+        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount', 'currentUrl', 'beritaFooterLine', 'allCategories'));
     }
 
     public function showBeritaByKategori(Request $request, $kategori)
@@ -92,17 +92,29 @@ class BeritaController extends Controller
         $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
         $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
         $allCategories = Kategori::all();
-        $beritaHeadLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->take(4)->get();
-        $beritaMidLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(4)->take(2)->get();
-        $beritaMidLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(6)->take(3)->get();
-        $beritaMidLineCol2 = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(9)->take(4)->get();
-        $beritaBotLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(13)->take(3)->get();
-        $beritaBotLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(18)->take(2)->get();
-        $beritaEndLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(20)->take(4)->get();
+        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        $beritaHeadLine = [];
+        $beritaMidLineCol = [];
+        $beritaMidLineRow = [];
+        $beritaMidLineCol2 = [];
+        $beritaBotLineRow = [];
+        $beritaBotLineCol = [];
+        $beritaEndLine = [];
+    
+        if (!empty($beritaHasKategori))
+        {
+            $beritaHeadLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->take(4)->get();
+            $beritaMidLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(4)->take(2)->get();
+            $beritaMidLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(6)->take(3)->get();
+            $beritaMidLineCol2 = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(9)->take(4)->get();
+            $beritaBotLineRow = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(13)->take(3)->get();
+            $beritaBotLineCol = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(18)->take(2)->get();
+            $beritaEndLine = $beritaHasKategori->getBerita()->orderBy('id', 'desc')->skip(20)->take(4)->get();
+        }
         return view('users.pages.berita.show_berita_by_kategori', compact(
             'kategori', 'allCategories', 'beritaHeadLine',
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2',
-            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine'
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine'
         ));
     }
 
@@ -224,7 +236,8 @@ class BeritaController extends Controller
         }
 
 
-        if (isset($request->image_berita)) {
+        if (isset($request->image_berita)) 
+        {
             $filePath = public_path('assets/berita/images/' . $berita->img);
 
             if (file_exists($filePath) && is_file($filePath)) {
@@ -234,10 +247,14 @@ class BeritaController extends Controller
             $imageName = time() . '.' . $request->image_berita->extension();
             $request->image_berita->move(public_path('assets/berita/images/'), $imageName);
             $data['image_berita'] = $imageName;
-        } else {
-            if (!isNull($berita->img)) {
+        } else 
+        {
+            if ($berita->img)
+            {
                 $data['image_berita'] = $berita->img;
-            } else {
+            }
+            else 
+            {
                 $data['image_berita'] = null;
             }
         }
