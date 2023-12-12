@@ -88,6 +88,8 @@
 - QuillJS
 - Dompdf
 - Maatwebsite/Excel
+- munafio/chatify
+- Pusher
 
 ### Package Manager
 - Composer
@@ -102,6 +104,6 @@
 - Have a database named in .env file
 - Run php artisan migrate
 - Run php artisan db:seed to seeding data
-- php artisan sweetalert:publish to publish sweet alert to frontend 
+- If the vendor sweetalert in view doesn't exist please run php artisan sweetalert:publish to publish sweet alert to frontend 
 - Run php artisan serve to running a laravel
 - Run npm run dev to running js script
