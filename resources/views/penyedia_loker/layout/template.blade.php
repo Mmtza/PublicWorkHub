@@ -72,7 +72,7 @@
 
         <div class="content">
             @yield('content')
-            @include('Penyedia_loker.layout.footer')
+            @include('penyedia_loker.layout.footer')
         </div>
 
 

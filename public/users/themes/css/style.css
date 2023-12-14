@@ -14806,6 +14806,31 @@ textarea {
     display: inline-block;
 }
 
+.avatar{
+    position:relative;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.avatar img{
+    display:block;
+}
+
+.avatar img {
+    width:100%;
+    height:100%;
+}
+
+.avatar img{
+    -o-object-fit:cover;
+    object-fit:cover;
+}
+
+.avatar-l{
+    height:2.5rem;
+    width:2.5rem;
+}
+
 .tags li a {
     float: left;
     display: block;
