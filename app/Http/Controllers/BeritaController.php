@@ -42,14 +42,14 @@ class BeritaController extends Controller
     public function showAllBerita()
     {
         $allCategories = Kategori::all();
-        $beritaHeadLine = Berita::orderBy('id', 'desc')->take(4)->get();
-        $beritaMidLineCol = Berita::orderBy('id', 'desc')->skip(4)->take(2)->get();
-        $beritaMidLineRow = Berita::orderBy('id', 'desc')->skip(6)->take(3)->get();
-        $beritaMidLineCol2 = Berita::orderBy('id', 'desc')->skip(9)->take(4)->get();
-        $beritaBotLineRow = Berita::orderBy('id', 'desc')->skip(13)->take(3)->get();
-        $beritaBotLineCol = Berita::orderBy('id', 'desc')->skip(18)->take(2)->get();
-        $beritaEndLine = Berita::orderBy('id', 'desc')->skip(20)->take(4)->get();
-        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        $beritaHeadLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->take(4)->get();
+        $beritaMidLineCol = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(4)->take(2)->get();
+        $beritaMidLineRow = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(6)->take(3)->get();
+        $beritaMidLineCol2 = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(9)->take(4)->get();
+        $beritaBotLineRow = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(13)->take(3)->get();
+        $beritaBotLineCol = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(18)->take(2)->get();
+        $beritaEndLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(20)->take(4)->get();
+        $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
         return view('users.pages.berita.all_berita', compact(
             'beritaHeadLine', 'allCategories',
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2',
@@ -60,10 +60,10 @@ class BeritaController extends Controller
     public function showBeritaBySlug(Request $request, $slug)
     {
         $berita = Berita::findSlugFirst($slug);
-        $berita_side = Berita::where('id', '!=', $berita->id)->take(5)->get();
+        $berita_side = Berita::where('status', 'aktif')->where('id', '!=', $berita->id)->take(5)->get();
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
-        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
         $allCategories = Kategori::all();
 
         // like
@@ -89,10 +89,10 @@ class BeritaController extends Controller
 
     public function showBeritaByKategori(Request $request, $kategori)
     {
-        $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
-        $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
+        $kategoriModel = Kategori::where('status', 'aktif')->where('nama_kategori', $kategori)->first();
+        $beritaHasKategori = Berita_Has_Kategori::where('status', 'aktif')->where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
         $allCategories = Kategori::all();
-        $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
+        $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
         $beritaHeadLine = [];
         $beritaMidLineCol = [];
         $beritaMidLineRow = [];
