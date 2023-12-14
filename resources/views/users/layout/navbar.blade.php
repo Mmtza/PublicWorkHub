@@ -18,11 +18,11 @@
                         <a href="{{ route('landing') }}" class="d-none d-md-block d-sm-none logo m-0 float-start">Public
                             Work Hub<span class="text-primary">.</span></a>
                     </div>
-                    <div class="col-5 text-center">
-                        <form action="#" class="search-form d-inline-block d-lg-none">
+                    <div class="col-6 text-center">
+                        {{-- <form action="#" class="search-form d-inline-block d-lg-none">
                             <input type="text" class="form-control" placeholder="Search...">
                             <span class="bi-search"></span>
-                        </form>
+                        </form> --}}
 
                         <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto mt-3 mb-0">
                             <li class="active"><a href="{{ route('landing') }}">Home</a></li>
@@ -43,10 +43,14 @@
                             </li>
                             <li><a href={{ route('guest.team') }}>Team</a></li>
                             <li class="mb-3"><a href="{{ route('guest.loker') }}">Loker</a></li>
+                            @auth                            
+                                <li class="mb-3 d-none d-lg-inline-block"><a href="{{ route('loker/chat') }}">Chat</a></li>                            
+                            @endauth
                             <li class="mb-3 d-none d-lg-inline-block"><a href="{{ route('users.pengaduan') }}">Pengaduan</a></li>                            
                             <li class="mb-3 border-bottom"></li>
                             @auth
                                 <li class="d-lg-none d-inline-block"><a href="{{ route('profile.edit') }}">Profile</a></li>
+                                <li class="d-lg-none d-inline-block"><a href="{{ route('loker/chat') }}">Chat</a></li>
                                 <li class="d-lg-none d-inline-block mb-2"><a
                                         href="{{ route('users.pengaduan') }}">Pengaduan</a></li>
                                 <li class="d-lg-none d-inline-block border-top border-black">
@@ -69,7 +73,7 @@
                             @endauth
                         </ul>
                     </div>
-                    <div class="col-4 text-end">
+                    <div class="col-3 text-end">
                         <a href="#"
                             class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
                             <span></span>
@@ -133,6 +137,10 @@
                                                                 </li>
                                                                 <li class="nav-item">
                                                                     <a class="nav-link px-3"
+                                                                        href="{{ route('loker/chat') }}">Chat</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link px-3"
                                                                         href="{{ route('users.pengaduan') }}">Pengaduan</a>
                                                                 </li>
                                                                 <li class="nav-item">
@@ -176,10 +184,10 @@
                                     @endif
                                 @endauth
                             </div>
-                            <form action="#" class="search-form">
+                            {{-- <form action="#" class="search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="bi-search"></span>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                 </div>
