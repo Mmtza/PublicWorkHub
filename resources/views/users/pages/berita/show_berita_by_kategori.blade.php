@@ -25,11 +25,11 @@
                                     <span
                                         class="date">{{ \Carbon\Carbon::parse($row->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                     <h2 class="mb-2">{{ $row->judul }}</h2>
-                                    <span class="text-white">
+                                    {{-- <span class="text-white">
                                         @php
                                             echo $truncatedString;
                                         @endphp
-                                    </span>
+                                    </span> --}}
                                 </div>
                             </a>
                         </div>
@@ -73,7 +73,7 @@
                                             class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                         <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a>
                                         </h2>
-                                        <p>{!! $truncatedString !!}</p>
+                                        {{-- <p>{!! $truncatedString !!}</p> --}}
                                         <p><a href="{{ route('guest.berita', $berita->slug) }}"
                                                 class="btn btn-sm btn-outline-primary">Read More</a></p>
                                     </div>
@@ -95,7 +95,7 @@
                                     <span
                                         class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                     <h3><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h3>
-                                    <p>{!! $truncatedString !!}</p>
+                                    {{-- <p>{!! $truncatedString !!}</p> --}}
                                     <p><a href="{{ route('guest.berita', $berita->slug) }}" class="read-more">Continue
                                             Reading</a></p>
                                 </li>
@@ -134,7 +134,7 @@
                                 <span
                                     class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                 <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h2>
-                                <p>{!! $truncatedString !!}</p>
+                                {{-- <p>{!! $truncatedString !!}</p> --}}
                                 <p><a href="{{ route('guest.berita', $berita->slug) }}" class="read-more">Continue
                                         Reading</a>
                                 </p>
@@ -180,7 +180,7 @@
                                             class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                         <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a>
                                         </h2>
-                                        <p>{!! $truncatedString !!}</p>
+                                        {{-- <p>{!! $truncatedString !!}</p> --}}
                                         <p><a href="{{ route('guest.berita', $berita->slug) }}"
                                                 class="btn btn-sm btn-outline-primary">Read More</a></p>
                                     </div>
@@ -197,7 +197,7 @@
                                     <span
                                         class="date">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                     <h2><a href="{{ route('guest.berita', $berita->slug) }}">{{ $berita->judul }}</a></h2>
-                                    <p>{!! $truncatedString !!}</p>
+                                    {{-- <p>{!! $truncatedString !!}</p> --}}
                                     <p><a href="{{ route('guest.berita', $berita->slug) }}"
                                             class="btn btn-sm btn-outline-primary">Continue Reading</a></p>
                                 </li>
