@@ -89,8 +89,8 @@ class BeritaController extends Controller
 
     public function showBeritaByKategori(Request $request, $kategori)
     {
-        $kategoriModel = Kategori::where('status', 'aktif')->where('nama_kategori', $kategori)->first();
-        $beritaHasKategori = Berita_Has_Kategori::where('status', 'aktif')->where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
+        $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
+        $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
         $allCategories = Kategori::all();
         $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
         $beritaHeadLine = [];
@@ -132,6 +132,7 @@ class BeritaController extends Controller
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
+        $isKategori = Berita_Has_Kategori::
         confirmDelete();
         return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }
