@@ -31,10 +31,11 @@ class LokerController extends Controller
 
     public function viewEditLokerDashboard($slug)
     {
-        $loker = Loker::findSlugFirst($slug);
-        $publisher = Loker::with('getUser')->find($loker->id);
+        $lokerSlug = Loker::findSlugFirst($slug);
+        $publisher = Loker::with('getUser')->find($lokerSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
+        $loker = Loker::where('id', $lokerSlug->id)->with('getKategori')->first();
         confirmDelete();
         return view('admins.pages.loker.edit_loker', compact('kategori', 'loker', 'publisherName'));
     }

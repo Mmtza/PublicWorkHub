@@ -128,11 +128,11 @@ class BeritaController extends Controller
 
     public function viewEditBeritaDashboard($slug)
     {
-        $berita = Berita::findSlugFirst($slug);
-        $publisher = Berita::with('getUser')->find($berita->id);
+        $beritaSlug = Berita::findSlugFirst($slug);
+        $publisher = Berita::with('getUser')->find($beritaSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
-        $isKategori = Berita_Has_Kategori::
+        $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
         confirmDelete();
         return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }

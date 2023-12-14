@@ -36,10 +36,11 @@ class PenulisBeritaController extends Controller
 
     public function viewEditBeritaDashboard($slug)
     {
-        $berita = Berita::findSlugFirst($slug);
-        $publisher = Berita::with('getUser')->find($berita->id);
+        $beritaSlug = Berita::findSlugFirst($slug);
+        $publisher = Berita::with('getUser')->find($beritaSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
+        $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
         confirmDelete();
         return view('penulis.pages.edit_berita', compact('berita', 'publisherName', 'kategori'));
     }
