@@ -126,6 +126,10 @@
                             data-feather="sun"></span></label>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link px-3"
+                    href="{{ route('loker/chat') }}"><span class="ms-1"><i class="fa-regular fa-message fa-lg"></i></span></a>
+            </li>
             {{-- notification --}}
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" style="min-width: 2.5rem" role="button" data-bs-toggle="dropdown"
@@ -377,8 +381,11 @@
                         <div class="overflow-auto scrollbar">
                             <ul class="nav d-flex flex-column pb-1">
                                 <li class="nav-item">
-                                    <a class="nav-link px-3" href="{{ route('profile.edit') }}"> <span class="me-2 text-900"
-                                            data-feather="user"></span><span>Profile</span></a>
+                                    <a class="nav-link px-3" href="{{ route('profile.edit') }}"><span class="ms-1 me-2 text-900"><i class="fa-regular fa-user"></i></span><span>Profile</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-3"
+                                        href="{{ route('loker/chat') }}"><span class="ms-1 me-2 text-900"><i class="fa-regular fa-message"></i></span><span>Chat</span></a>
                                 </li>
                             </ul>
                         </div>
