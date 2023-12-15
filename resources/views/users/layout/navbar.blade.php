@@ -102,9 +102,9 @@
                                                 @endif
                                             </div>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end px-2">
-                                            <div class="card position-relative border-0">
-                                                <div class="card-body p-0">
+                                        <ul class="dropdown-menu profile-custom px-2 rounded rounded-5 border border-300 shadow">
+                                            <div class="position-relative">
+                                                <div class="p-0">
                                                     <div class="text-center pt-4 pb-3">
                                                         <div class="avatar avatar-xl">
                                                             @if (empty(Auth::user()->foto))
@@ -159,12 +159,13 @@
                                                                 <a class="nav-link px-3"
                                                                     href="{{ route('users.pengaduan') }}">Pengaduan</a>
                                                             </li>
+                                                            <hr>
                                                             <li class="nav-item">
                                                                 <form class="bg-transparent"
                                                                     action="{{ route('logout') }}" method="POST">
                                                                     @csrf
                                                                     <button type="submit"
-                                                                        class="btn btn-none px-3">Logout</button>
+                                                                        class="btn btn-logout w-100">Logout</button>
                                                                 </form>
                                                             </li>
                                                         </ul>
