@@ -54,4 +54,9 @@ class Loker extends Model
     {
         return $this->belongsTo(Chat::class);
     }
+
+    public function getKategori()
+    {
+        return $this->belongsToMany(Kategori::class, 'loker_has_kategori', 'id_loker', 'id_kategori', 'id');
+    }
 }

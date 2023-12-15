@@ -49,7 +49,8 @@
         <div class="row mt-2">
             @foreach ( $kategori as $j ) 
                 <div class="col-8 col-sm-6 col-md-4 col-lg-2">
-                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}" id="{{ $j->nama_kategori }}"/>
+                    <input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}" 
+                    id="{{ $j->nama_kategori }}" {{ $berita->getKategori->contains($j)? 'checked' : '' }}/>
                     <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
                 </div>       
             @endforeach

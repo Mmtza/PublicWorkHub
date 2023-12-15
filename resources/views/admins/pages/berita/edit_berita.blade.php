@@ -68,16 +68,15 @@
             value="{{ $publisherName }}" disabled />
 
         <x-input-label for="kategori_berita" :value="'Kategori'" />
-        <div class="row mt-2">
-            @foreach ($kategori as $j)
+        <div class="row mt-2">            
+            @foreach ($kategori as $j)                    
                 <div class="col-8 col-sm-6 col-md-4 col-lg-2">
-                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
-                        id="{{ $j->nama_kategori }}" />
+                    <input type="checkbox" name="nama_kategori[]" value="{{ $j->nama_kategori }}"
+                        id="{{ $j->nama_kategori }}" {{ $berita->getKategori->contains($j)? 'checked' :  ''}}/>
                     <label for="{{ $j->nama_kategori }}">{{ $j->nama_kategori }}</label>
                 </div>
-            @endforeach
-        </div>
-
+            @endforeach                
+            </div>
         <x-input-label for="image_berita" :value="'Image'" />
         <input type="file" accept=".jpg, .png, .jpeg" class="rounded p-2 form-control" name="image_berita"
             id="image_berita" value="{{ $berita->img }}" />

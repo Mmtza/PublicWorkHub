@@ -65,8 +65,8 @@
         <div class="row mt-2">
             @foreach ($kategori as $k)
                 <div class="col-8 col-sm-6 col-md-4 col-lg-2">
-                    <x-text-input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}"
-                        id="{{ $k->nama_kategori }}" />
+                    <input type="checkbox" name="nama_kategori[]" value="{{ $k->nama_kategori }}"
+                        id="{{ $k->nama_kategori }}" {{ $loker->getKategori->contains($k) ? 'checked' : '' }} />
                     <label for="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</label>
                 </div>
             @endforeach
