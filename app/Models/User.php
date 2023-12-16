@@ -10,6 +10,7 @@ use App\Models\Berita;
 use App\Models\Komentar;
 use App\Models\Pengaduan;
 use App\Models\Apply_Loker;
+use App\Models\Notification;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -81,5 +82,9 @@ class User extends Authenticatable
 
     public function getChat() {
         return $this->belongsTo(Chat::class);
+    }
+
+    public function getNotification() {
+        return $this->belongsTo(Notification::class);
     }
 }
