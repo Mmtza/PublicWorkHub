@@ -40,7 +40,7 @@ class PenulisBeritaController extends Controller
         $beritaSlug = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($beritaSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'berita')->get();
         $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
@@ -58,7 +58,7 @@ class PenulisBeritaController extends Controller
 
     public function viewAddBeritaDashboard()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'berita')->get();
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         return view('penulis.pages.tambah_berita', compact('kategori', 'notification'));
     }
@@ -95,7 +95,7 @@ class PenulisBeritaController extends Controller
 
             foreach ($kategori as $i)
             {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'berita')->get();
 
                 foreach ($dataKategori as $j)
                 {
@@ -129,7 +129,7 @@ class PenulisBeritaController extends Controller
             $kategori = $_POST['nama_kategori'];
             foreach ($kategori as $i)
             {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'berita')->get();
 
                 foreach ($dataKategori as $j)
                 {

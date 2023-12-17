@@ -43,7 +43,7 @@ class BeritaController extends Controller
 
     public function showAllBerita()
     {
-        $allCategories = Kategori::all();
+        $allCategories = Kategori::where('type', 'berita')->get();
         $beritaHeadLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->take(4)->get();
         $beritaMidLineCol = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(4)->take(2)->get();
         $beritaMidLineRow = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(6)->take(3)->get();
@@ -66,7 +66,7 @@ class BeritaController extends Controller
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
         $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
-        $allCategories = Kategori::all();
+        $allCategories = Kategori::where('type', 'berita')->get();
 
         // like
         $likeByUser = false;
@@ -91,9 +91,9 @@ class BeritaController extends Controller
 
     public function showBeritaByKategori(Request $request, $kategori)
     {
-        $kategoriModel = Kategori::where('nama_kategori', $kategori)->first();
+        $kategoriModel = Kategori::where('nama_kategori', $kategori)->where('type', 'berita')->first();
         $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
-        $allCategories = Kategori::all();
+        $allCategories = Kategori::where('type', 'berita')->get();
         $beritaFooterLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(24)->take(3)->get();
         $beritaHeadLine = [];
         $beritaMidLineCol = [];
@@ -134,7 +134,7 @@ class BeritaController extends Controller
         $beritaSlug = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($beritaSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'berita')->get();
         $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
@@ -143,7 +143,7 @@ class BeritaController extends Controller
 
     public function viewAddBeritaDashboard()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'berita')->get();
         $publisherName = Auth::user()->name;
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName', 'notification'));
@@ -190,7 +190,7 @@ class BeritaController extends Controller
             $kategori = $_POST['nama_kategori'];
 
             foreach ($kategori as $i) {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'berita')->get();
 
                 foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([
@@ -230,7 +230,7 @@ class BeritaController extends Controller
             Berita_Has_Kategori::where('id_berita', $berita->id)->delete();
             $kategori = $_POST['nama_kategori'];
             foreach ($kategori as $i) {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'berita')->get();
 
                 foreach ($dataKategori as $j) {
                     Berita_Has_Kategori::create([

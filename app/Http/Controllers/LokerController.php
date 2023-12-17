@@ -26,7 +26,7 @@ class LokerController extends Controller
 
     public function viewAddLokerDashboard()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'loker')->get();
         $publisherName = Auth::user()->name;
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         return view('admins.pages.loker.tambah_loker', compact('kategori', 'publisherName', 'notification'));
@@ -37,7 +37,7 @@ class LokerController extends Controller
         $lokerSlug = Loker::findSlugFirst($slug);
         $publisher = Loker::with('getUser')->find($lokerSlug->id);
         $publisherName = $publisher->getUser()->first()->name;
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('type', 'loker')->get();
         $loker = Loker::where('id', $lokerSlug->id)->with('getKategori')->first();
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
@@ -86,7 +86,7 @@ class LokerController extends Controller
             $kategori = $_POST['nama_kategori'];
 
             foreach ($kategori as $i) {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'loker')->get();
 
                 foreach ($dataKategori as $j) {
                     Loker_Has_Kategori::create([
@@ -124,7 +124,7 @@ class LokerController extends Controller
             Loker_Has_Kategori::where('id_loker', $loker->id)->delete();
             $kategori = $_POST['nama_kategori'];
             foreach ($kategori as $i) {
-                $dataKategori = Kategori::where('nama_kategori', $i)->get();
+                $dataKategori = Kategori::where('nama_kategori', $i)->where('type', 'loker')->get();
 
                 foreach ($dataKategori as $j) {
                     Loker_Has_Kategori::create([

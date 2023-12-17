@@ -47,101 +47,121 @@ class DatabaseSeeder extends Seeder
 
         Kategori::factory()->create([
             'nama_kategori' => 'Pendidikan',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang pendidikan'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Sosial',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang sosial'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Sport',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang sport'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Ekonomi',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang ekonomi'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Teknologi',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang teknologi'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Hiburan',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang hiburan'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Olahraga',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang olahraga'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Kesehatan',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang kesehatan'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Fashion',
+            'type' => 'berita',
             'keterangan' => 'Berisi tentang fashion'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Web Developer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang web developer'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'UI UX Designer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang UI UX Designer'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Frontend Developer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang frontend Designer'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Backend Developer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang backend developer'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Mobile App Developer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang mobile app developer'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'IT Consultant',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang IT Consultant'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Guru',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang guru'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Keuangan',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang keuangan'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Staff',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang staff'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Dokter',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang dokter'
         ]);
 
         Kategori::factory()->create([
             'nama_kategori' => 'Manajer',
+            'type' => 'loker',
             'keterangan' => 'Berisi tentang manajer'
         ]);
 
