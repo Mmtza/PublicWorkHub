@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 03:02 PM
+-- Generation Time: Dec 17, 2023 at 04:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.12
 
@@ -210,6 +210,7 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `kategori` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nama_kategori` varchar(50) NOT NULL,
+  `type` enum('berita','loker') NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -217,27 +218,27 @@ CREATE TABLE `kategori` (
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id`, `nama_kategori`, `keterangan`) VALUES
-(1, 'Pendidikan', 'Berisi tentang pendidikan'),
-(2, 'Sosial', 'Berisi tentang sosial'),
-(3, 'Sport', 'Berisi tentang sport'),
-(4, 'Ekonomi', 'Berisi tentang ekonomi'),
-(5, 'Teknologi', 'Berisi tentang teknologi'),
-(6, 'Hiburan', 'Berisi tentang hiburan'),
-(7, 'Olahraga', 'Berisi tentang olahraga'),
-(8, 'Kesehatan', 'Berisi tentang kesehatan'),
-(9, 'Fashion', 'Berisi tentang fashion'),
-(10, 'Web Developer', 'Berisi tentang web developer'),
-(11, 'UI UX Designer', 'Berisi tentang UI UX Designer'),
-(12, 'Frontend Developer', 'Berisi tentang frontend Designer'),
-(13, 'Backend Developer', 'Berisi tentang backend developer'),
-(14, 'Mobile App Developer', 'Berisi tentang mobile app developer'),
-(15, 'IT Consultant', 'Berisi tentang IT Consultant'),
-(16, 'Guru', 'Berisi tentang guru'),
-(17, 'Keuangan', 'Berisi tentang keuangan'),
-(18, 'Staff', 'Berisi tentang staff'),
-(19, 'Dokter', 'Berisi tentang dokter'),
-(20, 'Manajer', 'Berisi tentang manajer');
+INSERT INTO `kategori` (`id`, `nama_kategori`, `type`, `keterangan`) VALUES
+(1, 'Pendidikan', 'berita', 'Berisi tentang pendidikan'),
+(2, 'Sosial', 'berita', 'Berisi tentang sosial'),
+(3, 'Sport', 'berita', 'Berisi tentang sport'),
+(4, 'Ekonomi', 'berita', 'Berisi tentang ekonomi'),
+(5, 'Teknologi', 'berita', 'Berisi tentang teknologi'),
+(6, 'Hiburan', 'berita', 'Berisi tentang hiburan'),
+(7, 'Olahraga', 'berita', 'Berisi tentang olahraga'),
+(8, 'Kesehatan', 'berita', 'Berisi tentang kesehatan'),
+(9, 'Fashion', 'berita', 'Berisi tentang fashion'),
+(10, 'Web Developer', 'loker', 'Berisi tentang web developer'),
+(11, 'UI UX Designer', 'loker', 'Berisi tentang UI UX Designer'),
+(12, 'Frontend Developer', 'loker', 'Berisi tentang frontend Designer'),
+(13, 'Backend Developer', 'loker', 'Berisi tentang backend developer'),
+(14, 'Mobile App Developer', 'loker', 'Berisi tentang mobile app developer'),
+(15, 'IT Consultant', 'loker', 'Berisi tentang IT Consultant'),
+(16, 'Guru', 'loker', 'Berisi tentang guru'),
+(17, 'Keuangan', 'loker', 'Berisi tentang keuangan'),
+(18, 'Staff', 'loker', 'Berisi tentang staff'),
+(19, 'Dokter', 'loker', 'Berisi tentang dokter'),
+(20, 'Manajer', 'loker', 'Berisi tentang manajer');
 
 -- --------------------------------------------------------
 
@@ -518,7 +519,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (8, 'Anwar Hadi', 'anwarhadi@gmail.com', NULL, '$2y$12$/2sTjcnpTFndKiDhl02SVOYAtxbOsc910YjsLhduZTCue7dyzmMOO', NULL, 'user', '2005-04-14', 'Mulawarman', '<p><span style=\"color: rgb(55, 65, 81);\">Saya memiliki minat yang besar dalam teknologi baru dan terus meningkatkan diri saya melalui pembelajaran mandiri dan mengikuti perkembangan industri. Saya percaya pada pendekatan yang proaktif terhadap pekerjaan dan selalu mencari cara untuk meningkatkan efisiensi dan efektivitas.</span></p>', '1702395937.jpg', NULL, NULL, 0, 'avatar.png', 0, NULL),
 (9, 'Anwar Egi', 'anwaregi@gmail.com', NULL, '$2y$12$8s6zqEWmztkbiWoqh0zWYOq32buQN9GLYJ0MMKwVViwO7ShzaTtea', NULL, 'penulis', '2004-08-13', 'Banten Walantaka', '<p><span style=\"color: rgb(55, 65, 81);\">Saya memiliki minat yang besar dalam teknologi baru dan terus meningkatkan diri saya melalui pembelajaran mandiri dan mengikuti perkembangan industri. Saya percaya pada pendekatan yang proaktif terhadap pekerjaan dan selalu mencari cara untuk meningkatkan efisiensi dan efektivitas.</span></p>', '1702396068.jpg', NULL, NULL, 0, 'avatar.png', 0, NULL),
 (10, 'anwar loker', 'anwarloker@gmail.com', NULL, '$2y$12$vmJVgQEhe3M43oeev9gD5u0kEkZrE0lEGpJNFtuZ899bWCgL1EVmu', NULL, 'penyedia_loker', NULL, NULL, '<p><br></p>', '1702414185.jpg', NULL, NULL, 0, 'avatar.png', 0, NULL),
-(12, 'admin', 'admin@gmail.com', '2023-12-12 15:33:58', '$2y$12$94dQwUSvWFrTCEH9Jv5IEuCHORwtJ1ad6XBtc27W.tZ9bKnQTaAU2', 'vkhqyQ83Y4PGRyiJ6hBM8iAIwE6YdoBDrinsdcCIi8xll3ULvwv7GtW6YE3P', 'admin', NULL, NULL, '<p><br></p>', '121702825145.jpg', '2023-12-12 15:33:58', '2023-12-17 14:59:24', 0, 'avatar.png', 0, NULL);
+(12, 'admin', 'admin@gmail.com', '2023-12-12 15:33:58', '$2y$12$94dQwUSvWFrTCEH9Jv5IEuCHORwtJ1ad6XBtc27W.tZ9bKnQTaAU2', 'RrjoBo6qgIBQTobRXubYW1fegPLLBqsUARwcVZSndQ9MhuE3IdXfoU6CZYrR', 'admin', NULL, NULL, '<p><br></p>', '121702825145.jpg', '2023-12-12 15:33:58', '2023-12-17 14:59:24', 0, 'avatar.png', 0, NULL);
 
 --
 -- Indexes for dumped tables
