@@ -26,6 +26,22 @@ class NotificationController extends Controller
         }
     }
 
+    public function storeNotificationToAll($isi, $waktu, $status, $id_user) 
+    {
+        $users = User::where('role', 'user')->get();
+
+        foreach($users as $user)
+        {
+            Notification::create([
+                'isi' => $isi,
+                'waktu_notifikasi' => $waktu,
+                'status' => $status,
+                'id_user' => $id_user,
+                'id_has_user' => $user->id
+            ]);
+        }
+    }
+
     public function storeNotification($isi, $waktu, $status, $id_user, $id_has_user) 
     {
         Notification::create([

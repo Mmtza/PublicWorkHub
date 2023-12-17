@@ -43,6 +43,11 @@ class BeritaController extends Controller
 
     public function showAllBerita()
     {
+        $notification = [];
+        if (Auth::check())
+        {
+            $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->get();
+        }
         $allCategories = Kategori::where('type', 'berita')->get();
         $beritaHeadLine = Berita::where('status', 'aktif')->orderBy('id', 'desc')->take(4)->get();
         $beritaMidLineCol = Berita::where('status', 'aktif')->orderBy('id', 'desc')->skip(4)->take(2)->get();
@@ -55,7 +60,7 @@ class BeritaController extends Controller
         return view('users.pages.berita.all_berita', compact(
             'beritaHeadLine', 'allCategories',
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2',
-            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine'
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine', 'notification'
         ));
     }
 
@@ -69,8 +74,10 @@ class BeritaController extends Controller
         $allCategories = Kategori::where('type', 'berita')->get();
 
         // like
+        $notification = [];
         $likeByUser = false;
         if (Auth::check()) {
+            $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->get();
             $user = Auth::user();
             $likeByUser = Like::where('id_user', $user->id)->where('id_berita', $berita->id)->exists();
         }
@@ -86,11 +93,16 @@ class BeritaController extends Controller
         $currentUrl = request()->url();
         // dd($currentUrl);
 
-        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount', 'currentUrl', 'beritaFooterLine', 'allCategories'));
+        return view('users.pages.berita.detail_berita', compact('berita', 'berita_side', 'publisherName', 'likeCount', 'likeByUser', 'komentar', 'komentarCount', 'currentUrl', 'beritaFooterLine', 'allCategories', 'notification'));
     }
 
     public function showBeritaByKategori(Request $request, $kategori)
     {
+        $notification = [];
+        if (Auth::check())
+        {
+            $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->get();
+        }
         $kategoriModel = Kategori::where('nama_kategori', $kategori)->where('type', 'berita')->first();
         $beritaHasKategori = Berita_Has_Kategori::where('id_kategori', $kategoriModel->id)->with('getBerita')->first();
         $allCategories = Kategori::where('type', 'berita')->get();
@@ -116,7 +128,7 @@ class BeritaController extends Controller
         return view('users.pages.berita.show_berita_by_kategori', compact(
             'kategori', 'allCategories', 'beritaHeadLine',
             'beritaMidLineRow', 'beritaMidLineCol', 'beritaMidLineCol2',
-            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine'
+            'beritaBotLineRow', 'beritaBotLineCol', 'beritaEndLine', 'beritaFooterLine', 'notification'
         ));
     }
 

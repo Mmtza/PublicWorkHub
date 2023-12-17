@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Loker_Has_Kategori;
 use App\Http\Controllers\Controller;
+use App\Models\Apply_Loker;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,9 @@ class PenyediaLokerController extends Controller
     public function showAllApplier()
     {
         $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
-        return view('penyedia_loker.pages.applier_loker', compact('notification'));
+        $applier_loker = Apply_Loker::with('getUser')->with('getLoker')->get(); 
+        confirmDelete();
+        return view('penyedia_loker.pages.applier_loker', compact('applier_loker', 'notification'));
     }
     
     public function viewEditLokerDashboard($slug)
@@ -100,7 +103,8 @@ class PenyediaLokerController extends Controller
             }
         }
         $notification = new NotificationController;
-        $notification->storeNotificationToAllAdmin("🏢 membuat loker baru", now(), "unread", Auth::user()->id);
+        $notification->storeNotificationToAllAdmin("🏢 ". Auth::user()->name ." membuat loker baru", now(), "unread", Auth::user()->id);
+        $notification->storeNotificationToAll("🏢 ". Auth::user()->name ." membuat loker baru", now(), "unread", Auth::user()->id);
         alert('Notifikasi', 'Berhasil membuat loker', 'success');
         return redirect()->route('penyedia-loker.loker');
     }
@@ -147,5 +151,29 @@ class PenyediaLokerController extends Controller
         Loker::destroy($loker->id);
         alert('Notifikasi', 'Berhasil menghapus loker', 'success');
         return redirect()->route('penyedia-loker.loker');
+    }
+
+    public function approveLokerDashboard($id)
+    {
+        $apply_loker = Apply_Loker::where('id', $id)->with('getUser')->first();
+        $apply_loker->status = 'diterima';
+        $apply_loker->save();
+        alert('Notifikasi', 'Kamu menerima lamaran user ini', 'success');
+        $notification = new NotificationController;
+        $notification->storeNotification("🏢 " . Auth::user()->name . " menerima lamaran loker kamu", now(), "unread", Auth::user()->id, $apply_loker->getUser->id);
+        $apply_loker->delete();
+        return redirect()->route('penyedia-loker.loker.applier');
+    }
+
+    public function rejectLokerDashboard($id)
+    {
+        $apply_loker = Apply_Loker::where('id', $id)->with('getUser')->first();
+        $apply_loker->status = 'ditolak';
+        $apply_loker->save();
+        alert('Notifikasi', 'Kamu menolak lamaran user ini', 'success');
+        $notification = new NotificationController;
+        $notification->storeNotification("🏢 " . Auth::user()->name . " menolak lamaran loker kamu", now(), "unread", Auth::user()->id, $apply_loker->getUser->id);
+        $apply_loker->delete();
+        return redirect()->route('penyedia-loker.loker.applier');
     }
 }

@@ -107,7 +107,8 @@ class PenulisBeritaController extends Controller
             }
         }
         $notification = new NotificationController;
-        $notification->storeNotificationToAllAdmin("📰 membuat berita baru, menunggu diaktifkan", now(), "unread", Auth::user()->id);
+        $notification->storeNotificationToAllAdmin("📰 ". Auth::user()->name ." membuat berita baru, menunggu diaktifkan", now(), "unread", Auth::user()->id);
+        $notification->storeNotificationToAll("📰 ". Auth::user()->name ." membuat berita baru", now(), "unread", Auth::user()->id);
         alert('Notifikasi', 'Berhasil membuat berita', 'success');
         return redirect()->route('penulis.berita');
     }

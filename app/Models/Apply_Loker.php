@@ -20,10 +20,10 @@ class Apply_Loker extends Model
     ];
 
     public function getUser() {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function getLoker() {
-        return $this->hasOne(Loker::class);
+        return $this->belongsTo(Loker::class, 'id_loker');
     }
 }

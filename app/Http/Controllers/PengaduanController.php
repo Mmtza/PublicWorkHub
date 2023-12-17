@@ -32,13 +32,15 @@ class PengaduanController extends Controller {
     }
 
     public function showPengaduanUser() {
+        $notification = [];
         if (Auth::check())
         {
+            $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->get();
             $pengaduan = Pengaduan::where('id_user', Auth::user()->id)->get();
             $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         
             // dd($data);
-            return view('users.pages.form_pengaduan.pengaduan', compact('pengaduan', 'beritaFooterLine'));
+            return view('users.pages.form_pengaduan.pengaduan', compact('pengaduan', 'beritaFooterLine', 'notification'));
         }
         else
         {

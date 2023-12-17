@@ -30,6 +30,7 @@ Route::get('/', [BeritaController::class, 'showAllBerita'])->name('landing');
 
 Route::get('/berita/{slug?}', [BeritaController::class, 'showBeritaBySlug'])->name('guest.berita');
 Route::get('/berita/kategori/{kategori?}', [BeritaController::class, 'showBeritaByKategori'])->name('guest.berita.kategori');
+Route::get('/loker/kategori/{kategori?}', [UserLokerController::class, 'showLokerByKategori'])->name('guest.loker.kategori');
 
 Route::get('/our-team', [TeamController::class, 'showAllCrew'])->name('guest.team');
 Route::get('/loker', [UserLokerController::class, 'showAllLoker'])->name('guest.loker');
@@ -153,6 +154,10 @@ Route::middleware(['auth', 'PenyediaLoker'])->group(function () {
     Route::get('/penyedia-loker/loker', [PenyediaLokerController::class, 'showAllLokerDashboard'])->name('penyedia-loker.loker');
 
     Route::get('/penyedia-loker/loker/applier', [PenyediaLokerController::class, 'showAllApplier'])->name('penyedia-loker.loker.applier');
+
+    Route::post('/penyedia-loker/loker/applier/approve', [PenyediaLokerController::class, 'approveLokerDashboard'])->name('penyedia-loker.loker.applier.approve');
+
+    Route::post('/penyedia-loker/loker/applier/reject', [PenyediaLokerController::class, 'rejectLokerDashboard'])->name('penyedia-loker.loker.applier.reject');
 
     Route::get('/penyedia-loker/loker/tambah', [PenyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
 

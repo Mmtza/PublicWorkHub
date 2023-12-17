@@ -64,6 +64,11 @@
                                         <div class="d-flex align-items-center"><span
                                                 class="nav-link-text">Tambah Loker</span></div>
                                     </a><!-- more inner pages-->
+                                    <a class="nav-link active" href="{{ route('penyedia-loker.loker.applier') }}" data-bs-toggle=""
+                                        aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text">Applier Loker</span></div>
+                                    </a><!-- more inner pages-->
                                 </li>
                             </ul>
                         </div>

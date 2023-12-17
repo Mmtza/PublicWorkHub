@@ -27,9 +27,17 @@
                         <td class="text-center">{{ $user->name }}</td>
                         <td class="text-center">{{ $user->email }}</td>
                         <td class="text-center">{{ $user->alamat }}</td>
-                        <td class="text-center">{{ $user->tanggal_lahir }}</td>
+                        <td class="text-center">{{ \Carbon\Carbon::parse($user->tanggal_lahir)->locale('id')->isoFormat('DD MMMM YYYY') }}</td>
                         <td class="text-center">{{ $user->role }}</td>
-                        <td class="text-center">{{ $user->foto }}</td>
+                        <td class="text-center">
+                            @if (!empty($user->foto))
+                                <div class="avatar avatar-3xl">
+                                    <img src="{{ asset('assets/users/images/' . $user->foto) }}" alt="">
+                                </div>
+                            @else
+                                Foto tidak tersedia
+                            @endif
+                        </td>
                         <td class="text-center d-flex align-items-center">
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="edit" data-toggle="modal"><i class="bi bi-pencil-square"
                                     data-toggle="tooltip" title="Edit"></i></a>
