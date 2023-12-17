@@ -16,7 +16,8 @@ class Notification extends Model
         'isi',
         'waktu_notifikasi',
         'status',
-        'id_user'
+        'id_user',
+        'id_has_user',
     ];
 
     public $timestamps = false;

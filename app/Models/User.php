@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Chat;
 use App\Models\Like;
 use App\Models\Loker;
 use App\Models\Berita;
@@ -78,10 +77,6 @@ class User extends Authenticatable
 
     public function getPengaduan() {
         return $this->belongsTo(Pengaduan::class);
-    }
-
-    public function getChat() {
-        return $this->belongsTo(Chat::class);
     }
 
     public function getNotification() {

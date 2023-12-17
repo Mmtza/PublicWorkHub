@@ -9,6 +9,7 @@ use App\Exports\LokerExport;
 use Illuminate\Http\Request;
 use App\Models\Loker_Has_Kategori;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,15 +19,17 @@ class LokerController extends Controller
     {
         $loker = Loker::orderBy('id', 'desc')->get();
         $lokerCount = Loker::count();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.loker.all_loker', compact('loker', 'lokerCount'));
+        return view('admins.pages.loker.all_loker', compact('loker', 'lokerCount', 'notification'));
     }
 
     public function viewAddLokerDashboard()
     {
         $kategori = Kategori::all();
         $publisherName = Auth::user()->name;
-        return view('admins.pages.loker.tambah_loker', compact('kategori', 'publisherName'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.loker.tambah_loker', compact('kategori', 'publisherName', 'notification'));
     }
 
     public function viewEditLokerDashboard($slug)
@@ -36,8 +39,9 @@ class LokerController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         $loker = Loker::where('id', $lokerSlug->id)->with('getKategori')->first();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.loker.edit_loker', compact('kategori', 'loker', 'publisherName'));
+        return view('admins.pages.loker.edit_loker', compact('kategori', 'loker', 'publisherName', 'notification'));
     }
 
     public function previewLokerDashboard($slug)
@@ -45,7 +49,8 @@ class LokerController extends Controller
         $loker = Loker::findSlugFirst($slug);
         $publisher = Loker::with('getUser')->find($loker->id);
         $publisherData = $publisher->getUser()->first();
-        return view('admins.pages.loker.detail_loker', compact('loker', 'publisherData'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.loker.detail_loker', compact('loker', 'publisherData', 'notification'));
     }
 
     public function addLokerDashboard(Request $request)
@@ -143,6 +148,8 @@ class LokerController extends Controller
     public function deleteLokerDashboard($slug)
     {
         $loker = Loker::findSlugFirst($slug);
+        $notification = new NotificationController;
+        $notification->storeNotification("🏢 loker kamu telah dihapus oleh admin", now(), "unread", Auth::user()->id, $loker->id_user);
         Loker::destroy($loker->id);
         alert('Notifikasi', 'Berhasil menghapus loker', 'success');
         return redirect()->route('admin.loker');

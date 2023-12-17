@@ -12,6 +12,7 @@ use App\Models\Berita_Has_Kategori;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\BeritaExport;
+use App\Models\Notification;
 use Maatwebsite\Excel\Facades\Excel;
 
 use function PHPUnit\Framework\isNull;
@@ -35,8 +36,9 @@ class BeritaController extends Controller
     {
         $berita = Berita::orderBy('id', 'desc')->get();
         $beritaCount = Berita::count();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount'));
+        return view('admins.pages.berita.all_berita', compact('berita', 'beritaCount', 'notification'));
     }
 
     public function showAllBerita()
@@ -123,7 +125,8 @@ class BeritaController extends Controller
         $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
-        return view('admins.pages.berita.detail_berita', compact('berita', 'publisherName'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.berita.detail_berita', compact('berita', 'publisherName', 'notification'));
     }
 
     public function viewEditBeritaDashboard($slug)
@@ -133,15 +136,17 @@ class BeritaController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori'));
+        return view('admins.pages.berita.edit_berita', compact('berita', 'publisherName', 'kategori', 'notification'));
     }
 
     public function viewAddBeritaDashboard()
     {
         $kategori = Kategori::all();
         $publisherName = Auth::user()->name;
-        return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.berita.tambah_berita', compact('kategori', 'publisherName', 'notification'));
     }
 
     public function addBeritaDashboard(Request $request)
@@ -266,6 +271,19 @@ class BeritaController extends Controller
         $berita->slug = Str::slug($data['judul_berita']) . $berita->id . $berita->waktu_publikasi;
         $berita->img = $data['image_berita'];
         $berita->save();
+        $notification = new NotificationController;
+        if ($berita->status == 'aktif') 
+        {
+            $notification->storeNotification("📰 berita kamu telah diaktifkan oleh admin", now(), "unread", Auth::user()->id, $berita->id_user);
+        }
+        else if ($berita->status == 'menunggu')
+        {
+            $notification->storeNotification("📰 berita kamu dalam proses menunggu oleh admin", now(), "unread", Auth::user()->id, $berita->id_user);
+        }
+        else if ($berita->status == 'tidak aktif')
+        {
+            $notification->storeNotification("📰 berita kamu telah dinonaktifkan oleh admin", now(), "unread", Auth::user()->id, $berita->id_user);
+        }
         alert('Notifikasi', 'Berhasil mengedit berita', 'success');
 
         return redirect()->route('admin.berita');
@@ -282,6 +300,8 @@ class BeritaController extends Controller
                 unlink($filePath);
             }
         }
+        $notification = new NotificationController;
+        $notification->storeNotification("📰 berita kamu telah dihapus oleh admin", now(), "unread", Auth::user()->id, $berita->id_user);
         Berita::destroy($berita->id);
         alert('Notifikasi', 'Berhasil menghapus berita', 'success');
         return redirect()->route('admin.berita');

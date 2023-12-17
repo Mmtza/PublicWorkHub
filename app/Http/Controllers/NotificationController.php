@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    public function storeNotificationToAll($isi, $waktu, $status, $id_user) 
+    public function storeNotificationToAllAdmin($isi, $waktu, $status, $id_user) 
     {
-        $users = User::all();
+        $users = User::where('role', 'admin')->get();
 
         foreach ($users as $u)
         {
@@ -37,15 +37,17 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function markAsReadNotification($id, $id_has_user) 
+    public function markAsReadNotification($id) 
     {
-        $notification = Notification::where('id', $id)->where('id_has_user', $id_has_user);
+        $notification = Notification::where('id', $id)->where('id_has_user', Auth::user()->id)->first();
         $notification->status = 'read';
         $notification->save(); 
+        return redirect()->back();
     }
 
-    public function markAsReadAllNotification($id_has_user)
+    public function markAsReadAllNotification()
     {
-        Notification::where('id_has_user', $id_has_user)->update(['status' => 'read']);
+        Notification::where('id_has_user', Auth::user()->id)->update(['status' => 'read']);
+        return redirect()->back();
     }
 }

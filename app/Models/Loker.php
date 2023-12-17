@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Chat;
 use App\Models\User;
 use App\Models\Apply_Loker;
 use Illuminate\Database\Eloquent\Model;
@@ -48,11 +47,6 @@ class Loker extends Model
     public function getApplyLoker()
     {
         return $this->belongsTo(Apply_Loker::class);
-    }
-
-    public function getChat()
-    {
-        return $this->belongsTo(Chat::class);
     }
 
     public function getKategori()
