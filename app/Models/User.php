@@ -3,13 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Chat;
 use App\Models\Like;
 use App\Models\Loker;
 use App\Models\Berita;
 use App\Models\Komentar;
 use App\Models\Pengaduan;
 use App\Models\Apply_Loker;
+use App\Models\Notification;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,7 +79,7 @@ class User extends Authenticatable
         return $this->belongsTo(Pengaduan::class);
     }
 
-    public function getChat() {
-        return $this->belongsTo(Chat::class);
+    public function getNotification() {
+        return $this->belongsTo(Notification::class);
     }
 }

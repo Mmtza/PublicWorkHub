@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Berita_Has_Kategori;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class PenulisBeritaController extends Controller
@@ -30,8 +30,9 @@ class PenulisBeritaController extends Controller
     {
         $berita = Berita::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
         $beritaCount = Berita::where('id_user', Auth::user()->id)->count();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('penulis.pages.all_berita', compact('berita', 'beritaCount'));
+        return view('penulis.pages.all_berita', compact('berita', 'beritaCount', 'notification'));
     }
 
     public function viewEditBeritaDashboard($slug)
@@ -41,8 +42,9 @@ class PenulisBeritaController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         $berita = Berita::where('id', $beritaSlug->id)->with('getKategori')->first();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('penulis.pages.edit_berita', compact('berita', 'publisherName', 'kategori'));
+        return view('penulis.pages.edit_berita', compact('berita', 'publisherName', 'kategori', 'notification'));
     }
 
     public function previewBeritaDashboard($slug)
@@ -50,13 +52,15 @@ class PenulisBeritaController extends Controller
         $berita = Berita::findSlugFirst($slug);
         $publisher = Berita::with('getUser')->find($berita->id);
         $publisherName = $publisher->getUser()->first()->name;
-        return view('penulis.pages.detail_berita', compact('berita', 'publisherName'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penulis.pages.detail_berita', compact('berita', 'publisherName', 'notification'));
     }
 
     public function viewAddBeritaDashboard()
     {
         $kategori = Kategori::all();
-        return view('penulis.pages.tambah_berita', compact('kategori'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penulis.pages.tambah_berita', compact('kategori', 'notification'));
     }
 
     public function addBeritaDashboard(Request $request)
@@ -102,6 +106,8 @@ class PenulisBeritaController extends Controller
                 }
             }
         }
+        $notification = new NotificationController;
+        $notification->storeNotificationToAllAdmin("📰 membuat berita baru, menunggu diaktifkan", now(), "unread", Auth::user()->id);
         alert('Notifikasi', 'Berhasil membuat berita', 'success');
         return redirect()->route('penulis.berita');
     }

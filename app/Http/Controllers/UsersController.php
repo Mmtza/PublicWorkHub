@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
 use Illuminate\Validation\Rules\Password;
 
@@ -13,20 +16,23 @@ class UsersController extends Controller
     public function showAllUsersDashboard()
     {
         $users = User::all();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.form_user.user', compact('users'));
+        return view('admins.pages.form_user.user', compact('users', 'notification'));
     }
 
     public function viewEditUsers($id) 
     {
         $user = User::find($id);
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('admins.pages.form_user.edit_user', compact('user'));
+        return view('admins.pages.form_user.edit_user', compact('user', 'notification'));
     }
 
     public function viewAddUsers() 
     {
-        return view('admins.pages.form_user.tambah_users');
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.form_user.tambah_users', compact('notification'));
     }
 
     public function editUsers(Request $request, $id) 

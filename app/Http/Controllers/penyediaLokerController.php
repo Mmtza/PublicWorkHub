@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Loker_Has_Kategori;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class PenyediaLokerController extends Controller
@@ -16,13 +17,15 @@ class PenyediaLokerController extends Controller
     {
         $loker = Loker::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
         $lokerCount = Loker::where('id_user', Auth::user()->id)->count();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('penyedia_loker.pages.all_loker', compact('loker', 'lokerCount'));
+        return view('penyedia_loker.pages.all_loker', compact('loker', 'lokerCount', 'notification'));
     }
 
     public function showAllApplier()
     {
-        return view('penyedia_loker.pages.applier_loker');
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penyedia_loker.pages.applier_loker', compact('notification'));
     }
     
     public function viewEditLokerDashboard($slug)
@@ -32,8 +35,9 @@ class PenyediaLokerController extends Controller
         $publisherName = $publisher->getUser()->first()->name;
         $kategori = Kategori::all();
         $loker = Loker::where('id', $lokerSlug->id)->with('getKategori')->first();
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         confirmDelete();
-        return view('penyedia_loker.pages.edit_loker', compact('loker', 'publisherName', 'kategori'));
+        return view('penyedia_loker.pages.edit_loker', compact('loker', 'publisherName', 'kategori', 'notification'));
     }
 
     public function previewLokerDashboard($slug)
@@ -41,13 +45,15 @@ class PenyediaLokerController extends Controller
         $loker = Loker::findSlugFirst($slug);
         $publisher = Loker::with('getUser')->find($loker->id);
         $publisherData = $publisher->getUser()->first();
-        return view('penyedia_loker.pages.detail_loker', compact('loker', 'publisherData'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penyedia_loker.pages.detail_loker', compact('loker', 'publisherData', 'notification'));
     }
 
     public function viewAddLokerDashboard()
     {
         $kategori = Kategori::all();
-        return view('penyedia_loker.pages.tambah_loker', compact('kategori'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penyedia_loker.pages.tambah_loker', compact('kategori', 'notification'));
     }
 
     public function addLokerDashboard(Request $request)
@@ -93,6 +99,8 @@ class PenyediaLokerController extends Controller
                 }
             }
         }
+        $notification = new NotificationController;
+        $notification->storeNotificationToAllAdmin("🏢 membuat loker baru", now(), "unread", Auth::user()->id);
         alert('Notifikasi', 'Berhasil membuat loker', 'success');
         return redirect()->route('penyedia-loker.loker');
     }

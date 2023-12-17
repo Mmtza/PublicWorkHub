@@ -12,6 +12,7 @@ use App\Charts\BeritaChart;
 use Illuminate\Http\Request;
 use App\Charts\PengaduanChart;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -21,6 +22,7 @@ class DashboardController extends Controller
         LokerChart $lokerChart, UserChart $userChart
     )
     {
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         $berita = Berita::count();
         $beritaMenunggu = Berita::where('status', 'menunggu')->count();
         $beritaAktif = Berita::where('status', 'aktif')->count();
@@ -37,7 +39,7 @@ class DashboardController extends Controller
         if($beritaTidakAktif > 0)
             $percentageBeritaTidakAktif = number_format((($beritaTidakAktif / $berita) * 100), 2);
 
-            $pengaduan = Pengaduan::count();
+        $pengaduan = Pengaduan::count();
         $pengaduanMenunggu = Pengaduan::where('status', 'menunggu')->count();
         $pengaduanDiterima = Pengaduan::where('status', 'diterima')->count();
         $pengaduanDitolak = Pengaduan::where('status', 'ditolak')->count();
@@ -69,12 +71,12 @@ class DashboardController extends Controller
             'chartPengaduanMobile', 'chartLoker', 'chartLokerMobile', 'chartUser', 'chartUserMobile',
             'berita', 'percentageBeritaMenunggu', 'percentageBeritaAktif', 'percentageBeritaTidakAktif', 
             'pengaduan', 'percentagePengaduanMenunggu', 'percentagePengaduanDiterima', 'percentagePengaduanDitolak', 
-            'loker', 
-            'user'));        
+            'loker', 'user', 'notification'));        
     }
 
     public function readDataPenulisDashboard(Request $request, BeritaChart $beritaChart)
     {
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
         $berita = Berita::where('id_user', Auth::user()->id)->count();
         $beritaMenunggu = Berita::where('status', 'menunggu')->where('id_user', Auth::user()->id)->count();
         $beritaAktif = Berita::where('status', 'aktif')->where('id_user', Auth::user()->id)->count();
@@ -98,7 +100,8 @@ class DashboardController extends Controller
         $chartStatusMobile = $beritaChart->buildPenulisMobileDonut();
         return view('penulis.index', compact(
             'chartBerita', 'chartBeritaMobile', 'chartStatus', 'chartStatusMobile', 'berita', 
-            'percentageBeritaMenunggu', 'percentageBeritaAktif', 'percentageBeritaTidakAktif'
+            'percentageBeritaMenunggu', 'percentageBeritaAktif', 'percentageBeritaTidakAktif',
+            'notification'
         ));        
     }
 
@@ -107,6 +110,7 @@ class DashboardController extends Controller
         $loker = Loker::where('id_user', Auth::user()->id)->count();
         $chartLoker = $lokerChart->buildPenyediaLokerPC();
         $chartLokerMobile = $lokerChart->buildPenyediaLokerMobile();
-        return view('penyedia_loker.index', compact('loker', 'chartLoker', 'chartLokerMobile'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('penyedia_loker.index', compact('loker', 'chartLoker', 'chartLokerMobile', 'notification'));
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
 
@@ -15,17 +16,19 @@ class PengaduanController extends Controller {
     public function showAllPengaduanDashboard() {
         $pengaduan = Pengaduan::all();
         confirmDelete();
-        return view('admins.pages.form_pengaduan.all_pengaduan', compact('pengaduan'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.form_pengaduan.all_pengaduan', compact('pengaduan', 'notification'));
     }
 
     public function viewEditPengaduanDashboard(Request $request, $id) {
         $pengaduan = Pengaduan::find($id);
-
-        return view('admins.pages.form_pengaduan.edit_pengaduan', compact('pengaduan'));
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.form_pengaduan.edit_pengaduan', compact('pengaduan', 'notification'));
     }
 
     public function viewAddPengaduan() {
-        return view('admins.pages.form_pengaduan.tambah_pengaduan');
+        $notification = Notification::where('id_has_user', Auth::user()->id)->orderBy('id', 'desc')->with('getUser')->get();
+        return view('admins.pages.form_pengaduan.tambah_pengaduan', compact('notification'));
     }
 
     public function showPengaduanUser() {
