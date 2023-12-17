@@ -14826,6 +14826,11 @@ textarea {
     object-fit:cover;
 }
 
+.avatar-m{
+    height:2rem;
+    width:2rem;
+}
+
 .avatar-l{
     height:2.5rem;
     width:2.5rem;

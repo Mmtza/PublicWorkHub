@@ -19,10 +19,10 @@ class Loker_Has_Kategori extends Model
     public $timestamps = false;
 
     public function getLoker() {
-        return $this->hasMany(Loker::class);
+        return $this->belongsToMany(Loker::class, 'loker_has_kategori', 'id_kategori', 'id_loker', 'id_kategori', 'id');
     }
 
     public function getKategori() {
-        return $this->hasMany(Kategori::class);
+        return $this->belongsToMany(Kategori::class, 'loker_has_kategori', 'id_loker', 'id_kategori', 'id_loker', 'id');
     }
 }
