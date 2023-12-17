@@ -31,7 +31,7 @@ class UserLokerController extends Controller
 
     public function showAllLoker()
     {
-        $allCategories = Kategori::all();
+        $allCategories = Kategori::where('type', 'loker')->get();
         $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         $loker = Loker::orderBy('id', 'desc')->first();
         $lokerPublisher = User::where('id', $loker->id_user)->first();
@@ -68,7 +68,7 @@ class UserLokerController extends Controller
 
     public function showLokerBySlug($slug)
     {
-        $allCategories = Kategori::all();
+        $allCategories = Kategori::where('type', 'loker')->get();
         $beritaFooterLine = Berita::orderBy('id', 'desc')->skip(24)->take(3)->get();
         $loker = Loker::findSlugGet($slug)->first();
         $lokerPublisher = User::where('id', $loker->id_user)->first();

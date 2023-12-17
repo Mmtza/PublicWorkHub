@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kategori', function(Blueprint $table) {
             $table->id();
             $table->string('nama_kategori', 50)->nullable(false);
+            $table->enum('type', ['berita', 'loker'])->nullable(false)->default('berita');
             $table->text('keterangan')->nullable(false);
         });
     }
