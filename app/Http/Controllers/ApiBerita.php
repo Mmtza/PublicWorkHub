@@ -149,7 +149,7 @@ class ApiBerita extends Controller
         }
         else 
         {
-            if (isNull($berita->foto))
+            if (!$berita->foto)
             {
                 $berita->img = null;                
             }
@@ -186,7 +186,7 @@ class ApiBerita extends Controller
             return new ApiResource(404, false, 'Gagal mendapatkan data berita, tidak ada data', $berita);            
         }
 
-        if (!isNull($berita->img)) {
+        if ($berita->img) {
             $filePath = public_path('assets/berita/images/' . $berita->img);
             
             if (file_exists($filePath) && is_file($filePath)) {

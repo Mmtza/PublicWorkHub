@@ -38,7 +38,7 @@
                         </td>
                         <td class="text-center">
                             <div class="d-flex align-items-center gap-2 justify-content-center">
-                                <form method="POST" action="{{ route('penyedia-loker.loker.applier.approve') }}" id="approveUserForm{{ $apply->id }}">
+                                <form method="POST" action="{{ route('penyedia-loker.loker.applier.approve', $apply->id) }}" id="approveUserForm{{ $apply->id }}">
                                     @csrf
                                     @method('post')                                    
                                     <button type="submit" class="btn btn-none p-0">
@@ -47,7 +47,7 @@
                                           </svg>                                
                                     </button>
                                 </form>
-                                <form method="POST" action="{{ route('penyedia-loker.loker.applier.reject') }}" id="rejectUserForm{{ $apply->id }}">
+                                <form method="POST" action="{{ route('penyedia-loker.loker.applier.reject', $apply->id) }}" id="rejectUserForm{{ $apply->id }}">
                                     @csrf
                                     @method('post')
                                     <button type="submit" class="btn btn-none p-0">
