@@ -155,9 +155,9 @@ Route::middleware(['auth', 'PenyediaLoker'])->group(function () {
 
     Route::get('/penyedia-loker/loker/applier', [PenyediaLokerController::class, 'showAllApplier'])->name('penyedia-loker.loker.applier');
 
-    Route::post('/penyedia-loker/loker/applier/approve', [PenyediaLokerController::class, 'approveLokerDashboard'])->name('penyedia-loker.loker.applier.approve');
+    Route::post('/penyedia-loker/loker/applier/approve/{id}', [PenyediaLokerController::class, 'approveLokerDashboard'])->name('penyedia-loker.loker.applier.approve');
 
-    Route::post('/penyedia-loker/loker/applier/reject', [PenyediaLokerController::class, 'rejectLokerDashboard'])->name('penyedia-loker.loker.applier.reject');
+    Route::post('/penyedia-loker/loker/applier/reject/{id}', [PenyediaLokerController::class, 'rejectLokerDashboard'])->name('penyedia-loker.loker.applier.reject');
 
     Route::get('/penyedia-loker/loker/tambah', [PenyediaLokerController::class, 'viewAddLokerDashboard'])->name('penyedia-loker.loker.tambah');
 

@@ -19,6 +19,8 @@ class Apply_Loker extends Model
         'waktu_apply'
     ];
 
+    public $timestamps = false;
+
     public function getUser() {
         return $this->belongsTo(User::class, 'id_user');
     }

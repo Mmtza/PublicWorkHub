@@ -137,7 +137,7 @@ class ApiPengaduan extends Controller
         }
         else 
         {
-            if (isNull($pengaduan->file))
+            if (!$pengaduan->file)
             {
                 $pengaduan->file = null;                
             }

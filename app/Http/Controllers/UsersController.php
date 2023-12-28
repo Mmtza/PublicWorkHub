@@ -175,7 +175,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         
-        if (!isNull($user->foto)) 
+        if ($user->foto) 
         {
             $filePath = public_path('assets/users/images/' . $user->foto);
 

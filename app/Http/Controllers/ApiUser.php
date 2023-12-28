@@ -107,7 +107,7 @@ class ApiUser extends Controller
         }
         else 
         {
-            if (isNull($user->foto))
+            if (!$user->foto)
             {
                 $user->foto = null;                
             }
@@ -135,7 +135,7 @@ class ApiUser extends Controller
         {
             return new ApiResource(404, false, 'Gagal mendapatkan data user, tidak ada data', $user);            
         }
-        if (!isNull($user->foto)) {
+        if ($user->foto) {
             $filePath = public_path('assets/users/images/' . $user->foto);
             
             if (file_exists($filePath) && is_file($filePath)) {

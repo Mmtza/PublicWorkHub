@@ -178,13 +178,12 @@ class PengaduanController extends Controller {
     public function deletePengaduanDashboard($id) {
         $pengaduan = Pengaduan::find($id);
 
-        if(!isNull($pengaduan->file)) {
+        if($pengaduan->file) {
             $filePath = public_path('assets/pengaduan/files/'.$pengaduan->file);
 
             if(file_exists($filePath) && is_file($filePath)) {
                 unlink($filePath);
             }
-            Pengaduan::destroy($pengaduan->id);
         }
 
         Pengaduan::destroy($pengaduan->id);

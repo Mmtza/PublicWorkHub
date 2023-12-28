@@ -56,7 +56,7 @@ class ProfileController extends Controller
         }
         else 
         {
-            if (isNull($request->user()->foto))
+            if (!$request->user()->foto)
             {
                 $request->user()->foto = null;                
             }
