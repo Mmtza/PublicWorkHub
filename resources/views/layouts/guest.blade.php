@@ -8,7 +8,8 @@
 
     <title>Public Work Hub</title>
     <meta name="description" content="" />
-    <meta name="keywords" content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
+    <meta name="keywords"
+        content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
 
     {{-- Icon web --}}
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
@@ -62,6 +63,23 @@
     <script src="{{ asset('users/themes') }}/js/navbar.js"></script>
     <script src="{{ asset('users/themes') }}/js/counter.js"></script>
     <script src="{{ asset('users/themes') }}/js/custom.js"></script>
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
 </body>
 
 </html>

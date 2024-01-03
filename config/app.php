@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool)env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Ladumor\LaravelPwa\PWAServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -186,7 +187,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facade\Excel::class
+        'Excel' => Maatwebsite\Excel\Facade\Excel::class,
+        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
     ])->toArray(),
 
 ];
