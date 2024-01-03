@@ -13,7 +13,9 @@
     <meta name="description" content="" />
     <meta name="keywords"
         content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
+    <link rel="apple-touch-icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
