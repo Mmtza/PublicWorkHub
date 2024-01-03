@@ -14,6 +14,7 @@
 - Login
 - Register
 - Responsif Desktop & Mobile
+- Progressive Web Apps
 - Dashboard User:
 	- Main Dashboard
 	- Form Pengaduan Masyarakat
@@ -90,6 +91,7 @@
 - Maatwebsite/Excel
 - munafio/chatify
 - Pusher
+- ladumor/laravel-pwa
 
 ### Package Manager
 - Composer
