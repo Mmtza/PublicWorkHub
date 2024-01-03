@@ -14,6 +14,7 @@
     <!--    Favicons-->
     <!-- ===============================================-->
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
+    <link rel="apple-touch-icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png">
     <meta name="theme-color" content="#ffffff" />
     <script src="{{ asset('admins/themes') }}/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="{{ asset('admins/themes') }}/vendors/simplebar/simplebar.min.js"></script>
@@ -63,6 +64,9 @@
 
     {{-- Bootstrap Icon CDN --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    {{-- laravel pwa manifest --}}
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
 
 <body>

@@ -10,11 +10,17 @@
     <meta name="description" content="" />
     <meta name="keywords"
         content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png">
 
     <!-- Fonts -->
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    {{-- laravel pwa manifest --}}
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!-- Scripts -->

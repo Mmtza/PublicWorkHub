@@ -12,11 +12,16 @@
         content="publicworkhub, berita, loker, lowongan kerja, pengaduan masyarakat, pengaduan, situs berita, loker, masyarakat" />
 
     {{-- Icon web --}}
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png" />
+    <link rel="apple-touch-icon" href="{{ asset('users/themes') }}/images/pwhlogo3.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    {{-- laravel pwa manifest --}}
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

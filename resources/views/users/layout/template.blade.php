@@ -36,6 +36,9 @@
     {{-- Axios CDN --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
 
+    {{-- laravel pwa manifest --}}
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
     <title>Public Work Hub</title>
 </head>
 
