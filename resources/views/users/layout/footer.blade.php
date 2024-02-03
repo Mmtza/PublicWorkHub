@@ -4,8 +4,8 @@
             <div class="col-lg-6">
                 <div class="widget">
                     <h3 class="mb-4">About</h3>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                        there live the blind texts.</p>
+                    <p>Website untuk bertukar informasi mengenai berita, lowongan pekerjaan, dan untuk pengaduan keluhan
+                        masyarakat sekitar.</p>
                 </div> <!-- /.widget -->
                 <div class="widget">
                     <h3>Social</h3>
@@ -46,16 +46,16 @@
                     <div class="post-entry-footer">
                         <ul>
                             @if (count($beritaFooterLine) > 0)
-                                @foreach ($beritaFooterLine as $berita)                                    
+                                @foreach ($beritaFooterLine as $berita)
                                     <li>
                                         <a href="{{ route('guest.berita', $berita->slug) }}">
-                                            <img src="{{ asset('assets/berita/images/'. $berita->img) }}"
+                                            <img src="{{ asset('assets/berita/images/' . $berita->img) }}"
                                                 alt="Image placeholder" class="me-4 rounded">
                                             <div class="text">
                                                 <h4>{{ $berita->judul }}</h4>
                                                 <div class="post-meta">
                                                     <span
-                                                        class="mr-2">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>                                                                
+                                                        class="mr-2">{{ \Carbon\Carbon::parse($berita->waktu_publikasi)->locale('id')->isoFormat('dddd, DD MMMM YYYY,  hh:mm:ss') }}</span>
                                                 </div>
                                             </div>
                                         </a>
